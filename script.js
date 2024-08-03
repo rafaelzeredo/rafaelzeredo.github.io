@@ -24,7 +24,7 @@ function handleFormSubmission(event) {
     // Example of console logging form data
     console.log(`Category: ${category}, Name: ${name}, Email: ${email}, Message: ${message}`);
 
-    emailjs.send("service_category_message", "template_8agfk2i", emailParams)
+    emailjs.send("service_z1qo3s9", "template_7sw68o6", emailParams)
         .then(function(response) {
             console.log('Email Sent!', response.status, response.text);
             alert('Your message has been sent successfully!');
