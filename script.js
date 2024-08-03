@@ -1,4 +1,4 @@
-// JavaScript code for your portfolio website
+// JavaScript code for your portfolio website ha!
 
 // Example function for handling form submission
 function handleFormSubmission(event) {
@@ -8,8 +8,8 @@ function handleFormSubmission(event) {
     const email = document.querySelector('input[name="email"]').value;
     const message = document.querySelector('textarea[name="message"]').value;
 
-    //check if all forms are filled
-    if (!categoory || !name || !email || !message) {
+    // Check if all fields are filled
+    if (!category || !name || !email || !message) {
         alert('Please fill in all fields.');
         return;
     }
@@ -27,8 +27,8 @@ function handleFormSubmission(event) {
     emailjs.send("service_category_message", "template_8agfk2i", emailParams)
         .then(function(response) {
             console.log('Email Sent!', response.status, response.text);
-            alert('Your message has been sent sucessfully!');
-    document.querySelector('form').reset(); // Reset form after successfull submission
+            alert('Your message has been sent successfully!');
+            document.querySelector('form').reset(); // Reset form after successful submission
         }, function(error) {
             console.error('Error sending email: ', error);
             alert('Oops! An error occurred while sending your message.');
@@ -41,3 +41,8 @@ function handleFormSubmission(event) {
 
 // Event listener for form submission
 document.querySelector('form').addEventListener('submit', handleFormSubmission);
+
+// Initialize EmailJS
+(function() {
+    emailjs.init("EJ0BgB3ON9MWWu40s");
+})();
