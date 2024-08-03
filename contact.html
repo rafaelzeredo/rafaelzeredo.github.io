@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafael Z - Artist Portfolio</title>
+    <title>Contact - Rafael Z</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,10 +25,22 @@
         </div>
     </nav>
 
-    <section id="home">
+    <section id="contact">
         <div class="container">
-            <h2>Welcome to My Portfolio</h2>
-            <p>This is the homepage of Rafael Z's artist portfolio. Click on the links above to explore more.</p>
+            <h2>Contact Me</h2>
+            <p>Reach out to discuss collaborations, projects, or consultations related to music, nutrition, or programming.</p>
+            <form action="#" method="POST">
+                <label for="category">Select a Category:</label>
+                <select name="category" id="category">
+                    <option value="Music">Music</option>
+                    <option value="Nutrition">Nutrition</option>
+                    <option value="Programming">Programming</option>
+                </select>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
         </div>
     </section>
 
