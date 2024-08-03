@@ -4,9 +4,9 @@
 function handleFormSubmission(event) {
     event.preventDefault();
     const category = document.getElementById('category').value;
-    const name = document.querySelector('input[name="name"]').value;
-    const email = document.querySelector('input[name="email"]').value;
-    const message = document.querySelector('textarea[name="message"]').value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
 
     // Check if all fields are filled
     if (!category || !name || !email || !message) {
