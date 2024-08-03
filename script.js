@@ -8,6 +8,29 @@ function handleFormSubmission(event) {
     const email = document.querySelector('input[name="email"]').value;
     const message = document.querySelector('textarea[name="message"]').value;
 
+    //check if all forms are filled
+    if (!categoory || !name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    const emailParams = {
+        category: category,
+        name: name,
+        email: email,
+        message: message
+    };
+
+    emailjs.send("service_category_message", "template_8agfk2i", emailParams)
+        .then(function(response) {
+            console.log('Email Sent!', response.status, response.text);
+            alert('Your message has been sent sucessfully!');
+            document.querySelector('form').reset(); // Reset form after successfull submission
+        }, function(error) {
+            console.error('Error sending email: ', error);
+            alert('Oops! An error occurred while sending your message.');
+        });
+
     // Example of console logging form data
     console.log(`Category: ${category}, Name: ${name}, Email: ${email}, Message: ${message}`);
 
