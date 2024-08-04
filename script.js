@@ -11,10 +11,10 @@ function sendEmail() {
     
 
     // Check if all fields are filled
-    if (!category || !name || !email || !message) {
-        alert('Please fill in all fields.');
-        return;
-    }
+    //if (!category || !name || !email || !message) {
+    //    alert('Please fill in all fields.');
+    //    return;
+    //}
 
 
     // Example of console logging form data
