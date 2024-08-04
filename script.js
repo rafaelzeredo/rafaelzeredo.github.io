@@ -18,17 +18,20 @@ function handleFormSubmission(event) {
         category: category,
         name: name,
         email: email,
-        message: message
+        message: message,
     };
 
     // Example of console logging form data
     console.log(`Category: ${category}, Name: ${name}, Email: ${email}, Message: ${message}`);
 
-    emailjs.send("service_z1qo3s9","template_7sw68o6",{
-        category: "category",
-        name: "name",
-        email: "email@provider.com",
-        message: "hey we want to hire you",
+    emailjs.send("service_z1qo3s9", "template_7sw68o6", emailParams)
+        .then(function(response) {
+            console.log('Email Sent!', response.status, response.text);
+            alert('Your message has been sent successfully!');
+            document.querySelector('form').reset(); // Reset form after successful submission
+        }, function(error) {
+            console.error('Error sending email: ', error);
+            alert('Oops! An error occurred while sending your message.');
         });
 
     // Replace with your form submission logic or API call
