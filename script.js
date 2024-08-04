@@ -3,10 +3,13 @@
 // Example function for handling form submission
 function handleFormSubmission(event) {
     event.preventDefault();
-    const category = document.getElementById('category').value;
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
+    let parms = {
+        category : document.getElementById('category').value,
+        name : document.getElementById("name").value,
+        email : document.getElementById("email").value,
+        message : document.getElementById("message").value,
+    }
+    
 
     // Check if all fields are filled
     if (!category || !name || !email || !message) {
@@ -14,17 +17,11 @@ function handleFormSubmission(event) {
         return;
     }
 
-    const emailParams = {
-        category: category,
-        name: name,
-        email: email,
-        message: message,
-    };
 
     // Example of console logging form data
     console.log(`Category: ${category}, Name: ${name}, Email: ${email}, Message: ${message}`);
 
-    emailjs.send("service_z1qo3s9", "template_7sw68o6", emailParams)
+    emailjs.send("service_z1qo3s9", "template_7sw68o6", parms)
         .then(function(response) {
             console.log('Email Sent!', response.status, response.text);
             alert('Your message has been sent successfully!');
