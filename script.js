@@ -20,7 +20,7 @@ function sendEmail() {
     // Example of console logging form data
     //console.log(`Category: ${category}, Name: ${name}, Email: ${email}, Message: ${message}`);
 
-    emailjs.send("service_category_message","template_7sw68o6", parms).then(alert("Email Sent!"))
+    emailjs.send("service_category_message","template_7sw68o6", parms).then(alert("Email Sent!"));
 
     //emailjs.send("service_z1qo3s9", "template_7sw68o6", parms)
         //.then(function(response) {
