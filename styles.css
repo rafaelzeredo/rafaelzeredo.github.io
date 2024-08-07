@@ -60,8 +60,8 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: relative;
-    bottom: 0;
+    position: absolute;
+    bottom: 12;
     width: 100%;
 }
 
