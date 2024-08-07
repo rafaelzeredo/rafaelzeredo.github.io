@@ -34,7 +34,7 @@ header p {
 }
 
 nav {
-    background-color: #314e20;
+    background-color: #444;
     text-align: center;
     padding: 10px 0;
 }
@@ -99,5 +99,9 @@ section {
 
 .service-category h3 {
     font-size: 1.5rem;
+<<<<<<< HEAD
     margin-bottom : 40px;
 }
+=======
+    margin-bottom
+>>>>>>> parent of a7b958b (changed color and closed brackets)
