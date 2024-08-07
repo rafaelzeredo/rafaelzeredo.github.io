@@ -30,7 +30,7 @@ header h1 {
 }
 
 nav {
-    background-color: #444;
+    background-color: #314e20;
     text-align: center;
     padding: 10px 0;
 }
@@ -92,3 +92,4 @@ section {
 .service-category h3 {
     font-size: 1.5rem;
     margin-bottom
+}
