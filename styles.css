@@ -29,10 +29,6 @@ header h1 {
     font-size: 2.5rem;
 }
 
-header p {
-    color: yellow;
-}
-
 nav {
     background-color: #444;
     text-align: center;
@@ -63,14 +59,10 @@ footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 0;
+    padding: 10px 0;
     position: absolute;
     bottom: 0;
-    margin: 0;
-    height: 100%;
     width: 100%;
-    left: 0;
-    right: 0;
 }
 
 /* Section-specific styles */
@@ -99,13 +91,4 @@ section {
 
 .service-category h3 {
     font-size: 1.5rem;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    margin-bottom : 40px;
-}
-=======
     margin-bottom
->>>>>>> parent of a7b958b (changed color and closed brackets)
-=======
-    margin-bottom
->>>>>>> parent of a7b958b (changed color and closed brackets)
