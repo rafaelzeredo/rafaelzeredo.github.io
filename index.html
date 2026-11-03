@@ -8,13 +8,13 @@
 <meta name="description" content="Rafael Z, cantor e compositor de Brasília. Reggae, rock, folk, em português e inglês.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#0B0810; --night:#15102A; --dusk:#3A2D63; --bone:#F3ECDF; --peach:#F1C8A6; --rose:#E4A48C; --dawn:#F6D58A;
   --sun:#F0B429; --ember:#E5703A; --text-dark:#17120F; --text-light:#F6EFE6;
   --bg:var(--bone); --fg:var(--text-dark); --mute:#5E544A; --line:rgba(23,18,15,.18);
-  --serif:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --serif:"Fraunces",Georgia,serif;
   --sans:"Jost","Avenir Next","Helvetica Neue",Arial,sans-serif;
   --pad:clamp(20px,4.2vw,68px); --hh:76px;
 }
@@ -147,8 +147,12 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .vis .play{position:absolute;left:50%;top:50%;width:92px;height:92px;margin:-46px;border-radius:50%;background:rgba(246,239,230,.94);color:var(--ink);display:grid;place-items:center;font-size:24px;padding-left:5px;transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s}
 .vis:hover .play{transform:scale(1.1)}
 .vis.playing .play{opacity:0;pointer-events:none}
-.vis .tag{position:absolute;left:16px;bottom:14px;color:#fff;font-size:11px;letter-spacing:.24em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.vis .tag{position:absolute;left:16px;bottom:14px;color:#fff;font-size:11px;letter-spacing:.24em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.7);transition:opacity 1.4s ease}
+.vis.titling .tag{opacity:0;transition-duration:.35s}
 .vis:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(11,8,16,.5));pointer-events:none}
+.vis.cover{aspect-ratio:1/1}
+.vis.cover:after{display:none}
+.song:hover .vis.cover>img{transform:none}
 .song .no{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--mute);margin-top:22px}
 .song h3{font-family:var(--serif);font-weight:500;font-size:clamp(38px,4.8vw,78px);line-height:.98;letter-spacing:-.02em;margin-top:2px}
 .song h3 em{font-weight:400}
@@ -408,32 +412,32 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   </div>
   <div class="feat">
     <article class="song rv">
-      <div class="vis" id="songVis" role="button" tabindex="0" aria-label="Assistir Tudo Que Nós Temos ao vivo">
+      <div class="vis" id="songVis" data-title-end="10" role="button" tabindex="0" aria-label="Assistir Tudo Que Nós Temos ao vivo">
         <video src="assets/video/cmw_tudo_que_nos_temos_live.mp4" poster="assets/img/poster_tudo.jpg" playsinline preload="none"></video>
         <span class="play" aria-hidden="true">▶</span>
         <span class="tag"><span data-pt>Ao vivo · Capital Moto Week 2024</span><span data-en>Live · Capital Moto Week 2024</span></span>
       </div>
       <div class="no">01</div>
       <h3>Tudo Que<br><em>Nós Temos</em></h3>
-      <p><span data-pt>Do EP de 2024. Aqui, a versão ao vivo do show no Palco Pepsi Black.</span><span data-en>From the 2024 EP. Here, the live version from the Pepsi Black stage show.</span></p>
+      <p><span data-pt>Do EP de 2024. Os links levam à gravação de estúdio; o vídeo mostra a apresentação ao vivo no Palco Pepsi Black, Capital Moto Week 2024.</span><span data-en>From the 2024 EP. The links lead to the studio recording; the video shows the live performance on the Pepsi Black stage, Capital Moto Week 2024.</span></p>
       <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
     </article>
     <article class="song rv">
-      <div class="vis" style="cursor:default"><img src="assets/img/bh_singing_headphones.jpg" alt="Rafael Z cantando no estúdio" style="object-position:50% 30%"><span class="tag"><span data-pt>Versão acústica</span><span data-en>Acoustic version</span></span></div>
+      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_agora_ao_vivo.jpg" alt="Capa do single Agora ao Vivo" loading="lazy" width="1000" height="1000"></div>
       <div class="no">02</div>
       <h3>Agora<br><em>ao Vivo</em></h3>
       <p><span data-pt>Canção autoral, em versão acústica. Single de 2025.</span><span data-en>An original song, in an acoustic version. 2025 single.</span></p>
       <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
     </article>
     <article class="song rv">
-      <div class="vis" style="cursor:default"><img src="assets/img/bh_semente_smile.jpg" alt="Rafael Z sorrindo no estúdio" loading="lazy" style="object-position:50% 22%"><span class="tag"><span data-pt>EP Tudo Que Nós Temos · 2024</span><span data-en>Tudo Que Nós Temos EP · 2024</span></span></div>
+      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_tudo_que_nos_temos_ep.jpg" alt="Capa do EP Tudo Que Nós Temos" loading="lazy" width="1000" height="1000"></div>
       <div class="no">03</div>
       <h3>A<br><em>Semente</em></h3>
       <p><span data-pt>Do EP <i>Tudo Que Nós Temos</i>, de 2024.</span><span data-en>From the 2024 EP <i>Tudo Que Nós Temos</i>.</span></p>
       <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
     </article>
     <article class="song rv">
-      <div class="vis" style="cursor:default"><img src="assets/img/cmw_mundo_daylight.jpg" alt="Rafael Z cantando com o violão ao ar livre" loading="lazy" style="object-position:50% 24%"><span class="tag">Single · 2025</span></div>
+      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_pro_mundo_sorrir.jpg" alt="Capa do single Pro Mundo Sorrir" loading="lazy" width="1000" height="1000"></div>
       <div class="no">04</div>
       <h3>Pro Mundo<br><em>Sorrir</em></h3>
       <p><span data-pt>Single de 2025.</span><span data-en>2025 single.</span></p>
@@ -461,8 +465,8 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
       <footer><span data-pt lang="pt-BR">Refrão de “Dream”. Em português: “Onde estava eu ontem à noite? Me leve de volta praquele sonho essa noite.”</span><span data-en>From the chorus of “Dream”</span></footer>
     </blockquote>
     <div class="dream-story">
-      <p><span data-pt>Rafael conheceu pela internet uma moça que morava longe. Ela falava inglês, compunha e cantava, e desde o início ele sentiu uma conexão fora do comum.</span><span data-en>Rafael met a girl online who lived far away. She spoke English, wrote music and sang, and from the start he felt an unusually strong connection.</span></p>
-      <p><span data-pt>Na noite em que a conheceu, sonhou com ela. “Dream” descreve essa experiência. Rafael acredita que pode ter sido uma projeção astral: essa é a interpretação dele sobre o que viveu.</span><span data-en>On the night he first met her, he dreamed about her. “Dream” describes that experience. Rafael believes it may have been an astral projection: that is his own interpretation of what happened.</span></p>
+      <p><span data-pt>Rafael conheceu uma moça certa noite e, nessa mesma noite, sonhou com ela. Desde o início, sentiu uma conexão fora do comum.</span><span data-en>Rafael met a woman one night, and that same night he dreamed about her. From the very beginning, he felt an unusual connection.</span></p>
+      <p><span data-pt>“Dream” descreve essa experiência. Rafael acredita que pode ter sido uma projeção astral: essa é a interpretação dele sobre o que viveu.</span><span data-en>“Dream” describes that experience. Rafael believes it may have been an astral projection: that is his own interpretation of what he lived through.</span></p>
     </div>
     <div class="dream-meta"><span class="t">Dream</span><span data-pt>do EP <i>From Lust With Love</i>, 2024</span><span data-en>from the EP <i>From Lust With Love</i>, 2024</span></div>
     <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
@@ -487,7 +491,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
         <div class="more"><p><span data-pt>Um músico que soa como uma banda. Repertório autoral e versões, em português e inglês.</span><span data-en>One musician who sounds like a band. Originals and covers, in Portuguese and English.</span></p><a href="#"><span data-pt>Ver o Solo</span><span data-en>See the Solo</span> →</a></div></div>
     </article>
     <article class="pn on" tabindex="0">
-      <img src="assets/img/cmw_trio_after.jpg" alt="Rafael Z Trio depois do show no Capital Moto Week" style="object-position:50% 40%">
+      <video src="assets/video/trio_donamaria_loop.mp4" poster="assets/img/poster_trio_donamaria.jpg" muted loop playsinline preload="metadata" aria-label="Rafael Z Trio tocando ao vivo no Dona Maria" style="object-position:50% 40%"></video>
       <div class="in"><div class="pre">Rafael Z</div>
         <h3>Trio<em><span data-pt>a banda ao vivo</span><span data-en>the live band</span></em></h3>
         <div class="more"><p><span data-pt>Autorais, reggae, rock e ska. Capital Moto Week 2024 e Brasal Pôr do Som 2025.</span><span data-en>Originals, reggae, rock and ska. Capital Moto Week 2024 and Brasal Pôr do Som 2025.</span></p><a href="#"><span data-pt>Ver o Trio</span><span data-en>See the Trio</span> →</a></div></div>
@@ -510,15 +514,15 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
       <p class="lead rv"><span data-pt>O show no Palco Pepsi Black, Capital Moto Week, Brasília, em julho de 2024.</span><span data-en>The show on the Pepsi Black stage, Capital Moto Week, Brasília, July 2024.</span></p>
       <p class="meta rv"><span data-pt>Mais filmes e fotos no arquivo</span><span data-en>More films and photographs in the archive</span> →</p>
     </div>
-    <div class="vis rv" id="liveVis" role="button" tabindex="0" aria-label="Assistir ao show">
+    <div class="vis rv" id="liveVis" data-title-end="7" role="button" tabindex="0" aria-label="Assistir ao show">
       <video src="assets/video/cmw_performance_film.mp4" poster="assets/img/poster_performance.jpg" playsinline preload="none"></video>
       <span class="play" aria-hidden="true">▶</span>
       <span class="tag"><span data-pt>Capital Moto Week · 22 jul 2024</span><span data-en>Capital Moto Week · 22 Jul 2024</span></span>
     </div>
   </div>
   <div class="strip" aria-hidden="true"><div>
-    <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt="">
-    <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt="">
+    <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt=""><img src="assets/img/porks_pirenopolis_trio_crowd.jpg" alt="">
+    <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt=""><img src="assets/img/porks_pirenopolis_trio_crowd.jpg" alt="">
   </div></div>
 </section>
 
@@ -544,7 +548,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
 <!-- STORY -->
 <section class="story" id="historia" data-id="story">
   <div class="grid">
-    <figure class="rv"><img src="assets/img/bh_portrait_smile.jpg" alt="Retrato de Rafael Z" style="object-position:55% 32%"></figure>
+    <figure class="rv"><img src="assets/img/bh_portrait_seated_smile.jpg" alt="Retrato de Rafael Z" style="object-position:50% 14%"></figure>
     <div class="txt">
       <div class="label rv"><b>05</b> <span data-pt>História</span><span data-en>Story</span></div>
       <p class="lead rv"><span data-pt>Nascido em Brasília, criado em parte na Inglaterra. Reggae, rock, ska, blues e o folk inglês da infância, com uma intenção simples: <em>criar energia boa</em>.</span><span data-en>Born in Brasília, partly raised in England. Reggae, rock, ska, blues and the English folk of his childhood, with one simple intention: <em>to create good energy</em>.</span></p>
@@ -638,6 +642,9 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     pl.addEventListener('click',function(){if(!pl.classList.contains('playing'))toggle()});
     pl.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});
     pv.addEventListener('pause',function(){pl.classList.remove('playing')});
+    // films open with their own lower-third title: keep the site caption out of its way until it has faded
+    var te=parseFloat(pl.dataset.titleEnd);
+    if(te){var cap=function(){pl.classList.toggle('titling',!pv.ended&&pv.currentTime<te)};['play','timeupdate','seeked','ended'].forEach(function(ev){pv.addEventListener(ev,cap)})}
   });
   // ambient videos: pause when off-screen
   [].slice.call(d.querySelectorAll('#heroVideo,.seam video')).forEach(function(v){new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?v.play().catch(function(){}):v.pause()})}).observe(v)});
