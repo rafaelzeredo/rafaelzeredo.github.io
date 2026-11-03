@@ -185,6 +185,10 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .dream-fig{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:#000;justify-self:end;width:min(100%,560px)}
 .dream-fig img{width:100%;height:100%;object-fit:cover;object-position:42% 45%;animation:drift 26s ease-in-out infinite alternate}
 .dream-fig:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,8,16,.15),transparent 40%,rgba(11,8,16,.55));pointer-events:none}
+.dream-fig.cover{aspect-ratio:1/1}
+.dream-fig.cover:after{display:none}
+.dream-fig.cover img{animation:none;object-position:50% 50%}
+.story .story-moon{position:relative;top:auto;max-height:none;aspect-ratio:4/5;margin-top:clamp(44px,5vw,76px)}
 @keyframes drift{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.12) translate(-2%,-3%)}}
 .formats{padding:clamp(70px,9vw,150px) 0}
 .formats header.sec{padding:0 var(--pad);display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px;margin-bottom:46px}
@@ -314,6 +318,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   .live .row,.story .grid,.contact .row{grid-template-columns:1fr}
   .live .vis{justify-self:center;margin-top:30px;max-height:none}
   .story figure{position:static;aspect-ratio:4/5;max-height:none}
+  .story .story-moon{aspect-ratio:4/3}
   .hl summary{grid-template-columns:54px minmax(0,1fr) 30px;row-gap:8px}
   .hl .w{grid-column:2}.hl .g{grid-column:2;grid-row:3}.hl .pl{grid-column:3;grid-row:1}
   .hl .body{padding-left:74px}
@@ -471,7 +476,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     <div class="dream-meta"><span class="t">Dream</span><span data-pt>do EP <i>From Lust With Love</i>, 2024</span><span data-en>from the EP <i>From Lust With Love</i>, 2024</span></div>
     <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
   </div>
-  <figure class="dream-fig rv"><img src="assets/img/bh_dream_moon.jpg" alt="Lua cheia alaranjada no céu noturno, entre folhas" loading="lazy"></figure>
+  <figure class="dream-fig cover rv"><img src="assets/img/cover_from_lust_with_love_ep.jpg" alt="Capa do EP From Lust With Love" loading="lazy" width="1000" height="1000"></figure>
 </section>
 
 <!-- FORMATS -->
@@ -554,6 +559,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
       <p class="lead rv"><span data-pt>Nascido em Brasília, criado em parte na Inglaterra. Reggae, rock, ska, blues e o folk inglês da infância, com uma intenção simples: <em>criar energia boa</em>.</span><span data-en>Born in Brasília, partly raised in England. Reggae, rock, ska, blues and the English folk of his childhood, with one simple intention: <em>to create good energy</em>.</span></p>
       <div class="facts rv"><span>Brasília</span><span><span data-pt>Infância na Inglaterra</span><span data-en>Childhood in England</span></span><span>Português · English</span></div>
       <a class="btn rv" href="#"><span data-pt>Ler a história completa</span><span data-en>Read the full story</span> →</a>
+      <figure class="dream-fig story-moon rv"><img src="assets/img/bh_dream_moon.jpg" alt="Lua cheia alaranjada no céu noturno, entre folhas" loading="lazy"></figure>
     </div>
   </div>
 </section>
