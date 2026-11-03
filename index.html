@@ -139,6 +139,18 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,90px);margin-top:clamp(40px,5vw,80px);align-items:start}
 .feat{row-gap:clamp(60px,7vw,120px)}
 .song:nth-child(even){margin-top:clamp(40px,9vw,150px)}
+.live-feat{width:min(100%,560px);margin:clamp(40px,5vw,80px) auto 0}
+.live-feat figcaption{margin-top:20px;text-align:center;display:flex;flex-direction:column;gap:6px}
+.live-feat figcaption .t{font-family:var(--serif);font-size:clamp(22px,2vw,30px);line-height:1.15;letter-spacing:-.01em}
+.live-feat figcaption .s{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+@media (min-width:900px){
+  .music .head{flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:22px}
+  .music .head .label{justify-content:center}
+  .music .head p{margin:0 auto;max-width:46ch}
+  .feat{max-width:1000px;margin:clamp(80px,8vw,130px) auto 0;padding-top:clamp(60px,6vw,96px);border-top:1px solid var(--line);column-gap:clamp(48px,7vw,110px);row-gap:clamp(64px,6vw,96px)}
+  .song:nth-child(even){margin-top:0}
+  .song .vis.cover{width:min(100%,260px)}
+}
 .song p i,.dream i{font-style:italic}
 .vis{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:#000;cursor:pointer}
 .vis video,.vis>img{width:100%;height:100%;object-fit:cover}
@@ -305,6 +317,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   .feat{grid-template-columns:1fr}
   .feat{row-gap:30px}
   .song:nth-child(even){margin-top:30px}
+  .feat{margin-top:56px;padding-top:44px;border-top:1px solid var(--line)}
   .dream{grid-template-columns:1fr;padding-top:clamp(70px,16vw,110px)}
   .dream-fig{order:-1;justify-self:stretch;width:100%;aspect-ratio:4/3}
   .dream:before{width:120vw;height:120vw;right:-40%;top:0}
@@ -414,13 +427,17 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     <h2 class="big" style="margin-top:26px"><span data-pt>Quatro canções,<br><em>uma assinatura.</em></span><span data-en>Four songs,<br><em>one signature.</em></span></h2></div>
     <p><span data-pt>As canções que melhor dizem quem é Rafael Z.</span><span data-en>The songs that say most about who Rafael Z is.</span></p>
   </div>
+  <figure class="live-feat rv">
+    <div class="vis" id="songVis" data-title-end="10" role="button" tabindex="0" aria-label="Assistir Tudo Que Nós Temos ao vivo">
+      <video src="assets/video/cmw_tudo_que_nos_temos_live.mp4" poster="assets/img/poster_tudo.jpg" playsinline preload="none"></video>
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1.5 16.5 10 1 18.5Z"/></svg></span>
+      <span class="tag"><span data-pt>Ao vivo · Capital Moto Week 2024</span><span data-en>Live · Capital Moto Week 2024</span></span>
+    </div>
+    <figcaption><span class="t"><span data-pt>Ao vivo no Capital Moto Week 2024</span><span data-en>Live at Capital Moto Week 2024</span></span><span class="s"><span data-pt>“Tudo Que Nós Temos” · Palco Pepsi Black, Brasília</span><span data-en>“Tudo Que Nós Temos” · Pepsi Black stage, Brasília</span></span></figcaption>
+  </figure>
   <div class="feat">
     <article class="song rv">
-      <div class="vis" id="songVis" data-title-end="10" role="button" tabindex="0" aria-label="Assistir Tudo Que Nós Temos ao vivo">
-        <video src="assets/video/cmw_tudo_que_nos_temos_live.mp4" poster="assets/img/poster_tudo.jpg" playsinline preload="none"></video>
-        <span class="play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1.5 16.5 10 1 18.5Z"/></svg></span>
-        <span class="tag"><span data-pt>Ao vivo · Capital Moto Week 2024</span><span data-en>Live · Capital Moto Week 2024</span></span>
-      </div>
+      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_tudo_que_nos_temos_ep.jpg" alt="Capa do EP Tudo Que Nós Temos" loading="lazy" width="1400" height="1400"></div>
       <div class="no">01</div>
       <h3>Tudo Que<br><em>Nós Temos</em></h3>
       <p><span data-pt>Do EP de 2024. Os links levam à gravação de estúdio; o vídeo mostra a apresentação ao vivo no Palco Pepsi Black, Capital Moto Week 2024.</span><span data-en>From the 2024 EP. The links lead to the studio recording; the video shows the live performance on the Pepsi Black stage, Capital Moto Week 2024.</span></p>
