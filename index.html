@@ -1,54 +1,657 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR" data-lang="pt" data-dir="entardecer">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafael Z - Artist Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rafael Z — Cantor e compositor · Brasília</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Rafael Z, cantor e compositor de Brasília. Reggae, rock, folk, em português e inglês.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B0810; --night:#15102A; --dusk:#3A2D63; --bone:#F3ECDF; --peach:#F1C8A6; --rose:#E4A48C; --dawn:#F6D58A;
+  --sun:#F0B429; --ember:#E5703A; --text-dark:#17120F; --text-light:#F6EFE6;
+  --bg:var(--bone); --fg:var(--text-dark); --mute:#5E544A; --line:rgba(23,18,15,.18);
+  --serif:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --sans:"Jost","Avenir Next","Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(20px,4.2vw,68px); --hh:76px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-weight:400;font-size:18px;line-height:1.55;background:var(--bg);color:var(--fg);transition:background-color 1s ease,color 1s ease;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body[data-theme=ink]{--bg:var(--ink);--fg:var(--text-light);--mute:#B8AEC4;--line:rgba(246,239,230,.2)}
+body[data-theme=night]{--bg:var(--night);--fg:var(--text-light);--mute:#B8AEC4;--line:rgba(246,239,230,.2)}
+body[data-theme=dusk]{--bg:var(--dusk);--fg:var(--text-light);--mute:#D3C8E3;--line:rgba(246,239,230,.25)}
+body[data-theme=peach]{--bg:var(--peach)}
+body[data-theme=rose]{--bg:var(--rose)}
+body[data-theme=dawn]{--bg:var(--dawn)}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+[data-pt],[data-en]{display:none}
+html[data-lang=pt] [data-pt]{display:revert}
+html[data-lang=en] [data-en]{display:revert}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+
+/* type */
+.label{font-size:12px;letter-spacing:.3em;text-transform:uppercase;font-weight:500;display:flex;align-items:center;gap:14px;color:var(--mute)}
+.label b{font-weight:500;color:var(--fg)}
+.label:before{content:"";width:26px;height:1px;background:var(--sun)}
+h2.big{font-family:var(--serif);font-weight:500;font-size:clamp(44px,7.4vw,118px);line-height:.96;letter-spacing:-.02em;font-optical-sizing:auto}
+h2.big em{font-style:italic;font-weight:400}
+.lead{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(22px,2.4vw,34px);line-height:1.22}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:99px;border:1px solid currentColor;font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;position:relative;overflow:hidden;isolation:isolate;transition:color .35s}
+.btn:before{content:"";position:absolute;inset:0;background:var(--fg);transform:translateY(101%);transition:transform .45s cubic-bezier(.2,.8,.2,1);z-index:-1}
+.btn:hover:before{transform:none}
+.btn:hover{color:var(--bg)}
+.btn.solid{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+.btn.solid:before{background:var(--text-light)}
+.btn.solid:hover{color:var(--ink)}
+
+/* header */
+header.top{position:fixed;inset:0 0 auto 0;height:var(--hh);z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);transition:background-color .5s,backdrop-filter .5s}
+header.top.scrolled{background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.mark{display:block;line-height:0}
+.mark img{height:42px;width:auto}
+.mark{transition:background-color .5s,padding .5s,border-radius .5s}
+body[data-theme=bone] .mark,body[data-theme=peach] .mark,body[data-theme=rose] .mark,body[data-theme=dawn] .mark{background:var(--ink);padding:7px 12px;border-radius:3px}
+body[data-theme=bone] .mark img,body[data-theme=peach] .mark img,body[data-theme=rose] .mark img,body[data-theme=dawn] .mark img{height:34px}
+.nav{display:flex;gap:34px;font-size:13px;font-weight:500;letter-spacing:.22em;text-transform:uppercase}
+.nav a{position:relative;padding:8px 0}
+.nav a:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--sun);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.nav a:hover:after,.nav a.on:after{transform:none}
+.tools{display:flex;align-items:center;gap:12px}
+.lang{display:flex;border:1px solid currentColor;border-radius:99px;font-size:12px;font-weight:500;letter-spacing:.14em;overflow:hidden}
+.lang button{padding:8px 13px}
+html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{background:var(--fg);color:var(--bg)}
+.menu-btn{display:none;width:44px;height:44px;border-radius:50%;border:1px solid currentColor;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.menu-btn span{width:16px;height:1.5px;background:currentColor;transition:transform .3s}
+.menu-open .menu-btn span:first-child{transform:translateY(3.25px) rotate(45deg)}
+.menu-open .menu-btn span:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+.tools .btn{padding:11px 22px;font-size:12px}
+
+.sheet{position:fixed;inset:0;z-index:40;background:var(--ink);color:var(--text-light);display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--hh) + 28px) var(--pad) calc(28px + env(safe-area-inset-bottom));clip-path:inset(0 0 100% 0);transition:clip-path .65s cubic-bezier(.7,0,.2,1);visibility:hidden}
+.menu-open .sheet{clip-path:inset(0);visibility:visible}
+.menu-open header.top{color:var(--text-light);background:transparent;backdrop-filter:none}
+.sheet nav{display:flex;flex-direction:column}
+.sheet nav a{font-family:var(--serif);font-weight:500;font-size:clamp(40px,11vw,68px);line-height:1.08;display:flex;align-items:baseline;gap:14px;padding:6px 0;border-bottom:1px solid rgba(246,239,230,.14)}
+.sheet nav a small{font-family:var(--sans);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#B8AEC4}
+.sheet .foot{display:flex;justify-content:space-between;align-items:center;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#B8AEC4}
+
+/* ================= HERO ================= */
+.hero{position:relative;min-height:100svh;overflow:hidden;background:var(--ink);color:var(--text-light);isolation:isolate}
+.hero .glow{position:absolute;inset:-10%;z-index:-3;background:url(assets/img/poster_hero_night.jpg) 80% 50%/cover;filter:blur(70px) saturate(1.3);opacity:.5;transform:scale(1.2)}
+.film{position:absolute;top:0;bottom:0;right:clamp(24px,7vw,130px);width:calc(100svh*.5625);max-width:46vw;z-index:-2;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 26%);mask-image:linear-gradient(90deg,transparent 0,#000 26%)}
+.film video{width:100%;height:100%;object-fit:cover}
+.film:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,8,16,.55),transparent 22%,transparent 62%,rgba(11,8,16,.7))}
+.grain{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.14;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+.hero-left{position:absolute;left:var(--pad);top:50%;transform:translateY(-46%);width:min(52vw,720px);display:flex;flex-direction:column;gap:0}
+.logo-hero{width:100%;height:auto;filter:drop-shadow(0 6px 40px rgba(0,0,0,.35))}
+.tagline{margin-top:clamp(20px,3vh,34px);font-size:13px;letter-spacing:.42em;text-transform:uppercase;font-weight:400;color:#E6DCEE;display:flex;gap:16px;align-items:center}
+.tagline:before{content:"";width:34px;height:1px;background:var(--sun)}
+.rot{position:relative;height:2.7em;margin-top:clamp(12px,2vh,20px);font-family:var(--serif);font-style:italic;font-size:clamp(24px,2.7vw,40px);line-height:1.1;max-width:20em}
+.rot>span{position:absolute;left:0;top:0;opacity:0;animation:rot 15s infinite}
+.rot>span:nth-child(2){animation-delay:5s}.rot>span:nth-child(3){animation-delay:10s}
+@keyframes rot{0%{opacity:0;transform:translateY(10px)}4%,30%{opacity:1;transform:none}36%,100%{opacity:0;transform:translateY(-6px)}}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(10px,2.4vh,26px)}
+.hero-actions .btn{color:var(--text-light)}
+.hero-actions .btn.solid{color:var(--ink)}
+.hero-actions .btn:before{background:var(--text-light)}
+.hero-actions .btn:hover{color:var(--ink)}
+.hero-note{position:absolute;right:var(--pad);bottom:28px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#CFC4DE;writing-mode:vertical-rl;transform:rotate(180deg)}
+.scrollcue{position:absolute;left:var(--pad);bottom:0;width:1px;height:54px;background:linear-gradient(var(--sun),transparent)}
+.hero .logo-hero,.hero .tagline,.hero .rot,.hero .hero-actions,.hero .film{opacity:0}
+.loaded .hero .film{animation:fadein 1.8s .1s forwards}
+.loaded .hero .logo-hero{animation:rise 1.4s .35s cubic-bezier(.2,.8,.2,1) forwards}
+.loaded .hero .tagline,.loaded .hero .rot,.loaded .hero .hero-actions{animation:rise 1.2s 1s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+/* ================= SEAM (sun) ================= */
+.seam{position:relative;height:clamp(440px,78svh,820px);overflow:hidden;background:var(--ink);color:var(--text-light);display:flex;flex-direction:column;justify-content:center;isolation:isolate}
+.seam video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 52%;z-index:-2}
+.seam:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--seam-top,var(--ink)) 0,rgba(11,8,16,.1) 30%,rgba(11,8,16,.1) 60%,var(--seam-bot,var(--bone)) 100%)}
+.mq{overflow:hidden;white-space:nowrap}
+.mq>div{display:inline-flex;animation:mq 60s linear infinite;will-change:transform}
+.mq:hover>div{animation-play-state:paused}
+.mq1{margin-bottom:clamp(14px,2vw,30px)}
+.mq1 span{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(54px,9.5vw,150px);line-height:1.05;display:inline-flex;align-items:center;padding-right:.5em;letter-spacing:-.02em;text-shadow:0 2px 40px rgba(0,0,0,.35)}
+.mq1 span:after{content:"";width:.16em;height:.16em;border-radius:50%;background:var(--sun);margin-left:.5em;box-shadow:0 0 30px 6px rgba(240,180,41,.55)}
+.mq2>div{animation-direction:reverse;animation-duration:90s}
+.mq2 span{text-shadow:0 1px 14px rgba(0,0,0,.6);font-weight:300;font-size:clamp(13px,1.3vw,19px);letter-spacing:.55em;text-transform:uppercase;padding-right:2.4em;color:#F2E8D8;opacity:.9}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ================= STATEMENT ================= */
+.statement{padding:clamp(80px,11vw,170px) var(--pad) clamp(70px,9vw,140px)}
+.statement .words{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.4vw,88px);line-height:1.06;max-width:1200px;margin-top:34px;letter-spacing:-.02em}
+.statement .words span{opacity:.16;transition:opacity .3s}
+.statement .words span.on{opacity:1}
+
+/* ================= MUSIC ================= */
+.music{padding:clamp(70px,9vw,150px) var(--pad)}
+.music .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.music .head p{max-width:30ch;color:var(--mute)}
+.feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,90px);margin-top:clamp(40px,5vw,80px);align-items:start}
+.feat{row-gap:clamp(60px,7vw,120px)}
+.song:nth-child(even){margin-top:clamp(40px,9vw,150px)}
+.song p i,.dream i{font-style:italic}
+.vis{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:#000;cursor:pointer}
+.vis video,.vis>img{width:100%;height:100%;object-fit:cover}
+.vis>img{transition:transform 2.4s cubic-bezier(.2,.8,.2,1)}
+.song:hover .vis>img{transform:scale(1.04)}
+.vis .play{position:absolute;left:50%;top:50%;width:92px;height:92px;margin:-46px;border-radius:50%;background:rgba(246,239,230,.94);color:var(--ink);display:grid;place-items:center;font-size:24px;padding-left:5px;transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.vis:hover .play{transform:scale(1.1)}
+.vis.playing .play{opacity:0;pointer-events:none}
+.vis .tag{position:absolute;left:16px;bottom:14px;color:#fff;font-size:11px;letter-spacing:.24em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.vis:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(11,8,16,.5));pointer-events:none}
+.song .no{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--mute);margin-top:22px}
+.song h3{font-family:var(--serif);font-weight:500;font-size:clamp(38px,4.8vw,78px);line-height:.98;letter-spacing:-.02em;margin-top:2px}
+.song h3 em{font-weight:400}
+.song p{color:var(--mute);margin:12px 0 20px;max-width:34ch}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{padding:10px 20px;border:1px solid currentColor;border-radius:99px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:background .3s,color .3s}
+.chip:hover{background:var(--fg);color:var(--bg)}
+.catalog{margin-top:clamp(70px,9vw,140px)}
+.catalog .label{margin-bottom:22px}
+.disco{border-top:1px solid var(--line)}
+.disco a{display:grid;grid-template-columns:80px 1fr auto;align-items:baseline;gap:16px;padding:20px 0;border-bottom:1px solid var(--line);transition:padding .45s cubic-bezier(.2,.8,.2,1)}
+.disco a:hover{padding-left:16px}
+.disco .y{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--mute)}
+.disco .t{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.8vw,40px);line-height:1.05;letter-spacing:-.01em}
+.disco .k{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);text-align:right}
+.disco a:hover .t{color:var(--sun)}
+
+/* ================= FORMATS ================= */
+/* dream */
+.dream{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(30px,6vw,110px);padding:clamp(90px,11vw,180px) var(--pad);overflow:hidden;isolation:isolate}
+.dream:before{content:"";position:absolute;right:-10%;top:10%;width:70vw;height:70vw;max-width:1000px;max-height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(240,180,41,.10),rgba(58,45,99,.22) 40%,transparent 70%);z-index:-1;pointer-events:none}
+.lyric{margin:clamp(30px,4vw,56px) 0 0;padding-left:clamp(18px,2vw,28px);border-left:1px solid var(--sun)}
+.lyric p{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,2.7vw,44px);line-height:1.15;letter-spacing:-.01em}
+.lyric footer{margin-top:16px;font-size:13px;letter-spacing:.06em;color:var(--mute);max-width:46ch}
+.dream-story{margin-top:clamp(28px,3vw,44px);max-width:46ch;color:var(--mute)}
+.dream-story p+p{margin-top:14px}
+.dream-meta{margin:28px 0 20px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.dream-meta .t{font-family:var(--serif);font-size:30px;letter-spacing:-.01em;text-transform:none;color:var(--fg)}
+.dream-meta i{text-transform:none;letter-spacing:.04em;font-size:14px}
+.dream-fig{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:#000;justify-self:end;width:min(100%,560px)}
+.dream-fig img{width:100%;height:100%;object-fit:cover;object-position:42% 45%;animation:drift 26s ease-in-out infinite alternate}
+.dream-fig:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,8,16,.15),transparent 40%,rgba(11,8,16,.55));pointer-events:none}
+@keyframes drift{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.12) translate(-2%,-3%)}}
+.formats{padding:clamp(70px,9vw,150px) 0}
+.formats header.sec{padding:0 var(--pad);display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px;margin-bottom:46px}
+.formats .intro{max-width:34ch;color:var(--mute)}
+.panels{display:flex;gap:10px;height:min(80vh,780px);min-height:560px;padding:0 var(--pad)}
+.pn{position:relative;flex:1;overflow:hidden;border-radius:3px;color:var(--text-light);transition:flex .9s cubic-bezier(.7,0,.2,1);background:#1a1420;cursor:pointer;isolation:isolate}
+.pn.on{flex:2.7}
+.pn img,.pn video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s cubic-bezier(.2,.8,.2,1);z-index:-2}
+.pn.on img,.pn.on video{transform:scale(1)}
+.pn:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,8,16,.05) 38%,rgba(11,8,16,.82));z-index:-1}
+.pn .in{position:absolute;inset:auto 0 0 0;padding:26px}
+.pn .pre{font-size:11px;letter-spacing:.3em;text-transform:uppercase;display:flex;gap:10px;align-items:center}
+.pn .pre:before{content:"";width:20px;height:1px;background:var(--sun)}
+.pn h3{font-family:var(--serif);font-weight:500;font-size:clamp(34px,3.6vw,60px);line-height:.95;letter-spacing:-.02em;margin-top:12px;transition:font-size .7s cubic-bezier(.7,0,.2,1)}
+.pn.on h3{font-size:clamp(44px,5.4vw,90px)}
+.pn h3 em{display:block;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;margin-top:12px}
+.pn .more{max-height:0;opacity:0;overflow:hidden;transition:max-height .7s,opacity .6s .1s}
+.pn.on .more{max-height:220px;opacity:1}
+.pn .more p{max-width:36ch;margin:16px 0 18px;font-size:17px;color:#EFE6D8}
+.pn .more a{display:inline-flex;gap:8px;align-items:center;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;border-bottom:1px solid var(--sun);padding-bottom:4px}
+
+/* ================= LIVE ================= */
+.live{padding:clamp(80px,10vw,160px) var(--pad) clamp(60px,8vw,120px);overflow:hidden}
+.live .row{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(30px,6vw,100px);align-items:center}
+.live h2.big{margin:26px 0 30px}
+.live .meta{margin-top:26px;color:var(--mute);font-size:12px;letter-spacing:.24em;text-transform:uppercase}
+.live .vis{aspect-ratio:9/16;max-height:80vh;justify-self:end;width:min(100%,430px)}
+.strip{margin:clamp(60px,8vw,110px) calc(-1*var(--pad)) 0;overflow:hidden}
+.strip div{display:flex;gap:14px;width:max-content;animation:mq 90s linear infinite;padding-left:14px}
+.strip img{height:clamp(240px,30vw,440px);width:auto;border-radius:2px}
+.strip:hover div{animation-play-state:paused}
+
+/* ================= HIGHLIGHTS ================= */
+.high{padding:clamp(70px,9vw,140px) var(--pad)}
+.high .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:50px;flex-wrap:wrap}
+.hl{border-top:1px solid var(--line)}
+.hl details{border-bottom:1px solid var(--line)}
+.hl summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,.9fr) 150px 40px;gap:20px;align-items:baseline;padding:26px 0;transition:padding .45s cubic-bezier(.2,.8,.2,1)}
+.hl summary::-webkit-details-marker{display:none}
+.hl details:hover summary{padding-left:14px}
+.hl .y{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--mute)}
+.hl .t{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.6vw,56px);line-height:1;letter-spacing:-.02em}
+.hl .w{color:var(--mute);font-size:16px}
+.hl .g{font-size:11px;letter-spacing:.2em;text-transform:uppercase;border:1px solid currentColor;border-radius:99px;padding:7px 14px;text-align:center;justify-self:start}
+.hl .pl{font-size:26px;line-height:1;transition:transform .4s;text-align:right;font-weight:300}
+.hl details[open] .pl{transform:rotate(45deg)}
+.hl .body{padding:0 0 30px 110px;max-width:72ch;color:var(--mute);font-size:18px}
+.hl .star .t:after{content:"";display:inline-block;width:.2em;height:.2em;background:var(--sun);border-radius:50%;margin-left:.25em;vertical-align:.5em}
+
+/* ================= STORY ================= */
+.story{padding:clamp(80px,10vw,160px) var(--pad)}
+.story .grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(30px,6vw,110px);align-items:start}
+.story figure{position:sticky;top:calc(var(--hh) + 20px);border-radius:3px;overflow:hidden;aspect-ratio:4/5;max-height:82vh}
+.story figure img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.story .txt .lead{font-size:clamp(30px,3.6vw,56px);line-height:1.12;margin:28px 0 36px;letter-spacing:-.01em;font-style:normal}
+.story .txt .lead em{font-style:italic;color:var(--sun)}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+.facts>span{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;border:1px solid var(--line);border-radius:99px;padding:9px 18px}
+
+/* ================= CONTACT ================= */
+.contact{padding:clamp(80px,10vw,160px) var(--pad) clamp(60px,7vw,110px)}
+.contact h2.big{font-size:clamp(50px,10vw,168px);margin:30px 0 40px}
+.contact .row{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(30px,6vw,100px);align-items:start}
+.pick{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 26px}
+.pick button{padding:12px 22px;border-radius:99px;border:1px solid currentColor;font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;transition:background .3s,color .3s}
+.pick button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:12px 22px;font-size:17px;border-top:1px solid var(--line);padding-top:22px}
+.contact dt{color:var(--mute);font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding-top:5px}
+
+/* ================= FOOTER ================= */
+footer.f{position:relative;padding:clamp(60px,8vw,120px) var(--pad) 36px;background:var(--ink);color:var(--text-light);text-align:center}
+footer.f .logo-foot{width:min(70vw,640px);height:auto;margin:0 auto}
+footer.f .rule{width:1px;height:70px;background:linear-gradient(var(--sun),transparent);margin:clamp(30px,4vw,56px) auto}
+footer.f .cols{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#B8AEC4;text-align:left}
+footer.f nav{display:flex;gap:26px;flex-wrap:wrap}
+.proto{font-size:12px;color:#8a8196;padding-top:30px;letter-spacing:.04em;text-align:left}
+
+/* dock + reveal */
+.dock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translate(-50%,160%);z-index:45;display:none;gap:6px;padding:6px;border-radius:99px;background:var(--ink);color:var(--text-light);box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.dock.show{transform:translate(-50%,0)}
+.dock a{padding:13px 22px;border-radius:99px;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.dock a.gold{background:var(--sun);color:var(--ink)}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+
+/* ============ DIRECTION B: ENTARDECER (full-bleed, dark) ============ */
+html[data-dir=entardecer] .film{left:0;right:0;width:auto;max-width:none;-webkit-mask-image:none;mask-image:none;z-index:-2}
+html[data-dir=entardecer] .film:after{background:linear-gradient(90deg,rgba(11,8,16,.9),rgba(11,8,16,.25) 58%,rgba(11,8,16,.05)),linear-gradient(180deg,rgba(11,8,16,.5),transparent 24%,transparent 55%,rgba(11,8,16,.85))}
+html[data-dir=entardecer] .film video{object-position:50% 30%}
+html[data-dir=entardecer] .hero .glow{display:none}
+html[data-dir=entardecer] .hero-left{top:auto;bottom:clamp(70px,12vh,130px);transform:none}
+html[data-dir=entardecer] .rot{color:#F3E9DA}
+
+
+/* ================= responsive ================= */
+@media (max-width:1100px){.nav{display:none}.menu-btn{display:flex}.tools .btn{display:none}}
+@media (max-width:899px){
+  :root{--hh:64px}
+  body{font-size:17px}
+  .mark img{height:36px}
+  .film,html[data-dir=entardecer] .film{left:0;right:0;top:0;bottom:0;width:auto;max-width:none;-webkit-mask-image:none;mask-image:none}
+  .film:after{background:linear-gradient(180deg,rgba(11,8,16,.55),transparent 22%,transparent 38%,rgba(11,8,16,.9))}
+  .hero .glow{display:none}
+  .hero{min-height:100svh;height:100svh}
+  .hero-left,html[data-dir=entardecer] .hero-left{left:var(--pad);right:var(--pad);width:auto;top:auto;bottom:calc(30px + 5svh);transform:none}
+  .logo-hero{width:min(86vw,420px)}
+  .rot{font-size:24px}
+  .hero-note,.scrollcue{display:none}
+  .hero-actions{margin-top:6px}
+  .music .head{align-items:flex-start}
+  .feat{grid-template-columns:1fr}
+  .feat{row-gap:30px}
+  .song:nth-child(even){margin-top:30px}
+  .dream{grid-template-columns:1fr;padding-top:clamp(70px,16vw,110px)}
+  .dream-fig{order:-1;justify-self:stretch;width:100%;aspect-ratio:4/3}
+  .dream:before{width:120vw;height:120vw;right:-40%;top:0}
+  .disco a{grid-template-columns:56px 1fr;row-gap:4px}.disco .k{grid-column:2;text-align:left}
+  .formats header.sec{grid-template-columns:1fr}
+  .panels{height:auto;min-height:0;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;scrollbar-width:none}
+  .panels::-webkit-scrollbar{display:none}
+  .pn,.pn.on{flex:0 0 80vw;height:min(128vw,640px);scroll-snap-align:center}
+  .pn .more{max-height:none;opacity:1}
+  .pn img,.pn video{transform:none}
+  .pn h3,.pn.on h3{font-size:clamp(40px,12vw,56px)}
+  .live .row,.story .grid,.contact .row{grid-template-columns:1fr}
+  .live .vis{justify-self:center;margin-top:30px;max-height:none}
+  .story figure{position:static;aspect-ratio:4/5;max-height:none}
+  .hl summary{grid-template-columns:54px minmax(0,1fr) 30px;row-gap:8px}
+  .hl .w{grid-column:2}.hl .g{grid-column:2;grid-row:3}.hl .pl{grid-column:3;grid-row:1}
+  .hl .body{padding-left:74px}
+  .dock{display:flex}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .hero .logo-hero,.hero .tagline,.hero .rot,.hero .hero-actions,.hero .film{opacity:1}
+  .rot>span:first-child{opacity:1}
+  .rv{opacity:1;transform:none}
+  .statement .words span{opacity:1}
+}
+</style>
 </head>
-<body>
-    <header>
-        <style>
-            .scaleA {
-              width: 50%;
-              max-width: max-content;
-            }
-            </style>
-        <div class="container">
-            
-            <h1>Rafael Z</h1>
-            <p>Artista - Programador - Produtor - Cantor - Compositor</p>
-            <img src="portrait.png" alt="Rafael Z's Portrait"  class="scaleA">
-            
-        </div>
-    </header>
+<body data-theme="ink">
 
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">Sobre</a></li>
-                <li><a href="services.html">Serviços</a></li>
-                <li><a href="contact.html">Contato</a></li>
-            </ul>
-        </div>
-    </nav>
+<header class="top" id="top">
+  <a class="mark" href="#home" aria-label="Rafael Z"><img src="assets/logo/rz_logo.png" alt="Rafael Z" width="1013" height="497"></a>
+  <nav class="nav" aria-label="Principal">
+    <a href="#musica"><span data-pt>Música</span><span data-en>Music</span></a>
+    <a href="#ao-vivo"><span data-pt>Ao vivo</span><span data-en>Live</span></a>
+    <a href="#formatos">Solo</a>
+    <a href="#formatos">Trio</a>
+    <a href="#historia"><span data-pt>História</span><span data-en>Story</span></a>
+    <a href="#contato"><span data-pt>Contato</span><span data-en>Booking</span></a>
+  </nav>
+  <div class="tools">
+    <div class="lang" role="group" aria-label="Idioma / Language"><button data-set="pt" aria-label="Português">PT</button><button data-set="en" aria-label="English">EN</button></div>
+    <a class="btn solid" href="#contato"><span data-pt>Contratar</span><span data-en>Book</span></a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false" id="menuBtn"><span></span><span></span></button>
+  </div>
+</header>
 
-    <section id="home">
-        <div class="container">
-            <h2>Bem Vindo</h2>
-            <p>Esse é o meu site oficial que eu mesmo resolvi construir. Clique nos links acima para explorar mais.</p>
-            <br>
-            <p> Aos poucos será adicionado mais conteúdo então fique ligado. </p>
-        </div>
-    </section>
+<div class="sheet" id="sheet" aria-hidden="true">
+  <nav aria-label="Menu">
+    <a href="#musica"><span data-pt>Música</span><span data-en>Music</span></a>
+    <a href="#ao-vivo"><span data-pt>Ao vivo</span><span data-en>Live</span></a>
+    <a href="#formatos">Solo<small><span data-pt>voz e violão</span><span data-en>voice and guitar</span></small></a>
+    <a href="#formatos">Trio<small><span data-pt>e com Bruno Dourado</span><span data-en>and with Bruno Dourado</span></small></a>
+    <a href="#historia"><span data-pt>História</span><span data-en>Story</span></a>
+    <a href="#contato"><span data-pt>Contato</span><span data-en>Booking</span></a>
+  </nav>
+  <div class="foot"><span>Spotify · Apple Music · YouTube</span><span>PT | EN</span></div>
+</div>
 
-    <footer>
-        <div class="footer">
-            <p>&copy; 2024 Rafael Z. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+<main id="home">
+<!-- HERO -->
+<section class="hero" id="hero" data-id="hero" aria-label="Rafael Z">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="film"><video id="heroVideo" src="assets/video/hero_night_loop.mp4" poster="assets/img/poster_hero_night.jpg" muted loop playsinline autoplay preload="auto" aria-label="Rafael Z cantando ao pôr do sol, Capital Moto Week 2024"></video></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hero-left">
+    <h1 class="sr">Rafael Z</h1>
+    <img class="logo-hero" src="assets/logo/rz_logo.png" alt="Rafael Z" width="1013" height="497">
+    <div class="tagline"><span data-pt>Cantor e compositor · Brasília</span><span data-en>Singer and songwriter · Brasília</span></div>
+    <div class="rot" aria-hidden="true">
+      <span><span data-pt>Mais um dia maravilhoso no planeta Terra</span><span data-en>Another wonderful day on planet Earth</span></span>
+      <span><span data-pt>Energia boa</span><span data-en>Good energy</span></span>
+      <span><span data-pt>Amor é inclusão</span><span data-en>Love is inclusion</span></span>
+    </div>
+    <div class="hero-actions"><a class="btn solid" href="#musica"><span data-pt>Ouvir</span><span data-en>Listen</span></a><a class="btn" href="#contato"><span data-pt>Contratar</span><span data-en>Book</span></a></div>
+  </div>
+  <div class="hero-note"><span data-pt>Ao vivo · Capital Moto Week 2024</span><span data-en>Live · Capital Moto Week 2024</span></div>
+  <span class="scrollcue" aria-hidden="true"></span>
+</section>
 
-    <script src="script.js"></script>
+<!-- SEAM: the sun, and the phrases -->
+<section class="seam" data-id="seam" aria-label="Mais um dia maravilhoso no planeta Terra · Energia boa · Amor é inclusão">
+  <video src="assets/video/sunset_loop.mp4" poster="assets/img/poster_sunset.jpg" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+  <div class="mq mq1" aria-hidden="true"><div>
+    <span><span data-pt>Mais um dia maravilhoso no planeta Terra</span><span data-en>Another wonderful day on planet Earth</span></span>
+    <span><span data-pt>Energia boa</span><span data-en>Good energy</span></span>
+    <span><span data-pt>Amor é inclusão</span><span data-en>Love is inclusion</span></span>
+    <span><span data-pt>Mais um dia maravilhoso no planeta Terra</span><span data-en>Another wonderful day on planet Earth</span></span>
+    <span><span data-pt>Energia boa</span><span data-en>Good energy</span></span>
+    <span><span data-pt>Amor é inclusão</span><span data-en>Love is inclusion</span></span>
+  </div></div>
+  <div class="mq mq2" aria-hidden="true"><div>
+    <span>Rafael Z</span><span><span data-pt>Brasília</span><span data-en>Brasília</span></span><span><span data-pt>Reggae · Rock · Folk · Ska · Blues</span><span data-en>Reggae · Rock · Folk · Ska · Blues</span></span><span><span data-pt>Português · English</span><span data-en>Português · English</span></span>
+    <span>Rafael Z</span><span>Brasília</span><span>Reggae · Rock · Folk · Ska · Blues</span><span>Português · English</span>
+  </div></div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement" data-id="statement">
+  <div class="label"><b>00</b> <span data-pt>Identidade</span><span data-en>Identity</span></div>
+  <p class="words" id="words" data-pt-text="Música para elevar a energia. Reggae na raiz, rock na urgência, folk no coração, de Brasília para onde a música for." data-en-text="Music to lift the energy. Reggae in the roots, rock in the urgency, folk in the heart, from Brasília to wherever the music goes."></p>
+</section>
+
+<!-- MUSIC -->
+<section class="music" id="musica" data-id="music">
+  <div class="head rv">
+    <div><div class="label"><b>01</b> <span data-pt>Música</span><span data-en>Music</span></div>
+    <h2 class="big" style="margin-top:26px"><span data-pt>Quatro canções,<br><em>uma assinatura.</em></span><span data-en>Four songs,<br><em>one signature.</em></span></h2></div>
+    <p><span data-pt>As canções que melhor dizem quem é Rafael Z.</span><span data-en>The songs that say most about who Rafael Z is.</span></p>
+  </div>
+  <div class="feat">
+    <article class="song rv">
+      <div class="vis" id="songVis" role="button" tabindex="0" aria-label="Assistir Tudo Que Nós Temos ao vivo">
+        <video src="assets/video/cmw_tudo_que_nos_temos_live.mp4" poster="assets/img/poster_tudo.jpg" playsinline preload="none"></video>
+        <span class="play" aria-hidden="true">▶</span>
+        <span class="tag"><span data-pt>Ao vivo · Capital Moto Week 2024</span><span data-en>Live · Capital Moto Week 2024</span></span>
+      </div>
+      <div class="no">01</div>
+      <h3>Tudo Que<br><em>Nós Temos</em></h3>
+      <p><span data-pt>Do EP de 2024. Aqui, a versão ao vivo do show no Palco Pepsi Black.</span><span data-en>From the 2024 EP. Here, the live version from the Pepsi Black stage show.</span></p>
+      <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
+    </article>
+    <article class="song rv">
+      <div class="vis" style="cursor:default"><img src="assets/img/bh_singing_headphones.jpg" alt="Rafael Z cantando no estúdio" style="object-position:50% 30%"><span class="tag"><span data-pt>Versão acústica</span><span data-en>Acoustic version</span></span></div>
+      <div class="no">02</div>
+      <h3>Agora<br><em>ao Vivo</em></h3>
+      <p><span data-pt>Canção autoral, em versão acústica. Single de 2025.</span><span data-en>An original song, in an acoustic version. 2025 single.</span></p>
+      <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
+    </article>
+    <article class="song rv">
+      <div class="vis" style="cursor:default"><img src="assets/img/bh_semente_smile.jpg" alt="Rafael Z sorrindo no estúdio" loading="lazy" style="object-position:50% 22%"><span class="tag"><span data-pt>EP Tudo Que Nós Temos · 2024</span><span data-en>Tudo Que Nós Temos EP · 2024</span></span></div>
+      <div class="no">03</div>
+      <h3>A<br><em>Semente</em></h3>
+      <p><span data-pt>Do EP <i>Tudo Que Nós Temos</i>, de 2024.</span><span data-en>From the 2024 EP <i>Tudo Que Nós Temos</i>.</span></p>
+      <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
+    </article>
+    <article class="song rv">
+      <div class="vis" style="cursor:default"><img src="assets/img/cmw_mundo_daylight.jpg" alt="Rafael Z cantando com o violão ao ar livre" loading="lazy" style="object-position:50% 24%"><span class="tag">Single · 2025</span></div>
+      <div class="no">04</div>
+      <h3>Pro Mundo<br><em>Sorrir</em></h3>
+      <p><span data-pt>Single de 2025.</span><span data-en>2025 single.</span></p>
+      <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
+    </article>
+  </div>
+  <div class="catalog rv">
+    <div class="label"><b>→</b> <span data-pt>Catálogo</span><span data-en>Catalogue</span></div>
+    <div class="disco" role="list">
+      <a href="#" role="listitem"><span class="y">2025</span><span class="t">Beautiful Girl</span><span class="k">Single</span></a>
+      <a href="#" role="listitem"><span class="y">2025</span><span class="t">Pro Mundo Sorrir</span><span class="k">Single</span></a>
+      <a href="#" role="listitem"><span class="y">2024</span><span class="t">From Lust With Love</span><span class="k">EP</span></a>
+      <a href="#" role="listitem"><span class="y">2024</span><span class="t">For Real</span><span class="k">Single</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- DREAM -->
+<section class="dream" id="dream" data-id="dream" aria-labelledby="dreamTitle">
+  <div class="dream-text rv">
+    <div class="label"><b>01</b> <span data-pt>Uma canção à parte</span><span data-en>A song apart</span></div>
+    <h2 class="big" id="dreamTitle" style="margin-top:26px"><span data-pt>E um<br><em>sonho.</em></span><span data-en>And one<br><em>dream.</em></span></h2>
+    <blockquote class="lyric" lang="en">
+      <p>Where was I last night?<br>Take me back to that dream tonight.</p>
+      <footer><span data-pt lang="pt-BR">Refrão de “Dream”. Em português: “Onde estava eu ontem à noite? Me leve de volta praquele sonho essa noite.”</span><span data-en>From the chorus of “Dream”</span></footer>
+    </blockquote>
+    <div class="dream-story">
+      <p><span data-pt>Rafael conheceu pela internet uma moça que morava longe. Ela falava inglês, compunha e cantava, e desde o início ele sentiu uma conexão fora do comum.</span><span data-en>Rafael met a girl online who lived far away. She spoke English, wrote music and sang, and from the start he felt an unusually strong connection.</span></p>
+      <p><span data-pt>Na noite em que a conheceu, sonhou com ela. “Dream” descreve essa experiência. Rafael acredita que pode ter sido uma projeção astral: essa é a interpretação dele sobre o que viveu.</span><span data-en>On the night he first met her, he dreamed about her. “Dream” describes that experience. Rafael believes it may have been an astral projection: that is his own interpretation of what happened.</span></p>
+    </div>
+    <div class="dream-meta"><span class="t">Dream</span><span data-pt>do EP <i>From Lust With Love</i>, 2024</span><span data-en>from the EP <i>From Lust With Love</i>, 2024</span></div>
+    <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
+  </div>
+  <figure class="dream-fig rv"><img src="assets/img/bh_dream_moon.jpg" alt="Lua cheia alaranjada no céu noturno, entre folhas" loading="lazy"></figure>
+</section>
+
+<!-- FORMATS -->
+<section class="formats" id="formatos" data-id="formats">
+  <header class="sec rv">
+    <div>
+      <div class="label"><b>02</b> <span data-pt>Formas de ouvir</span><span data-en>Ways to listen</span></div>
+      <h2 class="big" style="margin-top:26px"><span data-pt>Um artista,<br><em>três escalas.</em></span><span data-en>One artist,<br><em>three scales.</em></span></h2>
+    </div>
+    <p class="intro"><span data-pt>A mesma música: sozinho com o violão, com a banda, ou ao lado de Bruno Dourado.</span><span data-en>The same music: alone with the guitar, with the band, or alongside Bruno Dourado.</span></p>
+  </header>
+  <div class="panels" id="panels">
+    <article class="pn" tabindex="0">
+      <video src="assets/video/solo_studio_loop.mp4" poster="assets/img/poster_solo_studio.jpg" muted loop playsinline preload="metadata" aria-label="Rafael Z cantando com o violão no estúdio" style="object-position:50% 20%"></video>
+      <div class="in"><div class="pre">Rafael Z</div>
+        <h3>Solo<em><span data-pt>voz e violão</span><span data-en>voice and guitar</span></em></h3>
+        <div class="more"><p><span data-pt>Um músico que soa como uma banda. Repertório autoral e versões, em português e inglês.</span><span data-en>One musician who sounds like a band. Originals and covers, in Portuguese and English.</span></p><a href="#"><span data-pt>Ver o Solo</span><span data-en>See the Solo</span> →</a></div></div>
+    </article>
+    <article class="pn on" tabindex="0">
+      <img src="assets/img/cmw_trio_after.jpg" alt="Rafael Z Trio depois do show no Capital Moto Week" style="object-position:50% 40%">
+      <div class="in"><div class="pre">Rafael Z</div>
+        <h3>Trio<em><span data-pt>a banda ao vivo</span><span data-en>the live band</span></em></h3>
+        <div class="more"><p><span data-pt>Autorais, reggae, rock e ska. Capital Moto Week 2024 e Brasal Pôr do Som 2025.</span><span data-en>Originals, reggae, rock and ska. Capital Moto Week 2024 and Brasal Pôr do Som 2025.</span></p><a href="#"><span data-pt>Ver o Trio</span><span data-en>See the Trio</span> →</a></div></div>
+    </article>
+    <article class="pn" tabindex="0">
+      <video src="assets/video/trio_lakeside_loop.mp4" poster="assets/img/poster_trio_lakeside.jpg" muted loop playsinline preload="metadata" style="object-position:48% 50%"></video>
+      <div class="in"><div class="pre">Rafael Z Trio</div>
+        <h3><span data-pt>com Bruno Dourado</span><span data-en>with Bruno Dourado</span><em><span data-pt>uma formação específica</span><span data-en>a specific line-up</span></em></h3>
+        <div class="more"><p><span data-pt>Ao lado de Bruno Dourado, da formação original do Natiruts. Ao vivo, outubro de 2026.</span><span data-en>Alongside Bruno Dourado, from the original Natiruts line-up. Live, October 2026.</span></p><a href="#"><span data-pt>Ver esta formação</span><span data-en>See this line-up</span> →</a></div></div>
+    </article>
+  </div>
+</section>
+
+<!-- LIVE -->
+<section class="live" id="ao-vivo" data-id="live">
+  <div class="row">
+    <div>
+      <div class="label rv"><b>03</b> <span data-pt>Ao vivo</span><span data-en>Live</span></div>
+      <h2 class="big rv"><span data-pt>Pôr do sol,<br><em>palco aberto.</em></span><span data-en>Sunset,<br><em>open stage.</em></span></h2>
+      <p class="lead rv"><span data-pt>O show no Palco Pepsi Black, Capital Moto Week, Brasília, em julho de 2024.</span><span data-en>The show on the Pepsi Black stage, Capital Moto Week, Brasília, July 2024.</span></p>
+      <p class="meta rv"><span data-pt>Mais filmes e fotos no arquivo</span><span data-en>More films and photographs in the archive</span> →</p>
+    </div>
+    <div class="vis rv" id="liveVis" role="button" tabindex="0" aria-label="Assistir ao show">
+      <video src="assets/video/cmw_performance_film.mp4" poster="assets/img/poster_performance.jpg" playsinline preload="none"></video>
+      <span class="play" aria-hidden="true">▶</span>
+      <span class="tag"><span data-pt>Capital Moto Week · 22 jul 2024</span><span data-en>Capital Moto Week · 22 Jul 2024</span></span>
+    </div>
+  </div>
+  <div class="strip" aria-hidden="true"><div>
+    <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt="">
+    <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt="">
+  </div></div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="high" id="destaques" data-id="high">
+  <div class="head rv">
+    <div><div class="label"><b>04</b> <span data-pt>Destaques</span><span data-en>Highlights</span></div>
+    <h2 class="big" style="margin-top:26px"><span data-pt>Palcos<br><em>selecionados</em></span><span data-en>Selected<br><em>stages</em></span></h2></div>
+    <p class="lead" style="max-width:20em;color:var(--mute)"><span data-pt>Uma seleção, não um currículo completo.</span><span data-en>A selection, not a complete résumé.</span></p>
+  </div>
+  <div class="hl rv">
+    <details class="star" open><summary><span class="y">2025</span><span class="t">Brasal Pôr do Som</span><span class="w">Praça do Cruzeiro, Brasília</span><span class="g">Rafael Z Trio</span><span class="pl">+</span></summary>
+      <div class="body"><span data-pt>24 de agosto de 2025. O Rafael Z Trio foi a atração do Pôr do Som da Brasal Veículos, evento ao ar livre na Praça do Cruzeiro. A apresentação foi muito bem recebida pelo público e ficou registrada em vídeo.</span><span data-en>24 August 2025. Rafael Z Trio performed at Brasal Veículos' Pôr do Som, an open-air event at Praça do Cruzeiro. The show was warmly received by the audience and was filmed.</span></div></details>
+    <details><summary><span class="y">2024</span><span class="t">Capital Moto Week</span><span class="w">Palco Pepsi Black, Brasília</span><span class="g">Rafael Z Trio</span><span class="pl">+</span></summary>
+      <div class="body"><span data-pt>Duas apresentações listadas na programação do festival, em julho de 2024. Filmes e fotos do show de 22 de julho estão no arquivo.</span><span data-en>Two slots listed in the festival programme, July 2024. Films and photographs of the 22 July show are in the archive.</span></div></details>
+        <details><summary><span class="y">2014</span><span class="t">Estúdio Máquina</span><span class="w">Belo Horizonte</span><span class="g"><span data-pt>Estúdio</span><span data-en>Studio</span></span><span class="pl">+</span></summary>
+      <div class="body"><span data-pt>Gravação no estúdio de Belo Horizonte, onde conheceu Lelo Zaneti, baixista do Skank. A história completa estará na página História.</span><span data-en>Recording at the Belo Horizonte studio, where he met Lelo Zaneti, Skank's bassist. The full story will be on the Story page.</span></div></details>
+    <details><summary><span class="y">2014</span><span class="t">Djavan</span><span class="w"><span data-pt>Centro de Convenções, Brasília</span><span data-en>Convention Centre, Brasília</span></span><span class="g"><span data-pt>Set de lounge</span><span data-en>Lounge set</span></span><span class="pl">+</span></summary>
+      <div class="body"><span data-pt>Set de lounge, em palco separado, antes do show Rua dos Amores Ao Vivo, de Djavan.</span><span data-en>Lounge set on a separate stage before Djavan's Rua dos Amores Ao Vivo concert.</span></div></details>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="historia" data-id="story">
+  <div class="grid">
+    <figure class="rv"><img src="assets/img/bh_portrait_smile.jpg" alt="Retrato de Rafael Z" style="object-position:55% 32%"></figure>
+    <div class="txt">
+      <div class="label rv"><b>05</b> <span data-pt>História</span><span data-en>Story</span></div>
+      <p class="lead rv"><span data-pt>Nascido em Brasília, criado em parte na Inglaterra. Reggae, rock, ska, blues e o folk inglês da infância, com uma intenção simples: <em>criar energia boa</em>.</span><span data-en>Born in Brasília, partly raised in England. Reggae, rock, ska, blues and the English folk of his childhood, with one simple intention: <em>to create good energy</em>.</span></p>
+      <div class="facts rv"><span>Brasília</span><span><span data-pt>Infância na Inglaterra</span><span data-en>Childhood in England</span></span><span>Português · English</span></div>
+      <a class="btn rv" href="#"><span data-pt>Ler a história completa</span><span data-en>Read the full story</span> →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contato" data-id="contact">
+  <div class="label rv"><b>06</b> <span data-pt>Contato</span><span data-en>Booking</span></div>
+  <h2 class="big rv"><span data-pt>Vamos levar<br>essa <em>energia</em><br>ao seu palco.</span><span data-en>Let's bring<br>this <em>energy</em><br>to your stage.</span></h2>
+  <div class="row">
+    <div class="rv">
+      <p class="lead"><span data-pt>Festivais, eventos corporativos, bares, restaurantes e festas privadas.</span><span data-en>Festivals, corporate events, venues, restaurants and private parties.</span></p>
+      <div class="pick" role="group" aria-label="Formato"><button aria-pressed="false" data-f="Solo">Solo</button><button aria-pressed="true" data-f="Trio">Trio</button><button aria-pressed="false" data-f="Trio com Bruno Dourado"><span data-pt>Trio com Bruno Dourado</span><span data-en>Trio with Bruno Dourado</span></button></div>
+      <div class="cta-row"><a class="btn solid" href="#"><span data-pt>Pedir proposta:</span><span data-en>Request a quote:</span>&nbsp;<b id="askF" style="font-weight:600">Trio</b></a><a class="btn" href="#"><span data-pt>Baixar press kit (PDF)</span><span data-en>Download press kit (PDF)</span></a></div>
+    </div>
+    <dl class="rv">
+      <dt>WhatsApp</dt><dd><a href="https://wa.me/5561984167777" rel="noopener">+55 61 98416-7777</a></dd>
+      <dt>E-mail</dt><dd><a href="mailto:rafaelmartinszeredo@gmail.com">rafaelmartinszeredo@gmail.com</a></dd>
+      <dt><span data-pt>Base</span><span data-en>Based in</span></dt><dd>Brasília, DF</dd>
+      <dt><span data-pt>Idiomas</span><span data-en>Languages</span></dt><dd>Português · English</dd>
+    </dl>
+  </div>
+</section>
+</main>
+
+<footer class="f" data-id="footer">
+  <img class="logo-foot" src="assets/logo/rz_logo.png" alt="Rafael Z" width="1013" height="497" loading="lazy">
+  <div class="rule" aria-hidden="true"></div>
+  <div class="cols"><nav><a href="#musica"><span data-pt>Música</span><span data-en>Music</span></a><a href="#ao-vivo"><span data-pt>Ao vivo</span><span data-en>Live</span></a><a href="#formatos">Solo</a><a href="#formatos">Trio</a><a href="#historia"><span data-pt>História</span><span data-en>Story</span></a><a href="#contato"><span data-pt>Contato</span><span data-en>Booking</span></a></nav><span>Spotify · Apple Music · YouTube · Instagram</span></div>
+  <p class="proto">© 2026 Rafael Z</p>
+</footer>
+
+<div class="dock" id="dock"><a href="#musica"><span data-pt>Ouvir</span><span data-en>Listen</span></a><a class="gold" href="#contato"><span data-pt>Contratar</span><span data-en>Book</span></a></div>
+
+
+<script>
+(function(){
+  var d=document, root=d.documentElement, body=d.body;
+  // theme per section, per direction
+  var MAP={
+    entardecer:{hero:'ink',seam:'ink',statement:'night',music:'dusk',dream:'ink',formats:'night',live:'ink',high:'night',story:'dusk',contact:'night',footer:'ink'}
+  };
+  var SEAM_END={entardecer:'#15102A'};
+  var SEAM_TOP={entardecer:'#0B0810'};
+  var secs=[].slice.call(d.querySelectorAll('[data-id]'));
+  function setDir(k,silent){
+    if(!MAP[k])k='entardecer';
+    root.dataset.dir=k;
+    secs.forEach(function(s){s.dataset.theme=MAP[k][s.dataset.id]});
+    var seam=d.querySelector('.seam');seam.style.setProperty('--seam-bot',SEAM_END[k]);seam.style.setProperty('--seam-top',SEAM_TOP[k]);
+    body.dataset.theme=MAP[k][current()];
+  }
+  function current(){var best='hero',m=1e9;secs.forEach(function(s){var r=s.getBoundingClientRect(),c=Math.abs(r.top+r.height/2-innerHeight/2);if(r.top<innerHeight*.55&&r.bottom>innerHeight*.45&&c<m){m=c;best=s.dataset.id}});return best}
+  setDir('entardecer',true);
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)body.dataset.theme=MAP[root.dataset.dir][e.target.dataset.id]})},{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(function(s){io.observe(s)});
+  // language
+  function setLang(l){root.dataset.lang=l;root.lang=l==='pt'?'pt-BR':'en';buildWords();try{localStorage.setItem('rz-lang',l)}catch(e){}}
+  d.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.set)})});
+  try{var s=localStorage.getItem('rz-lang');if(s)root.dataset.lang=s}catch(e){}
+  setTimeout(function(){body.classList.add('loaded')},30);
+  // menu
+  var mb=d.getElementById('menuBtn'),sh=d.getElementById('sheet');
+  function menu(o){body.classList.toggle('menu-open',o);mb.setAttribute('aria-expanded',o);sh.setAttribute('aria-hidden',!o);body.style.overflow=o?'hidden':''}
+  mb.addEventListener('click',function(){menu(!body.classList.contains('menu-open'))});
+  sh.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu(false)})});
+  var top=d.getElementById('top');
+  addEventListener('scroll',function(){top.classList.toggle('scrolled',scrollY>40)},{passive:true});
+  // reveal
+  var rio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}})},{threshold:.12});
+  d.querySelectorAll('.rv').forEach(function(e){rio.observe(e)});
+  // statement word reveal
+  var wEl=d.getElementById('words'),ws=[];
+  function buildWords(){var t=wEl.getAttribute('data-'+root.dataset.lang+'-text');wEl.innerHTML='';ws=[];t.split(' ').forEach(function(w){var s=d.createElement('span');s.textContent=w+' ';wEl.appendChild(s);ws.push(s)});updWords()}
+  function updWords(){var r=wEl.getBoundingClientRect(),h=innerHeight,p=Math.min(1,Math.max(0,(h*.88-r.top)/(r.height+h*.32))),n=Math.round(p*ws.length*1.05);ws.forEach(function(s,i){s.classList.toggle('on',i<n)})}
+  addEventListener('scroll',updWords,{passive:true});addEventListener('resize',updWords);buildWords();
+  // panels
+  var pns=[].slice.call(d.querySelectorAll('.pn'));
+  function act(p){pns.forEach(function(x){x.classList.toggle('on',x===p);var v=x.querySelector('video');if(v){x===p?v.play().catch(function(){}):v.pause()}})}
+  pns.forEach(function(p){p.addEventListener('mouseenter',function(){if(innerWidth>899)act(p)});p.addEventListener('focus',function(){act(p)});p.addEventListener('click',function(){act(p)})});
+  var pvio=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target.querySelector('video');if(!v)return;if(e.isIntersecting&&(innerWidth<=899||e.target.classList.contains('on')))v.play().catch(function(){});else v.pause()})},{threshold:.5});
+  pns.forEach(function(p){pvio.observe(p)});
+  // film players (with sound)
+  [].slice.call(d.querySelectorAll('.vis[role=button]')).forEach(function(pl){
+    var pv=pl.querySelector('video');
+    function toggle(){if(pv.paused){pv.controls=true;pv.play();pl.classList.add('playing')}else pv.pause()}
+    pl.addEventListener('click',function(){if(!pl.classList.contains('playing'))toggle()});
+    pl.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});
+    pv.addEventListener('pause',function(){pl.classList.remove('playing')});
+  });
+  // ambient videos: pause when off-screen
+  [].slice.call(d.querySelectorAll('#heroVideo,.seam video')).forEach(function(v){new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?v.play().catch(function(){}):v.pause()})}).observe(v)});
+  // contact picker
+  d.querySelectorAll('.pick button').forEach(function(b){b.addEventListener('click',function(){d.querySelectorAll('.pick button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});d.getElementById('askF').textContent=b.dataset.f})});
+  // dock (mobile)
+  var dock=d.getElementById('dock'),hero=d.getElementById('hero'),ct=d.getElementById('contato');
+  function dk(){var past=hero.getBoundingClientRect().bottom<innerHeight*.4,inC=ct.getBoundingClientRect().top<innerHeight*.7;dock.classList.toggle('show',past&&!inC&&!body.classList.contains('menu-open'))}
+  addEventListener('scroll',dk,{passive:true});dk();
+  // active nav
+  var navs=[].slice.call(d.querySelectorAll('.nav a')),map={musica:0,'ao-vivo':1,formatos:2,historia:4,contato:5};
+  var nio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){navs.forEach(function(a){a.classList.remove('on')});var i=map[e.target.id];if(i!==undefined)navs[i].classList.add('on')}})},{rootMargin:'-45% 0px -50% 0px'});
+  ['musica','ao-vivo','formatos','historia','contato'].forEach(function(id){nio.observe(d.getElementById(id))});
+})();
+</script>
 </body>
 </html>
