@@ -144,8 +144,9 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .vis video,.vis>img{width:100%;height:100%;object-fit:cover}
 .vis>img{transition:transform 2.4s cubic-bezier(.2,.8,.2,1)}
 .song:hover .vis>img{transform:scale(1.04)}
-.vis .play{position:absolute;left:50%;top:50%;width:92px;height:92px;margin:-46px;border-radius:50%;background:rgba(246,239,230,.94);color:var(--ink);display:grid;place-items:center;font-size:24px;padding-left:5px;transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s}
-.vis:hover .play{transform:scale(1.1)}
+.vis .play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;border-radius:50%;border:1px solid rgba(246,239,230,.72);background:rgba(11,8,16,.28);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);display:grid;place-items:center;transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .4s,background-color .4s,opacity .3s}
+.vis .play svg{width:17px;height:19px;margin-left:3px;fill:#F6EFE6}
+@media (hover:hover){.vis:hover .play{transform:scale(1.06);border-color:#F6EFE6;background:rgba(11,8,16,.42)}}
 .vis.playing .play{opacity:0;pointer-events:none}
 .vis .tag{position:absolute;left:16px;bottom:14px;color:#fff;font-size:11px;letter-spacing:.24em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.7);transition:opacity 1.4s ease}
 .vis.titling .tag{opacity:0;transition-duration:.35s}
@@ -287,6 +288,8 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
 @media (max-width:1100px){.nav{display:none}.menu-btn{display:flex}.tools .btn{display:none}}
 @media (max-width:899px){
   :root{--hh:64px}
+  .vis .play{width:56px;height:56px;margin:-28px}
+  .vis .play svg{width:15px;height:17px}
   body{font-size:17px}
   .mark img{height:36px}
   .film,html[data-dir=entardecer] .film{left:0;right:0;top:0;bottom:0;width:auto;max-width:none;-webkit-mask-image:none;mask-image:none}
@@ -415,7 +418,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     <article class="song rv">
       <div class="vis" id="songVis" data-title-end="10" role="button" tabindex="0" aria-label="Assistir Tudo Que Nós Temos ao vivo">
         <video src="assets/video/cmw_tudo_que_nos_temos_live.mp4" poster="assets/img/poster_tudo.jpg" playsinline preload="none"></video>
-        <span class="play" aria-hidden="true">▶</span>
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1.5 16.5 10 1 18.5Z"/></svg></span>
         <span class="tag"><span data-pt>Ao vivo · Capital Moto Week 2024</span><span data-en>Live · Capital Moto Week 2024</span></span>
       </div>
       <div class="no">01</div>
@@ -424,21 +427,21 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
       <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
     </article>
     <article class="song rv">
-      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_agora_ao_vivo.jpg" alt="Capa do single Agora ao Vivo" loading="lazy" width="1000" height="1000"></div>
+      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_agora_ao_vivo.jpg" alt="Capa do single Agora ao Vivo" loading="lazy" width="1400" height="1400"></div>
       <div class="no">02</div>
       <h3>Agora<br><em>ao Vivo</em></h3>
       <p><span data-pt>Canção autoral, em versão acústica. Single de 2025.</span><span data-en>An original song, in an acoustic version. 2025 single.</span></p>
       <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
     </article>
     <article class="song rv">
-      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_tudo_que_nos_temos_ep.jpg" alt="Capa do EP Tudo Que Nós Temos" loading="lazy" width="1000" height="1000"></div>
+      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_tudo_que_nos_temos_ep.jpg" alt="Capa do EP Tudo Que Nós Temos" loading="lazy" width="1400" height="1400"></div>
       <div class="no">03</div>
       <h3>A<br><em>Semente</em></h3>
       <p><span data-pt>Do EP <i>Tudo Que Nós Temos</i>, de 2024.</span><span data-en>From the 2024 EP <i>Tudo Que Nós Temos</i>.</span></p>
       <div class="chips"><a class="chip" href="#">Spotify</a><a class="chip" href="#">Apple Music</a><a class="chip" href="#">YouTube</a></div>
     </article>
     <article class="song rv">
-      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_pro_mundo_sorrir.jpg" alt="Capa do single Pro Mundo Sorrir" loading="lazy" width="1000" height="1000"></div>
+      <div class="vis cover" style="cursor:default"><img src="assets/img/cover_pro_mundo_sorrir.jpg" alt="Capa do single Pro Mundo Sorrir" loading="lazy" width="1400" height="1400"></div>
       <div class="no">04</div>
       <h3>Pro Mundo<br><em>Sorrir</em></h3>
       <p><span data-pt>Single de 2025.</span><span data-en>2025 single.</span></p>
@@ -517,7 +520,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     </div>
     <div class="vis rv" id="liveVis" data-title-end="7" role="button" tabindex="0" aria-label="Assistir ao show">
       <video src="assets/video/cmw_performance_film.mp4" poster="assets/img/poster_performance.jpg" playsinline preload="none"></video>
-      <span class="play" aria-hidden="true">▶</span>
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1.5 16.5 10 1 18.5Z"/></svg></span>
       <span class="tag"><span data-pt>Capital Moto Week · 22 jul 2024</span><span data-en>Capital Moto Week · 22 Jul 2024</span></span>
     </div>
   </div>
