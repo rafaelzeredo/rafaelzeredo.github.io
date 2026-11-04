@@ -206,6 +206,8 @@ footer.f a:hover{color:var(--text-light)}
   .photos{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   .photos .a,.photos .d,.photos .e{grid-column:span 2;aspect-ratio:4/3}
   .photos .b,.photos .c{grid-column:span 1;aspect-ratio:4/5}
+  .photos .b:first-child{grid-column:span 2}
+  .photos .c:last-child:nth-child(odd){grid-column:span 2;aspect-ratio:1/1}
   .films{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad));padding:0 var(--pad) 8px;scrollbar-width:none}
   .films::-webkit-scrollbar{display:none}
   .film-card{flex:0 0 min(74vw,calc(70svh * 9 / 16));scroll-snap-align:center}
