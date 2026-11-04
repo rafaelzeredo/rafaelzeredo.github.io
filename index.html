@@ -226,6 +226,7 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .live{padding:clamp(80px,10vw,160px) var(--pad) clamp(60px,8vw,120px);overflow:hidden}
 .live .row{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(30px,6vw,100px);align-items:center}
 .live h2.big{margin:26px 0 30px}
+.live .ftitle{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3vw,44px);line-height:1.05;letter-spacing:-.01em;margin-bottom:12px}
 .live .meta{margin-top:26px;color:var(--mute);font-size:12px;letter-spacing:.24em;text-transform:uppercase}
 .live .vis{aspect-ratio:9/16;max-height:80vh;justify-self:end;width:min(100%,430px)}
 .strip{margin:clamp(60px,8vw,110px) calc(-1*var(--pad)) 0;overflow:hidden}
@@ -419,7 +420,15 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
 <!-- STATEMENT -->
 <section class="statement" data-id="statement">
   <div class="label"><b>00</b> <span data-pt>Identidade</span><span data-en>Identity</span></div>
-  <p class="words" id="words" data-pt-text="Música para elevar a energia. Reggae na raiz, rock na urgência, folk no coração, de Brasília para onde a música for." data-en-text="Music to lift the energy. Reggae in the roots, rock in the urgency, folk in the heart, from Brasília to wherever the music goes."></p>
+  <p class="words" id="words" data-pt-text="Música para elevar a energia. Reggae na raiz, rock na urgência, folk no coração. De Brasília para onde a música for." data-en-text="Music to lift the energy. Reggae in the roots, rock in the urgency, folk in the heart. From Brasília to wherever the music goes."></p>
+  <figure class="live-feat rv">
+    <div class="vis" id="highlightsVis" data-title-end="7" role="button" tabindex="0" aria-label="Assistir o show: momentos do Capital Moto Week 2024">
+      <video src="assets/video/cmw_performance_film.mp4" poster="assets/img/poster_performance.jpg" playsinline preload="none"></video>
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1.5 16.5 10 1 18.5Z"/></svg></span>
+      <span class="tag"><span data-pt>Capital Moto Week · 22 jul 2024</span><span data-en>Capital Moto Week · 22 Jul 2024</span></span>
+    </div>
+    <figcaption><span class="t"><span data-pt>O show</span><span data-en>The show</span></span><span class="s"><span data-pt>Uma seleção de momentos ao vivo · Capital Moto Week 2024</span><span data-en>A selection of live moments · Capital Moto Week 2024</span></span></figcaption>
+  </figure>
 </section>
 
 <!-- MUSIC -->
@@ -429,14 +438,6 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     <h2 class="big" style="margin-top:26px"><span data-pt>Quatro canções,<br><em>uma assinatura.</em></span><span data-en>Four songs,<br><em>one signature.</em></span></h2></div>
     <p><span data-pt>As canções que melhor dizem quem é Rafael Z.</span><span data-en>The songs that say most about who Rafael Z is.</span></p>
   </div>
-  <figure class="live-feat rv">
-    <div class="vis" id="songVis" data-title-end="10" role="button" tabindex="0" aria-label="Assistir Zóio de Lula ao vivo">
-      <video src="assets/video/cmw_tudo_que_nos_temos_live.mp4" poster="assets/img/poster_tudo.jpg" playsinline preload="none"></video>
-      <span class="play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1.5 16.5 10 1 18.5Z"/></svg></span>
-      <span class="tag"><span data-pt>Ao vivo · Capital Moto Week 2024</span><span data-en>Live · Capital Moto Week 2024</span></span>
-    </div>
-    <figcaption><span class="t"><span data-pt>Ao vivo no Capital Moto Week 2024</span><span data-en>Live at Capital Moto Week 2024</span></span><span class="s"><span data-pt>“Zóio de Lula”, cover de Charlie Brown Jr. · Palco Pepsi Black, Brasília</span><span data-en>“Zóio de Lula”, Charlie Brown Jr. cover · Pepsi Black stage, Brasília</span></span></figcaption>
-  </figure>
   <div class="feat">
     <article class="song rv">
       <div class="vis cover" style="cursor:default"><img src="assets/img/cover_tudo_que_nos_temos_ep.jpg" alt="Capa do EP Tudo Que Nós Temos" loading="lazy" width="1400" height="1400"></div>
@@ -534,13 +535,14 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     <div>
       <div class="label rv"><b>03</b> <span data-pt>Ao vivo</span><span data-en>Live</span></div>
       <h2 class="big rv"><span data-pt>Pôr do sol,<br><em>palco aberto.</em></span><span data-en>Sunset,<br><em>open stage.</em></span></h2>
-      <p class="lead rv"><span data-pt>O show no Palco Pepsi Black, Capital Moto Week, Brasília, em julho de 2024.</span><span data-en>The show on the Pepsi Black stage, Capital Moto Week, Brasília, July 2024.</span></p>
+      <p class="ftitle rv">Zóio de Lula</p>
+      <p class="lead rv"><span data-pt>Cover de Charlie Brown Jr., ao vivo no Capital Moto Week 2024.</span><span data-en>Charlie Brown Jr. cover, performed live at Capital Moto Week 2024.</span></p>
       <p class="meta rv"><a href="ao-vivo/" style="border-bottom:1px solid var(--sun);padding-bottom:4px"><span data-pt>Ver o portfólio ao vivo</span><span data-en>See the live portfolio</span> →</a></p>
     </div>
-    <div class="vis rv" id="liveVis" data-title-end="7" role="button" tabindex="0" aria-label="Assistir ao show">
-      <video src="assets/video/cmw_performance_film.mp4" poster="assets/img/poster_performance.jpg" playsinline preload="none"></video>
+    <div class="vis rv" id="zoioVis" data-title-end="10" role="button" tabindex="0" aria-label="Assistir Zóio de Lula ao vivo">
+      <video src="assets/video/cmw_tudo_que_nos_temos_live.mp4" poster="assets/img/poster_tudo.jpg" playsinline preload="none"></video>
       <span class="play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1.5 16.5 10 1 18.5Z"/></svg></span>
-      <span class="tag"><span data-pt>Capital Moto Week · 22 jul 2024</span><span data-en>Capital Moto Week · 22 Jul 2024</span></span>
+      <span class="tag"><span data-pt>Ao vivo · Capital Moto Week 2024</span><span data-en>Live · Capital Moto Week 2024</span></span>
     </div>
   </div>
   <div class="strip" aria-hidden="true"><div>
