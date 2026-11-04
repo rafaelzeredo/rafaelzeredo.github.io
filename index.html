@@ -21,7 +21,7 @@
      element or label). Between two sections it is split: --sec at the bottom of the one + --sec at the top of the next, which
      keeps the colour change at the middle of the gap. The Identity section follows the .seam video, which has no padding, so
      it carries the whole --gap itself. On phones a photograph stacked above its section label is separated from it by --gap too. */
-  --sec:clamp(80px,10vw,160px); --gap:calc(var(--sec)*2);
+  --sec:clamp(64px,8vw,128px); --gap:calc(var(--sec)*2);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -191,22 +191,17 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 
 /* ================= FORMATS ================= */
 /* dream */
-.dream{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(30px,6vw,110px);padding:var(--sec) var(--pad);overflow:hidden;isolation:isolate}
+.dream{position:relative;display:grid;grid-template-columns:minmax(0,700px);justify-content:center;padding:var(--sec) var(--pad);overflow:hidden;isolation:isolate}
 .dream:before{content:"";position:absolute;right:-10%;top:10%;width:70vw;height:70vw;max-width:1000px;max-height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(240,180,41,.10),rgba(58,45,99,.22) 40%,transparent 70%);z-index:-1;pointer-events:none}
 .lyric{margin:clamp(30px,4vw,56px) 0 0;padding-left:clamp(18px,2vw,28px);border-left:1px solid var(--sun)}
 .lyric p{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,2.7vw,44px);line-height:1.15;letter-spacing:-.01em}
 .lyric footer{margin-top:16px;font-size:13px;letter-spacing:.06em;color:var(--mute);max-width:46ch}
 .dream-story{margin-top:clamp(28px,3vw,44px);max-width:46ch;color:var(--mute)}
 .dream-story p+p{margin-top:14px}
-.dream-meta{margin:28px 0 20px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.dream-meta{margin:22px 0 18px;display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
 .dream-meta .t{font-family:var(--serif);font-size:30px;letter-spacing:-.01em;text-transform:none;color:var(--fg)}
 .dream-meta i{text-transform:none;letter-spacing:.04em;font-size:14px}
-.dream-fig{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:#000;justify-self:end;width:min(100%,560px)}
-.dream-fig img{width:100%;height:100%;object-fit:cover;object-position:42% 45%;animation:drift 26s ease-in-out infinite alternate}
-.dream-fig:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,8,16,.15),transparent 40%,rgba(11,8,16,.55));pointer-events:none}
-.dream-fig.cover{aspect-ratio:1/1}
-.dream-fig.cover:after{display:none}
-.dream-fig.cover img{animation:none;object-position:50% 50%}@keyframes drift{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.12) translate(-2%,-3%)}}
+.dream-cover{margin-top:clamp(28px,3vw,40px);width:min(100%,260px)}
 .formats{padding:var(--sec) 0}
 .formats header.sec{padding:0 var(--pad);display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px;margin-bottom:46px}
 .formats .intro{max-width:34ch;color:var(--mute)}
@@ -326,8 +321,8 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   .feat{row-gap:30px}
   .song:nth-child(even){margin-top:30px}
   .feat{margin-top:56px;padding-top:44px;border-top:1px solid var(--line)}
-  .dream{grid-template-columns:1fr;row-gap:var(--gap)}
-  .dream-fig{order:-1;justify-self:stretch;width:100%;aspect-ratio:4/3}
+  .dream{grid-template-columns:1fr}
+  .dream-cover{width:100%}
   .dream:before{width:120vw;height:120vw;right:-40%;top:0}
   .disco a{grid-template-columns:56px 1fr;row-gap:4px}.disco .k{grid-column:2;text-align:left}
   .formats header.sec{grid-template-columns:1fr}
@@ -499,10 +494,10 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
       <p><span data-pt>Rafael conheceu uma moça certa noite e, nessa mesma noite, sonhou com ela. Desde o início, sentiu uma conexão fora do comum.</span><span data-en>Rafael met a woman one night, and that same night he dreamed about her. From the very beginning, he felt an unusual connection.</span></p>
       <p><span data-pt>“Dream” descreve essa experiência. Rafael acredita que pode ter sido uma projeção astral: essa é a interpretação dele sobre o que viveu.</span><span data-en>“Dream” describes that experience. Rafael believes it may have been an astral projection: that is his own interpretation of what he lived through.</span></p>
     </div>
+    <div class="vis cover dream-cover" style="cursor:default"><img src="assets/img/cover_from_lust_with_love_ep.jpg" alt="Capa do EP From Lust With Love" loading="lazy" width="1000" height="1000"></div>
     <div class="dream-meta"><span class="t">Dream</span><span data-pt>do EP <i>From Lust With Love</i>, 2024</span><span data-en>from the EP <i>From Lust With Love</i>, 2024</span></div>
     <div class="chips"><a class="chip" href="https://open.spotify.com/track/4NwdpTLdXLJ8r8nsU9ahYg" target="_blank" rel="noopener">Spotify</a><a class="chip" href="https://music.apple.com/br/album/dream/1772144762?i=1772144764" target="_blank" rel="noopener">Apple Music</a><a class="chip" href="https://www.youtube.com/watch?v=KPGVJBNcEVY" target="_blank" rel="noopener">YouTube</a><a class="chip" href="https://www.deezer.com/track/3030005171" target="_blank" rel="noopener">Deezer</a></div>
   </div>
-  <figure class="dream-fig cover rv"><img src="assets/img/cover_from_lust_with_love_ep.jpg" alt="Capa do EP From Lust With Love" loading="lazy" width="1000" height="1000"></figure>
 </section>
 
 <!-- FORMATS -->
