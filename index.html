@@ -17,6 +17,9 @@
   --serif:"Fraunces",Georgia,serif;
   --sans:"Jost","Avenir Next","Helvetica Neue",Arial,sans-serif;
   --pad:clamp(20px,4.2vw,68px); --hh:76px;
+  /* vertical rhythm: each section pads its top and bottom by --sec, so every transition is 2 x --sec;
+     --stack = photo-to-heading space where a photo stacks above its section label on phones */
+  --sec:clamp(80px,10vw,160px); --stack:56px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -127,13 +130,13 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 @keyframes mq{to{transform:translateX(-50%)}}
 
 /* ================= STATEMENT ================= */
-.statement{padding:clamp(80px,11vw,170px) var(--pad) clamp(70px,9vw,140px)}
+.statement{padding:clamp(80px,11vw,170px) var(--pad) var(--sec)}
 .statement .words{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.4vw,88px);line-height:1.06;max-width:1200px;margin-top:34px;letter-spacing:-.02em}
 .statement .words span{opacity:.16;transition:opacity .3s}
 .statement .words span.on{opacity:1}
 
 /* ================= MUSIC ================= */
-.music{padding:clamp(70px,9vw,150px) var(--pad)}
+.music{padding:var(--sec) var(--pad)}
 .music .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
 .music .head p{max-width:30ch;color:var(--mute)}
 .feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,90px);margin-top:clamp(40px,5vw,80px);align-items:start}
@@ -186,7 +189,7 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 
 /* ================= FORMATS ================= */
 /* dream */
-.dream{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(30px,6vw,110px);padding:clamp(90px,11vw,180px) var(--pad);overflow:hidden;isolation:isolate}
+.dream{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(30px,6vw,110px);padding:var(--sec) var(--pad);overflow:hidden;isolation:isolate}
 .dream:before{content:"";position:absolute;right:-10%;top:10%;width:70vw;height:70vw;max-width:1000px;max-height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(240,180,41,.10),rgba(58,45,99,.22) 40%,transparent 70%);z-index:-1;pointer-events:none}
 .lyric{margin:clamp(30px,4vw,56px) 0 0;padding-left:clamp(18px,2vw,28px);border-left:1px solid var(--sun)}
 .lyric p{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,2.7vw,44px);line-height:1.15;letter-spacing:-.01em}
@@ -202,7 +205,7 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .dream-fig.cover{aspect-ratio:1/1}
 .dream-fig.cover:after{display:none}
 .dream-fig.cover img{animation:none;object-position:50% 50%}@keyframes drift{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.12) translate(-2%,-3%)}}
-.formats{padding:clamp(70px,9vw,150px) 0}
+.formats{padding:var(--sec) 0}
 .formats header.sec{padding:0 var(--pad);display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px;margin-bottom:46px}
 .formats .intro{max-width:34ch;color:var(--mute)}
 .panels{display:flex;gap:10px;height:min(80vh,780px);min-height:560px;padding:0 var(--pad)}
@@ -223,11 +226,12 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .pn .more a{display:inline-flex;gap:8px;align-items:center;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;border-bottom:1px solid var(--sun);padding-bottom:4px}
 
 /* ================= LIVE ================= */
-.live{padding:clamp(80px,10vw,160px) var(--pad) clamp(60px,8vw,120px);overflow:hidden}
+.live{padding:var(--sec) var(--pad);overflow:hidden}
 .live .row{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(30px,6vw,100px);align-items:center}
 .live h2.big{margin:26px 0 30px}
 .live .ftitle{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3vw,44px);line-height:1.05;letter-spacing:-.01em;margin-bottom:12px}
 .live .meta{margin-top:26px;color:var(--mute);font-size:12px;letter-spacing:.24em;text-transform:uppercase}
+.live .vcol{justify-self:end;width:min(100%,430px)}
 .live .vis{aspect-ratio:9/16;max-height:80vh;justify-self:end;width:min(100%,430px)}
 .strip{margin:clamp(60px,8vw,110px) calc(-1*var(--pad)) 0;overflow:hidden}
 .strip div{display:flex;gap:14px;width:max-content;animation:mq 90s linear infinite;padding-left:14px}
@@ -235,7 +239,7 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .strip:hover div{animation-play-state:paused}
 
 /* ================= HIGHLIGHTS ================= */
-.high{padding:clamp(70px,9vw,140px) var(--pad)}
+.high{padding:var(--sec) var(--pad)}
 .high .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:50px;flex-wrap:wrap}
 .hl{border-top:1px solid var(--line)}
 .hl details{border-bottom:1px solid var(--line)}
@@ -252,7 +256,7 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .hl .star .t:after{content:"";display:inline-block;width:.2em;height:.2em;background:var(--sun);border-radius:50%;margin-left:.25em;vertical-align:.5em}
 
 /* ================= STORY ================= */
-.story{padding:clamp(80px,10vw,160px) var(--pad)}
+.story{padding:var(--sec) var(--pad)}
 .story .grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(30px,6vw,110px);align-items:start}
 .story figure{position:sticky;top:calc(var(--hh) + 20px);border-radius:3px;overflow:hidden;aspect-ratio:4/5;max-height:82vh}
 .story figure img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
@@ -262,7 +266,7 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .facts>span{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;border:1px solid var(--line);border-radius:99px;padding:9px 18px}
 
 /* ================= CONTACT ================= */
-.contact{padding:clamp(80px,10vw,160px) var(--pad) clamp(60px,7vw,110px)}
+.contact{padding:var(--sec) var(--pad) clamp(60px,7vw,110px)}
 .contact h2.big{font-size:clamp(50px,10vw,168px);margin:30px 0 40px}
 .contact .row{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(30px,6vw,100px);align-items:start}
 .pick{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 26px}
@@ -320,7 +324,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   .feat{row-gap:30px}
   .song:nth-child(even){margin-top:30px}
   .feat{margin-top:56px;padding-top:44px;border-top:1px solid var(--line)}
-  .dream{grid-template-columns:1fr;padding-top:clamp(70px,16vw,110px)}
+  .dream{grid-template-columns:1fr;row-gap:var(--stack)}
   .dream-fig{order:-1;justify-self:stretch;width:100%;aspect-ratio:4/3}
   .dream:before{width:120vw;height:120vw;right:-40%;top:0}
   .disco a{grid-template-columns:56px 1fr;row-gap:4px}.disco .k{grid-column:2;text-align:left}
@@ -332,6 +336,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   .pn img,.pn video{transform:none}
   .pn h3,.pn.on h3{font-size:clamp(40px,12vw,56px)}
   .live .row,.story .grid,.contact .row{grid-template-columns:1fr}
+  .story .grid{row-gap:var(--stack)}
   .live .vis{justify-self:center;margin-top:30px;max-height:none}
   .story figure{position:static;aspect-ratio:4/5;max-height:none}  .hl summary{grid-template-columns:54px minmax(0,1fr) 30px;row-gap:8px}
   .hl .w{grid-column:2}.hl .g{grid-column:2;grid-row:3}.hl .pl{grid-column:3;grid-row:1}
@@ -537,12 +542,14 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
       <h2 class="big rv"><span data-pt>Pôr do sol,<br><em>palco aberto.</em></span><span data-en>Sunset,<br><em>open stage.</em></span></h2>
       <p class="ftitle rv">Zóio de Lula</p>
       <p class="lead rv"><span data-pt>Cover de Charlie Brown Jr., ao vivo no Capital Moto Week 2024.</span><span data-en>Charlie Brown Jr. cover, performed live at Capital Moto Week 2024.</span></p>
-      <p class="meta rv"><a href="ao-vivo/" style="border-bottom:1px solid var(--sun);padding-bottom:4px"><span data-pt>Ver o portfólio ao vivo</span><span data-en>See the live portfolio</span> →</a></p>
     </div>
+    <div class="vcol">
     <div class="vis rv" id="zoioVis" data-title-end="10" role="button" tabindex="0" aria-label="Assistir Zóio de Lula ao vivo">
       <video src="assets/video/cmw_tudo_que_nos_temos_live.mp4" poster="assets/img/poster_tudo.jpg" playsinline preload="none"></video>
       <span class="play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1.5 16.5 10 1 18.5Z"/></svg></span>
       <span class="tag"><span data-pt>Ao vivo · Capital Moto Week 2024</span><span data-en>Live · Capital Moto Week 2024</span></span>
+    </div>
+      <p class="meta rv"><a href="ao-vivo/" style="border-bottom:1px solid var(--sun);padding-bottom:4px"><span data-pt>Ver o portfólio ao vivo</span><span data-en>See the live portfolio</span> →</a></p>
     </div>
   </div>
   <div class="strip" aria-hidden="true"><div>
