@@ -230,27 +230,38 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .live .meta{margin-top:26px;color:var(--mute);font-size:12px;letter-spacing:.24em;text-transform:uppercase}
 .live .vcol{justify-self:end;width:min(100%,430px)}
 .live .vis{aspect-ratio:9/16;max-height:80vh;justify-self:end;width:min(100%,430px)}
-.strip{margin:clamp(60px,8vw,110px) calc(-1*var(--pad)) 0;overflow:hidden}
-.strip div{display:flex;gap:14px;width:max-content;animation:mq 90s linear infinite;padding-left:14px}
-.strip img{height:clamp(240px,30vw,440px);width:auto;border-radius:2px}
-.strip:hover div{animation-play-state:paused}
+/* photo strip: a native horizontal scroller (finger, trackpad, keys, mouse drag); the slow drift is script-driven and yields to the visitor */
+.strip{margin:clamp(60px,8vw,110px) calc(-1*var(--pad)) 0;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab}
+.strip::-webkit-scrollbar{display:none}
+.strip.drag{cursor:grabbing}
+.strip div{display:flex;gap:14px;width:max-content;padding-left:14px}
+.strip img{height:clamp(240px,30vw,440px);width:auto;border-radius:2px;-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
 
 /* ================= HIGHLIGHTS ================= */
 .high{padding:var(--sec) var(--pad)}
 .high .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:50px;flex-wrap:wrap}
 .hl{border-top:1px solid var(--line)}
 .hl details{border-bottom:1px solid var(--line)}
-.hl summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,.9fr) 150px 40px;gap:20px;align-items:baseline;padding:26px 0;transition:padding .45s cubic-bezier(.2,.8,.2,1)}
+.hl summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,.9fr) 180px 40px;gap:20px;align-items:baseline;padding:26px 0;transition:padding .45s cubic-bezier(.2,.8,.2,1)}
 .hl summary::-webkit-details-marker{display:none}
 .hl details:hover summary{padding-left:14px}
 .hl .y{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--mute)}
 .hl .t{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.6vw,56px);line-height:1;letter-spacing:-.02em}
 .hl .w{color:var(--mute);font-size:16px}
-.hl .g{font-size:11px;letter-spacing:.2em;text-transform:uppercase;border:1px solid currentColor;border-radius:99px;padding:7px 14px;text-align:center;justify-self:start}
+.hl .t small{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:400;line-height:1.4;color:var(--mute);margin-top:12px}
+.hl .g{font-size:11px;letter-spacing:.2em;text-transform:uppercase;line-height:1.5;color:var(--mute);display:flex;align-items:baseline;gap:10px}
+.hl .g:before{content:"";flex:none;width:6px;height:6px;border-radius:50%;border:1px solid var(--sun);transform:translateY(-1px)}
 .hl .pl{font-size:26px;line-height:1;transition:transform .4s;text-align:right;font-weight:300}
 .hl details[open] .pl{transform:rotate(45deg)}
 .hl .body{padding:0 0 30px 110px;max-width:72ch;color:var(--mute);font-size:18px}
-.hl .star .t:after{content:"";display:inline-block;width:.2em;height:.2em;background:var(--sun);border-radius:50%;margin-left:.25em;vertical-align:.5em}
+.hl .body p+p{margin-top:12px}
+.hl .body em{font-style:italic}
+.hl .body .go{display:inline-flex;margin-top:18px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--fg);border-bottom:1px solid var(--sun);padding-bottom:4px}
+.hl .body.media{display:grid;grid-template-columns:minmax(0,62ch) minmax(0,340px);gap:clamp(24px,3.4vw,56px);align-items:start;max-width:none}
+.hl-film .vis{aspect-ratio:4/3}
+.hl-film figcaption{margin-top:12px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.hl-note{margin-top:clamp(26px,3vw,40px);max-width:62ch;color:var(--mute);font-size:16px}
+.hl .star .n:after{content:"";display:inline-block;width:.2em;height:.2em;background:var(--sun);border-radius:50%;margin-left:.25em;vertical-align:.5em}
 
 /* ================= STORY ================= */
 .story{padding:var(--sec) var(--pad)}
@@ -260,7 +271,20 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .story .txt .lead{font-size:clamp(30px,3.6vw,56px);line-height:1.12;margin:28px 0 36px;letter-spacing:-.01em;font-style:normal}
 .story .txt .lead em{font-style:italic;color:var(--sun)}
 .facts{display:flex;flex-wrap:wrap;gap:10px}   /* no bottom margin: it belonged to a button that is gone and added 36px before Contact */
-.facts>span{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;border:1px solid var(--line);border-radius:99px;padding:9px 18px}
+/* story topics: one short panel at a time; the same button closes it */
+.facts button{font:inherit;font-size:clamp(12px,calc(.55vw + 5px),15px);letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:inherit;background:none;border:1px solid var(--line);border-radius:99px;padding:.85em 1.2em .85em 1.5em;cursor:pointer;display:inline-flex;align-items:center;gap:12px;transition:background-color .35s,color .35s,border-color .35s}
+.facts button i{font-style:normal;font-size:18px;line-height:1;font-weight:300;transition:transform .4s}
+.facts button[aria-expanded=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.facts button[aria-expanded=true] i{transform:rotate(45deg)}
+@media (hover:hover){.facts button:hover{border-color:var(--sun)}}
+.tales{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;transition:grid-template-rows .7s cubic-bezier(.2,.8,.2,1),opacity .5s ease,visibility 0s .7s}
+.tales.open{grid-template-rows:1fr;opacity:1;visibility:visible;transition-delay:0s}
+.tales-in{overflow:hidden;min-height:0}
+.tale{margin-top:clamp(28px,3vw,40px);padding-left:clamp(18px,2vw,28px);border-left:1px solid var(--sun);max-width:52ch}
+.tale p{font-size:clamp(18px,calc(1.2vw + 4px),24px);line-height:1.62}
+.tale p+p{margin-top:14px}
+.tale.show{animation:tale .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes tale{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 /* ================= CONTACT ================= */
 .contact{padding:var(--sec) var(--pad) clamp(60px,7vw,110px)}
@@ -338,6 +362,8 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   .story figure{position:static;aspect-ratio:4/5;max-height:none}  .hl summary{grid-template-columns:54px minmax(0,1fr) 30px;row-gap:8px}
   .hl .w{grid-column:2}.hl .g{grid-column:2;grid-row:3}.hl .pl{grid-column:3;grid-row:1}
   .hl .body{padding-left:74px}
+  .hl .body.media{grid-template-columns:1fr}
+  .hl-film{max-width:420px}
   .dock{display:flex}
 }
 @media (prefers-reduced-motion:reduce){
@@ -549,7 +575,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
       <p class="meta rv"><a href="ao-vivo/" style="border-bottom:1px solid var(--sun);padding-bottom:4px"><span data-pt>Ver o portfólio ao vivo</span><span data-en>See the live portfolio</span> →</a></p>
     </div>
   </div>
-  <div class="strip" aria-hidden="true"><div>
+  <div class="strip" role="region" tabindex="0" aria-label="Fotos ao vivo · Live photos"><div>
     <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt=""><img src="assets/img/porks_pirenopolis_trio_crowd.jpg" alt="">
     <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt=""><img src="assets/img/porks_pirenopolis_trio_crowd.jpg" alt="">
   </div></div>
@@ -559,19 +585,20 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
 <section class="high" id="destaques" data-id="high">
   <div class="head rv">
     <div><div class="label"><b>04</b> <span data-pt>Destaques</span><span data-en>Highlights</span></div>
-    <h2 class="big" style="margin-top:26px"><span data-pt>Palcos<br><em>selecionados</em></span><span data-en>Selected<br><em>stages</em></span></h2></div>
+    <h2 class="big" style="margin-top:26px"><span data-pt>Momentos<br><em>selecionados</em></span><span data-en>Selected<br><em>moments</em></span></h2></div>
     <p class="lead" style="max-width:20em;color:var(--mute)"><span data-pt>Uma seleção, não um currículo completo.</span><span data-en>A selection, not a complete résumé.</span></p>
   </div>
   <div class="hl rv">
-    <details class="star" open><summary><span class="y">2025</span><span class="t">Brasal Pôr do Som</span><span class="w">Praça do Cruzeiro, Brasília</span><span class="g">Rafael Z Trio</span><span class="pl">+</span></summary>
-      <div class="body"><span data-pt>24 de agosto de 2025. O Rafael Z Trio foi a atração do Pôr do Som da Brasal Veículos, evento ao ar livre na Praça do Cruzeiro. A apresentação foi muito bem recebida pelo público e ficou registrada em vídeo.</span><span data-en>24 August 2025. Rafael Z Trio performed at Brasal Veículos' Pôr do Som, an open-air event at Praça do Cruzeiro. The show was warmly received by the audience and was filmed.</span></div></details>
-    <details><summary><span class="y">2024</span><span class="t">Capital Moto Week</span><span class="w">Palco Pepsi Black, Brasília</span><span class="g">Rafael Z Trio</span><span class="pl">+</span></summary>
-      <div class="body"><span data-pt>Duas apresentações listadas na programação do festival, em julho de 2024. Filmes e fotos do show de 22 de julho estão no arquivo.</span><span data-en>Two slots listed in the festival programme, July 2024. Films and photographs of the 22 July show are in the archive.</span></div></details>
-        <details><summary><span class="y">2014</span><span class="t">Estúdio Máquina</span><span class="w">Belo Horizonte</span><span class="g"><span data-pt>Estúdio</span><span data-en>Studio</span></span><span class="pl">+</span></summary>
-      <div class="body"><span data-pt>Gravação no estúdio de Belo Horizonte, onde conheceu Lelo Zaneti, baixista do Skank.</span><span data-en>Recording at the Belo Horizonte studio, where he met Lelo Zaneti, Skank's bassist.</span></div></details>
-    <details><summary><span class="y">2014</span><span class="t">Djavan</span><span class="w"><span data-pt>Centro de Convenções, Brasília</span><span data-en>Convention Centre, Brasília</span></span><span class="g"><span data-pt>Set de lounge</span><span data-en>Lounge set</span></span><span class="pl">+</span></summary>
-      <div class="body"><span data-pt>Set de lounge, em palco separado, antes do show Rua dos Amores Ao Vivo, de Djavan.</span><span data-en>Lounge set on a separate stage before Djavan's Rua dos Amores Ao Vivo concert.</span></div></details>
+    <details class="star" open><summary><span class="y">2025</span><span class="t"><span class="n">Brasal Pôr do Som</span><small><span data-pt>24 de agosto · Rafael Z Trio</span><span data-en>24 August · Rafael Z Trio</span></small></span><span class="w">Praça do Cruzeiro, Brasília</span><span class="g"><span data-pt>Show ao vivo</span><span data-en>Live show</span></span><span class="pl" aria-hidden="true">+</span></summary>
+      <div class="body"><p><span data-pt>O Rafael Z Trio foi a atração do Pôr do Som, evento ao ar livre da Brasal Veículos na Praça do Cruzeiro, para um grande público espalhado pela praça. O show foi muito bem recebido e ficou registrado em vídeo e fotos.</span><span data-en>Rafael Z Trio played Brasal Veículos’ Pôr do Som, an open-air event at Praça do Cruzeiro, to a large audience spread across the square. The show was warmly received and was filmed and photographed.</span></p></div></details>
+    <details><summary><span class="y">2024</span><span class="t"><span class="n">Capital Moto Week</span><small><span data-pt>Julho · Rafael Z Trio</span><span data-en>July · Rafael Z Trio</span></small></span><span class="w">Palco Pepsi Black, Brasília</span><span class="g">Festival</span><span class="pl" aria-hidden="true">+</span></summary>
+      <div class="body"><p><span data-pt>O Rafael Z Trio no Palco Pepsi Black, com duas apresentações na programação do festival. O show de 22 de julho foi filmado e fotografado.</span><span data-en>Rafael Z Trio on the Pepsi Black stage, with two slots in the festival programme. The 22 July show was filmed and photographed.</span></p><a class="go" href="ao-vivo/"><span data-pt>Ver os filmes no portfólio ao vivo</span><span data-en>Watch the films in the live portfolio</span> →</a></div></details>
+    <details><summary><span class="y">2014</span><span class="t"><span class="n">Estúdio Máquina</span><small>“Carona pra Qualquer Lugar”</small></span><span class="w">Belo Horizonte</span><span class="g"><span data-pt>Sessão de gravação</span><span data-en>Recording session</span></span><span class="pl" aria-hidden="true">+</span></summary>
+      <div class="body media"><div><p><span data-pt>Em 2014, a convite de Lelo Zaneti, baixista do Skank, Rafael gravou sua canção “Carona pra Qualquer Lugar” no Estúdio Máquina, o estúdio do Skank em Belo Horizonte. Produção musical e baixo de Lelo, bateria de Glauco Nastácia e guitarra solo de Fabrício Diesel.</span><span data-en>In 2014, at the invitation of Lelo Zaneti, Skank’s bassist, Rafael recorded his song “Carona pra Qualquer Lugar” at Estúdio Máquina, Skank’s studio in Belo Horizonte. Lelo produced and played bass, Glauco Nastácia played drums and Fabrício Diesel played lead guitar.</span></p><p><span data-pt>Rafael filmou a sessão. A gravação, inédita até agora, será lançada em breve.</span><span data-en>Rafael filmed the session. The recording, unreleased until now, is coming out soon.</span></p></div><figure class="hl-film"><div class="vis" role="button" tabindex="0" aria-label="Assistir: sessão de gravação no Estúdio Máquina, 2014"><video src="assets/video/maquina_2014_session.mp4" poster="assets/img/poster_maquina_2014.jpg" playsinline preload="none"></video><span class="play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1.5 16.5 10 1 18.5Z"/></svg></span></div><figcaption><span data-pt>Filme da sessão · 2014</span><span data-en>Session film · 2014</span></figcaption></figure></div></details>
+    <details><summary><span class="y">2014</span><span class="t"><span class="n">Djavan</span><small><span data-pt>5 de abril · set de lounge</span><span data-en>5 April · lounge set</span></small></span><span class="w">Centro de Convenções Ulysses Guimarães, Brasília</span><span class="g"><span data-pt>Apresentação especial</span><span data-en>Special performance</span></span><span class="pl" aria-hidden="true">+</span></summary>
+      <div class="body"><p><span data-pt>5 de abril de 2014. Um set de lounge, em palco separado, antes do show <em>Rua dos Amores Ao Vivo</em>, de Djavan, no Auditório Master do Centro de Convenções Ulysses Guimarães. Na época, Rafael se apresentava como Rafael Caynan.</span><span data-en>5 April 2014. A lounge set on a separate stage before Djavan’s <em>Rua dos Amores Ao Vivo</em> concert in the Auditório Master at the Ulysses Guimarães Convention Centre. At the time, Rafael performed as Rafael Caynan.</span></p></div></details>
   </div>
+  <p class="hl-note rv"><span data-pt>Fora desta seleção, muitos outros palcos pelo Brasil, solo e com banda: de Brasília a Búzios, Garopaba e Arraial d’Ajuda.</span><span data-en>Beyond this selection, many other stages across Brazil, solo and with bands: from Brasília to Búzios, Garopaba and Arraial d’Ajuda.</span></p>
 </section>
 
 <!-- STORY -->
@@ -581,7 +608,12 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     <div class="txt">
       <div class="label rv"><b>05</b> <span data-pt>História</span><span data-en>Story</span></div>
       <p class="lead rv"><span data-pt>Nascido em Brasília, criado em parte na Inglaterra. Reggae, rock, ska, blues e o folk inglês da infância, com uma intenção simples: <em>criar energia boa</em>.</span><span data-en>Born in Brasília, partly raised in England. Reggae, rock, ska, blues and the English folk of his childhood, with one simple intention: <em>to create good energy</em>.</span></p>
-      <div class="facts rv"><span>Brasília</span><span><span data-pt>Infância na Inglaterra</span><span data-en>Childhood in England</span></span><span>Português · English</span></div>
+      <div class="facts rv" role="group" aria-label="Três partes da história · Three parts of the story"><button type="button" id="fact-bsb" aria-expanded="false" aria-controls="tale-bsb">Brasília<i aria-hidden="true">+</i></button><button type="button" id="fact-eng" aria-expanded="false" aria-controls="tale-eng"><span data-pt>Infância na Inglaterra</span><span data-en>Childhood in England</span><i aria-hidden="true">+</i></button><button type="button" id="fact-lng" aria-expanded="false" aria-controls="tale-lng">Português · English<i aria-hidden="true">+</i></button></div>
+      <div class="tales" id="tales"><div class="tales-in">
+        <div class="tale" id="tale-bsb" role="region" aria-labelledby="fact-bsb" hidden><p><span data-pt>Nasci em Brasília, e foi aqui que muitas das minhas raízes se formaram: a família, os primeiros amigos, as primeiras bandas. É a cidade para onde eu sempre volto.</span><span data-en>I was born in Brasília, and it is where many of my roots took hold: family, my first friends, my first bands. It is the city I keep coming back to.</span></p><p><span data-pt>Mas a vida e a música me levaram para muitos outros lugares, e cada um deixou alguma coisa. Ter raízes e continuar aberto ao mundo nunca foram coisas opostas para mim: uma sustenta a outra.</span><span data-en>But life and music have taken me to many other places, and each of them left something with me. Having roots and staying open to the world have never been opposites for me. One holds up the other.</span></p></div>
+        <div class="tale" id="tale-eng" role="region" aria-labelledby="fact-eng" hidden><p><span data-pt>Morei na Inglaterra mais ou menos dos nove aos treze anos. Viver em outro país tão cedo me mostrou que o jeito como as pessoas vivem, pensam, se comunicam e se comportam não é universal.</span><span data-en>I lived in England from about nine to thirteen. Living in another country that young showed me that the way people live, think, talk and behave is not universal.</span></p><p><span data-pt>Quando a gente passa tempo demais num lugar só, é fácil achar que os costumes dali são simplesmente como o mundo funciona. Morar fora desfaz essa ideia: dá perspectiva, faz questionar, abre a cabeça. Foi lá que aprendi a pensar em inglês, e é de lá que vem o folk inglês que ainda aparece na minha música.</span><span data-en>Stay in one place long enough and it is easy to believe its customs are simply how the world works. Living somewhere else undoes that: it gives you perspective, makes you question things, opens your mind. It is where I learned to think in English, and where the English folk that still runs through my music comes from.</span></p></div>
+        <div class="tale" id="tale-lng" role="region" aria-labelledby="fact-lng" hidden><p><span data-pt>Penso em português e em inglês, e isso aparece em tudo: no jeito de falar, de criar, de compor. Mais novo, trabalhei traduzindo conferências internacionais, levando ideias de uma língua para a outra.</span><span data-en>I think in Portuguese and in English, and it shows in everything: how I speak, how I create, how I write songs. When I was younger I worked translating at international conferences, carrying ideas from one language into the other.</span></p><p><span data-pt>Transitar entre dois idiomas faz parte da minha história e da minha música, que escrevo nas duas línguas. Por isso este site é bilíngue: é assim que eu penso.</span><span data-en>Moving between two languages is part of my story and of my music, which I write in both. That is why this site is bilingual: it is how I think.</span></p></div>
+      </div></div>
     </div>
   </div>
 </section>
@@ -665,6 +697,34 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   pns.forEach(function(p){p.addEventListener('mouseenter',function(){if(innerWidth>899)act(p)});p.addEventListener('focus',function(){act(p)});p.addEventListener('click',function(){act(p)})});
   var pvio=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target.querySelector('video');if(!v)return;if(e.isIntersecting&&(innerWidth<=899||e.target.classList.contains('on')))v.play().catch(function(){});else v.pause()})},{threshold:.5});
   pns.forEach(function(p){pvio.observe(p)});
+  // story topics: one panel at a time; tapping the open topic closes it
+  var facts=[].slice.call(d.querySelectorAll('.facts button')),tales=d.getElementById('tales');
+  function tell(b){var open=b.getAttribute('aria-expanded')!=='true';facts.forEach(function(x){var on=open&&x===b,t=d.getElementById(x.getAttribute('aria-controls'));x.setAttribute('aria-expanded',on);if(on){t.hidden=false;t.classList.remove('show');void t.offsetWidth;t.classList.add('show')}else if(open)t.hidden=true});tales.classList.toggle('open',open)}
+  facts.forEach(function(b){b.addEventListener('click',function(){tell(b)})});
+  // highlights: closing an entry stops its film
+  d.querySelectorAll('.hl details').forEach(function(x){x.addEventListener('toggle',function(){if(!x.open)x.querySelectorAll('video').forEach(function(v){v.pause()})})});
+  // photo strip: native horizontal scrolling with a slow drift (one set of photos per 90 s) that pauses while the visitor
+  // touches, drags, scrolls, hovers or uses the keys, and resumes 2.5 s later. The photos are there twice, so the scroll
+  // position is moved by exactly one set when it leaves [lo, lo+P): the same picture, no visible jump.
+  (function(){var st=d.querySelector('.strip');if(!st)return;var ims=st.querySelectorAll('img'),half=ims.length/2,P=0,lo=0,x=0,set=-1,last=0,until=0,hov=false,on=false,raf=0,
+    still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function measure(){var p=ims[half].offsetLeft-ims[0].offsetLeft;if(p>0&&p!==P){P=p;lo=Math.round(P*.25);x=wrap(set<0?lo:st.scrollLeft);put()}}
+    function wrap(v){return !P?v:v<lo?v+P:v>=lo+P?v-P:v}
+    function put(){st.scrollLeft=x;set=st.scrollLeft}
+    function busy(){until=performance.now()+2500}
+    function tick(t){raf=0;if(!on)return;var dt=last?Math.min(64,t-last):16;last=t;
+      if(P&&!still&&!hov&&t>until){if(Math.abs(st.scrollLeft-set)>1)x=st.scrollLeft;x=wrap(x+P/90000*dt);put()}
+      raf=requestAnimationFrame(tick)}
+    ['pointerdown','touchstart','wheel','keydown'].forEach(function(e){st.addEventListener(e,busy,{passive:true})});
+    st.addEventListener('scroll',function(){if(Math.abs(st.scrollLeft-set)>1)busy()},{passive:true});
+    st.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')hov=true});st.addEventListener('pointerleave',function(){hov=false});
+    st.addEventListener('dragstart',function(e){e.preventDefault()});
+    var dx=null;st.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button)return;dx={x:e.clientX,s:st.scrollLeft};st.setPointerCapture(e.pointerId);st.classList.add('drag')});
+    st.addEventListener('pointermove',function(e){if(!dx)return;st.scrollLeft=dx.s-(e.clientX-dx.x);busy()});
+    ['pointerup','pointercancel'].forEach(function(n){st.addEventListener(n,function(){dx=null;st.classList.remove('drag')})});
+    ims.forEach(function(im){if(!im.complete)im.addEventListener('load',measure)});addEventListener('load',measure);addEventListener('resize',measure);measure();
+    new IntersectionObserver(function(es){on=es[0].isIntersecting;last=0;if(on&&!raf)raf=requestAnimationFrame(tick)}).observe(st);
+  })();
   // film players (with sound)
   [].slice.call(d.querySelectorAll('.vis[role=button]')).forEach(function(pl){
     var pv=pl.querySelector('video');
