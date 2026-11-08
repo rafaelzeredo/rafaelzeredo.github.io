@@ -51,6 +51,30 @@ python3 -m http.server 8000
 
 Open http://localhost:8000, then return with `git switch main`.
 
+## Undo only the Music page refinement (8 Nov 2026, later the same day)
+
+The `/musica/` page was redesigned after the restructure. Saved state before that change:
+
+| | |
+|---|---|
+| Commit before the change | `bf58060aee74ba5ebc1081eb1557eb4f7c151053` (the homepage restructure) |
+| Backup branch | `backup/pre-music-page-2026-11-08`, **on GitHub and locally** |
+| Local tag (extra copy) | `backup/pre-music-page-2026-11-08-tag` |
+
+To put back the previous Music page while keeping everything else:
+
+```bash
+cd ~/Desktop/ClaudeWorkspace/Website/rafael-z-site
+git checkout main
+git pull
+git fetch origin backup/pre-music-page-2026-11-08
+git restore --source=origin/backup/pre-music-page-2026-11-08 --staged --worktree -- musica/index.html
+git commit -m "Restore the previous Music page (bf58060)"
+git push origin main
+```
+
+The new cover files (`assets/img/cover_beautiful_girl.jpg`, `assets/img/cover_for_real.jpg`, `assets/img/thumbs/`) are harmless if left in place. The full restore above (to `eba6470`) still works and removes them too.
+
 ## What not to do
 
 - Do not use `git push --force` or `git reset --hard` on `main`.

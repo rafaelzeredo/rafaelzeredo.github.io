@@ -5,70 +5,115 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Música · Rafael Z</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Rafael Z: canções autorais, capas, histórias e links para ouvir no Spotify, Apple Music, Deezer e YouTube.">
+<meta name="description" content="Rafael Z: EPs e singles, com as capas e links para ouvir no Spotify, Apple Music, Deezer e YouTube.">
 <script>try{var l=localStorage.getItem('rz-lang');if(l==='en'){document.documentElement.dataset.lang='en';document.documentElement.lang='en'}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/pages.css?v=5a9cdb5e">
 <style>
-/* Music portfolio: the songs, the Dream feature and the catalogue (moved here from the homepage, 8 Nov 2026) */
-.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:min(100%,460px);justify-self:end}
-.mosaic img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px}
-.listen-on{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+/* Music page: a listening catalogue, one cover per release (redesigned 8 Nov 2026).
+   Everything here is scoped to this page; pages.css is unchanged. */
+main img{height:auto}  /* the width/height attributes must never force a tall box (the cause of the stretched covers) */
+.cov{position:relative;aspect-ratio:1/1;border-radius:3px;overflow:hidden;background:#000;box-shadow:0 30px 70px -36px rgba(0,0,0,.75)}
+.cov img{width:100%;height:100%;object-fit:cover}
+.cov:after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(246,239,230,.12);pointer-events:none}
+[id]{scroll-margin-top:calc(var(--hh) + 18px)}
+
+/* hero */
 .phero .sound{color:var(--mute);max-width:40ch;margin-top:18px}
-.songs{padding:clamp(70px,9vw,150px) var(--pad)}
-.songs .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
-.songs .head p{color:var(--mute);max-width:34ch}
-.songlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(40px,5vw,80px) clamp(30px,5vw,90px);margin-top:clamp(40px,5vw,70px);padding-top:clamp(40px,5vw,70px);border-top:1px solid var(--line)}
-.song{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:clamp(18px,2.4vw,34px);align-items:start}
-.song .cover{border-radius:3px;overflow:hidden;background:#000;aspect-ratio:1/1}
-.song .cover img{width:100%;height:100%;object-fit:cover}
-.song .no{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--mute)}
-.song h3{font-family:var(--serif);font-weight:500;font-size:clamp(32px,3.4vw,54px);line-height:.98;letter-spacing:-.02em;margin-top:4px}
-.song h3 em{font-weight:400}
-.song p{color:var(--mute);margin:12px 0 18px;max-width:34ch;font-size:17px}
-.song p i,.dream i{font-style:italic}
-.song .chips{gap:8px;grid-column:2}
-.song .chip{padding:9px 16px;font-size:11px}
-/* Dream */
-.dream{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(30px,6vw,110px);align-items:start;padding:clamp(70px,9vw,150px) var(--pad);overflow:hidden;isolation:isolate}
-.dream:before{content:"";position:absolute;right:-10%;top:10%;width:70vw;height:70vw;max-width:1000px;max-height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(240,180,41,.10),rgba(58,45,99,.22) 40%,transparent 70%);z-index:-1;pointer-events:none}
-.dream h2.big{margin-top:26px}
-.lyric{margin:clamp(30px,4vw,56px) 0 0;padding-left:clamp(18px,2vw,28px);border-left:1px solid var(--sun)}
-.lyric p{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,2.7vw,44px);line-height:1.15;letter-spacing:-.01em}
-.lyric footer{margin-top:16px;font-size:13px;letter-spacing:.06em;color:var(--mute);max-width:46ch}
-.dream-story{margin-top:clamp(28px,3vw,44px);max-width:46ch;color:var(--mute)}
-.dream-story p+p{margin-top:14px}
-.dream-side{position:sticky;top:calc(var(--hh) + 24px)}
-.dream-cover{border-radius:3px;overflow:hidden;width:min(100%,420px)}
-.dream-meta{margin:22px 0 18px;display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
-.dream-meta .t{font-family:var(--serif);font-size:30px;letter-spacing:-.01em;text-transform:none;color:var(--fg)}
-.dream-meta i{text-transform:none;letter-spacing:.04em;font-size:14px}
-/* catalogue */
-.catalog{padding:clamp(70px,9vw,150px) var(--pad) clamp(60px,7vw,110px)}
-.catalog h2.mid{margin:24px 0 14px}
-.catalog .note{color:var(--mute);max-width:52ch}
-.disco{border-top:1px solid var(--line);margin-top:clamp(30px,4vw,50px)}
-.disco>div{display:grid;grid-template-columns:80px minmax(0,1fr) auto auto;align-items:baseline;gap:16px 24px;padding:20px 0;border-bottom:1px solid var(--line)}
-.disco .y{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--mute)}
-.disco .t{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.8vw,40px);line-height:1.05;letter-spacing:-.01em}
-.disco .k{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
-.disco .ln{display:flex;gap:18px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
-.disco .ln a{border-bottom:1px solid var(--sun);padding-bottom:3px}
-.disco .ln a:hover{color:var(--sun)}
-.catalog .chips{margin-top:clamp(28px,3vw,40px)}
+.everywhere{margin-top:30px}
+.k-lbl{font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;color:var(--mute)}
+.everywhere .chips{margin-top:12px}
+.idx{justify-self:end;width:min(100%,420px)}
+.idx .k-lbl{padding-bottom:14px;border-bottom:1px solid var(--line)}
+.idx ol{list-style:none}
+.idx a{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);transition:color .3s}
+.idx img{width:56px;height:56px;border-radius:2px;object-fit:cover;box-shadow:0 0 0 1px rgba(246,239,230,.12)}
+.idx b{display:block;font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.1;letter-spacing:-.01em}
+.idx small{display:block;margin-top:4px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.idx .ar{color:var(--sun);font-size:15px;transition:transform .35s}
+.idx a:hover b{color:var(--sun)}
+.idx a:hover .ar{transform:translateY(3px)}
+
+/* catalogue sections */
+.cat{padding:clamp(70px,9vw,150px) var(--pad);overflow-x:clip}  /* clip, not hidden: keeps the sticky EP covers working */
+.cat .head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px 40px;flex-wrap:wrap;padding-bottom:clamp(28px,3.5vw,46px);margin-bottom:clamp(44px,6vw,90px);border-bottom:1px solid var(--line)}
+.cat .head h2.mid{margin-top:22px}
+.cat .head p{color:var(--mute);max-width:34ch}
+.meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--mute)}
+.meta b{font-weight:500;color:var(--sun)}
+.meta i{font-style:normal;opacity:.6}
+.plats{display:flex;flex-wrap:wrap;gap:8px}
+.pl{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 18px;border:1px solid currentColor;border-radius:99px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;white-space:nowrap;transition:background .3s,color .3s}
+.pl:hover{background:var(--fg);color:var(--bg)}
+
+/* EPs: cover beside the record, tracklist, featured tracks */
+.ep{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(30px,5.5vw,100px);align-items:start;isolation:isolate}
+.ep+.ep{margin-top:clamp(70px,9vw,140px);padding-top:clamp(70px,9vw,140px);border-top:1px solid var(--line)}
+.ep .cov{position:sticky;top:calc(var(--hh) + 28px);width:100%;max-width:520px}
+.ep h3{font-family:var(--serif);font-weight:500;font-size:clamp(42px,5.2vw,84px);line-height:.96;letter-spacing:-.02em;margin:16px 0 18px}
+.ep h3 em{font-style:italic;font-weight:400}
+.ep .d{color:var(--mute);max-width:44ch}
+.ep .d i{font-style:italic}
+.ep .listen{margin-top:30px}
+.ep .listen .plats{margin-top:12px}
+.tracks{list-style:none;margin-top:clamp(34px,4vw,50px);border-top:1px solid var(--line)}
+.tracks li{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:10px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line)}
+.tracks .n{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--mute)}
+.tracks .tt{font-size:18px;color:var(--mute)}
+.tracks .hl{padding:18px 0 12px}
+.tracks .hl .n{color:var(--sun)}
+.tracks .hl .tt{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.2vw,30px);line-height:1.1;letter-spacing:-.01em;color:var(--fg)}
+.tl{grid-column:2;display:flex;flex-wrap:wrap;gap:0 20px;margin-top:4px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+.tl a{display:inline-block;padding:9px 0;text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:1px;text-underline-offset:6px;transition:color .3s}
+.tl a:hover{color:var(--sun)}
+/* the story of Dream, inside its EP */
+.ep.dreamy:before{content:"";position:absolute;right:-20%;top:0;width:70vw;height:70vw;max-width:900px;max-height:900px;border-radius:50%;background:radial-gradient(circle,rgba(240,180,41,.09),rgba(58,45,99,.2) 40%,transparent 70%);z-index:-1;pointer-events:none}
+.story{margin-top:clamp(44px,5vw,70px)}
+.lyric{margin:24px 0 0;padding-left:clamp(18px,2vw,28px);border-left:1px solid var(--sun)}
+.lyric p{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,2.6vw,40px);line-height:1.15;letter-spacing:-.01em}
+.lyric footer{margin-top:14px;font-size:13px;letter-spacing:.06em;color:var(--mute);max-width:46ch}
+.story .txt{margin-top:26px;max-width:46ch;color:var(--mute)}
+.story .txt p+p{margin-top:14px}
+
+/* singles: a row of records */
+.singles{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(40px,4vw,60px) clamp(18px,2.4vw,36px)}
+.sg{display:flex;flex-direction:column}
+.sg .meta{margin-top:20px}
+.sg h3{font-family:var(--serif);font-weight:500;font-size:clamp(26px,2.4vw,36px);line-height:1.02;letter-spacing:-.01em;margin-top:8px}
+.sg h3 em{font-style:italic;font-weight:400}
+.sg .d{color:var(--mute);font-size:16px;margin-top:8px;max-width:30ch}
+.sg .plats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto;padding-top:20px}
+.sg .pl{padding:10px 8px;font-size:11px;letter-spacing:.12em}
+.everything{margin-top:clamp(56px,6vw,90px);padding-top:clamp(30px,3vw,40px);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 30px}
+.everything p{color:var(--mute);max-width:40ch}
+
+@media (max-width:1099px) and (min-width:900px){
+  .sg .plats{grid-template-columns:1fr;gap:6px}
+}
 @media (max-width:899px){
-  .mosaic{justify-self:stretch;width:100%}
-  .songlist{grid-template-columns:1fr;gap:44px}
-  .song{grid-template-columns:112px minmax(0,1fr);gap:18px}
-  .song .chips{grid-column:1 / -1}
-  .song p{margin-bottom:0}
-  .dream{grid-template-columns:1fr}
-  .dream-side{position:static}
-  .dream-cover{width:min(100%,300px)}
-  .disco>div{grid-template-columns:56px minmax(0,1fr);row-gap:8px}
-  .disco .k,.disco .ln{grid-column:2}
+  .singles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .idx{justify-self:stretch;width:100%}
+  .idx ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px}
+  .idx a{grid-template-columns:44px minmax(0,1fr);gap:12px;padding:9px 0}
+  .idx img{width:44px;height:44px}
+  .idx b{font-size:16px}
+  .idx small{font-size:10px;letter-spacing:.16em}
+  .idx .ar{display:none}
+  .ep{grid-template-columns:1fr}
+  .ep .cov{position:relative;top:0;max-width:500px}
+  .ep.dreamy:before{right:0;top:30%;width:100%;height:auto;aspect-ratio:1/1}
+}
+@media (max-width:599px){
+  .ep .listen .plats{display:grid;grid-template-columns:1fr 1fr}
+  .tl{gap:0 15px;letter-spacing:.12em}
+  .singles{column-gap:14px}
+  .sg .plats{grid-template-columns:1fr;gap:6px;padding-top:16px}
+  .sg .pl{min-height:40px}
+  .sg h3{font-size:24px}
+  .sg .meta{margin-top:14px;font-size:11px;letter-spacing:.16em}
+  .sg .d{font-size:15px}
 }
 </style>
 </head>
@@ -93,91 +138,127 @@
 <section class="phero" data-t="ink">
   <div>
     <div class="label rv"><b>01</b> <span data-pt>Música</span><span data-en>Music</span></div>
-    <h1 class="big rv"><span data-pt>Quatro canções,<br><em>uma assinatura.</em></span><span data-en>Four songs,<br><em>one signature.</em></span></h1>
-    <p class="lead rv"><span data-pt>As canções que melhor dizem quem é Rafael Z.</span><span data-en>The songs that say most about who Rafael Z is.</span></p>
+    <h1 class="big rv"><span data-pt>Uma assinatura,<br><em>em canções.</em></span><span data-en>One signature,<br><em>in songs.</em></span></h1>
+    <p class="lead rv"><span data-pt>Escolha uma capa e ouça na sua plataforma preferida.</span><span data-en>Pick a cover and listen on your favourite platform.</span></p>
     <p class="sound rv"><span data-pt>Música para elevar a energia. Reggae na raiz, rock na urgência, folk no coração. De Brasília para onde a música for.</span><span data-en>Music to lift the energy. Reggae in the roots, rock in the urgency, folk in the heart. From Brasília to wherever the music goes.</span></p>
-    <div class="rv"><div class="listen-on chips"><a class="chip" href="https://open.spotify.com/artist/7kd18976nztFGQEd83LE8Q" target="_blank" rel="noopener">Spotify</a><a class="chip" href="https://music.apple.com/br/artist/rafael-z/1533916916" target="_blank" rel="noopener">Apple Music</a><a class="chip" href="https://www.deezer.com/artist/108967802" target="_blank" rel="noopener">Deezer</a><a class="chip" href="https://www.youtube.com/@rafaelzeredo" target="_blank" rel="noopener">YouTube</a></div></div>
+    <div class="everywhere rv">
+      <div class="k-lbl"><span data-pt>Tudo de Rafael Z em</span><span data-en>All of Rafael Z on</span></div>
+      <div class="chips"><a class="chip" href="https://open.spotify.com/artist/7kd18976nztFGQEd83LE8Q" target="_blank" rel="noopener">Spotify</a><a class="chip" href="https://music.apple.com/br/artist/rafael-z/1533916916" target="_blank" rel="noopener">Apple Music</a><a class="chip" href="https://www.deezer.com/artist/108967802" target="_blank" rel="noopener">Deezer</a><a class="chip" href="https://www.youtube.com/@rafaelzeredo/releases" target="_blank" rel="noopener">YouTube</a></div>
+    </div>
     <a class="crumb rv" href="../">← <span data-pt>Voltar ao site</span><span data-en>Back to the site</span></a>
   </div>
-  <div class="mosaic rv" aria-hidden="true"><img src="../assets/img/cover_tudo_que_nos_temos_ep.jpg" alt="" width="1400" height="1400"><img src="../assets/img/cover_agora_ao_vivo.jpg" alt="" width="1400" height="1400"><img src="../assets/img/cover_pro_mundo_sorrir.jpg" alt="" width="1400" height="1400"><img src="../assets/img/cover_from_lust_with_love_ep.jpg" alt="" width="1000" height="1000"></div>
+  <nav class="idx rv" aria-label="Lançamentos · Releases">
+    <div class="k-lbl"><span data-pt>Nesta página</span><span data-en>On this page</span></div>
+    <ol>
+      <li><a href="#tudo-que-nos-temos"><img src="../assets/img/thumbs/cover_tudo_que_nos_temos_ep_200.jpg" alt="" width="200" height="200"><span><b>Tudo Que Nós Temos</b><small>EP · 2024</small></span><span class="ar" aria-hidden="true">↓</span></a></li>
+      <li><a href="#from-lust-with-love"><img src="../assets/img/thumbs/cover_from_lust_with_love_ep_200.jpg" alt="" width="200" height="200"><span><b>From Lust With Love</b><small>EP · 2024</small></span><span class="ar" aria-hidden="true">↓</span></a></li>
+      <li><a href="#beautiful-girl"><img src="../assets/img/thumbs/cover_beautiful_girl_200.jpg" alt="" width="200" height="200"><span><b>Beautiful Girl</b><small>Single · 2025</small></span><span class="ar" aria-hidden="true">↓</span></a></li>
+      <li><a href="#pro-mundo-sorrir"><img src="../assets/img/thumbs/cover_pro_mundo_sorrir_200.jpg" alt="" width="200" height="200"><span><b>Pro Mundo Sorrir</b><small>Single · 2025</small></span><span class="ar" aria-hidden="true">↓</span></a></li>
+      <li><a href="#agora"><img src="../assets/img/thumbs/cover_agora_ao_vivo_200.jpg" alt="" width="200" height="200"><span><b>Agora (Ao vivo)</b><small>Single · 2025</small></span><span class="ar" aria-hidden="true">↓</span></a></li>
+      <li><a href="#for-real"><img src="../assets/img/thumbs/cover_for_real_200.jpg" alt="" width="200" height="200"><span><b>For Real</b><small>Single · 2024</small></span><span class="ar" aria-hidden="true">↓</span></a></li>
+    </ol>
+  </nav>
 </section>
 
-<section class="songs" id="cancoes" data-t="dusk">
+<section class="cat" id="eps" data-t="dusk">
   <div class="head rv">
-    <div class="label"><b>02</b> <span data-pt>Canções</span><span data-en>Songs</span></div>
-    <p><span data-pt>Ouça cada canção na sua plataforma preferida.</span><span data-en>Listen to each song on your favourite platform.</span></p>
-  </div>
-  <div class="songlist">
-    <article class="song rv">
-      <div class="cover"><img src="../assets/img/cover_tudo_que_nos_temos_ep.jpg" alt="Capa do EP Tudo Que Nós Temos" loading="lazy" width="1400" height="1400"></div>
-      <div>
-        <div class="no">01</div>
-        <h3>Tudo Que<br><em>Nós Temos</em></h3>
-        <p><span data-pt>Do EP de 2024. Os links levam à gravação de estúdio.</span><span data-en>From the 2024 EP. The links lead to the studio recording.</span></p>
-      </div>
-      <div class="chips"><a class="chip" href="https://open.spotify.com/track/1B5GqvhtFzysxjppebfu6v" target="_blank" rel="noopener">Spotify</a><a class="chip" href="https://music.apple.com/br/album/tudo-que-n%C3%B3s-temos/1771898588?i=1771898591" target="_blank" rel="noopener">Apple Music</a><a class="chip" href="https://www.youtube.com/watch?v=IsH1Nnfqr1c" target="_blank" rel="noopener">YouTube</a><a class="chip" href="https://www.deezer.com/track/3032466481" target="_blank" rel="noopener">Deezer</a></div>
-    </article>
-    <article class="song rv">
-      <div class="cover"><img src="../assets/img/cover_agora_ao_vivo.jpg" alt="Capa do single Agora (Ao vivo)" loading="lazy" width="1400" height="1400"></div>
-      <div>
-        <div class="no">02</div>
-        <h3>Agora<br><em>(Ao vivo)</em></h3>
-        <p><span data-pt>Canção autoral, em versão acústica. Single de 2025.</span><span data-en>An original song, in an acoustic version. 2025 single.</span></p>
-      </div>
-      <div class="chips"><a class="chip" href="https://open.spotify.com/track/2gIHN6O5NtgdvUx02JQXVL" target="_blank" rel="noopener">Spotify</a><a class="chip" href="https://music.apple.com/br/album/agora-ao-vivo-single/1817513928" target="_blank" rel="noopener">Apple Music</a><a class="chip" href="https://www.youtube.com/watch?v=JEznkpz2pIE" target="_blank" rel="noopener">YouTube</a><a class="chip" href="https://www.deezer.com/track/3389968071" target="_blank" rel="noopener">Deezer</a></div>
-    </article>
-    <article class="song rv">
-      <div class="cover"><img src="../assets/img/cover_tudo_que_nos_temos_ep.jpg" alt="Capa do EP Tudo Que Nós Temos" loading="lazy" width="1400" height="1400"></div>
-      <div>
-        <div class="no">03</div>
-        <h3>A<br><em>Semente</em></h3>
-        <p><span data-pt>Do EP <i>Tudo Que Nós Temos</i>, de 2024.</span><span data-en>From the 2024 EP <i>Tudo Que Nós Temos</i>.</span></p>
-      </div>
-      <div class="chips"><a class="chip" href="https://open.spotify.com/track/0qQlLVXVZCDNJsZkS8UTgJ" target="_blank" rel="noopener">Spotify</a><a class="chip" href="https://music.apple.com/br/album/a-semente/1771898588?i=1771898751" target="_blank" rel="noopener">Apple Music</a><a class="chip" href="https://www.youtube.com/watch?v=2hRjACjynCo" target="_blank" rel="noopener">YouTube</a><a class="chip" href="https://www.deezer.com/track/3032466511" target="_blank" rel="noopener">Deezer</a></div>
-    </article>
-    <article class="song rv">
-      <div class="cover"><img src="../assets/img/cover_pro_mundo_sorrir.jpg" alt="Capa do single Pro Mundo Sorrir" loading="lazy" width="1400" height="1400"></div>
-      <div>
-        <div class="no">04</div>
-        <h3>Pro Mundo<br><em>Sorrir</em></h3>
-        <p><span data-pt>Single de 2025.</span><span data-en>2025 single.</span></p>
-      </div>
-      <div class="chips"><a class="chip" href="https://open.spotify.com/track/23G6zGh82giwaWX5vhcqEf" target="_blank" rel="noopener">Spotify</a><a class="chip" href="https://music.apple.com/br/album/pro-mundo-sorrir-single/1834747617" target="_blank" rel="noopener">Apple Music</a><a class="chip" href="https://www.youtube.com/watch?v=g3z1dMj7t_4" target="_blank" rel="noopener">YouTube</a><a class="chip" href="https://www.deezer.com/track/3517816901" target="_blank" rel="noopener">Deezer</a></div>
-    </article>
-  </div>
-</section>
-
-<section class="dream" id="dream" data-t="ink" aria-labelledby="dreamTitle">
-  <div class="dream-text rv">
-    <div class="label"><b>03</b> <span data-pt>Uma canção à parte</span><span data-en>A song apart</span></div>
-    <h2 class="big" id="dreamTitle"><span data-pt>E um<br><em>sonho.</em></span><span data-en>And one<br><em>dream.</em></span></h2>
-    <blockquote class="lyric" lang="en">
-      <p>Where was I last night?<br>Take me back to that dream tonight.</p>
-      <footer><span data-pt lang="pt-BR">Refrão de “Dream”. Em português: “Onde estava eu ontem à noite? Me leve de volta praquele sonho essa noite.”</span><span data-en>From the chorus of “Dream”</span></footer>
-    </blockquote>
-    <div class="dream-story">
-      <p><span data-pt>Rafael conheceu uma moça certa noite e, nessa mesma noite, sonhou com ela. Desde o início, sentiu uma conexão fora do comum.</span><span data-en>Rafael met a woman one night, and that same night he dreamed about her. From the very beginning, he felt an unusual connection.</span></p>
-      <p><span data-pt>“Dream” descreve essa experiência. Rafael acredita que pode ter sido uma projeção astral: essa é a interpretação dele sobre o que viveu.</span><span data-en>“Dream” describes that experience. Rafael believes it may have been an astral projection: that is his own interpretation of what he lived through.</span></p>
+    <div>
+      <div class="label"><b>02</b> EPs</div>
+      <h2 class="mid"><span data-pt>Os <em>EPs</em></span><span data-en>The <em>EPs</em></span></h2>
     </div>
+    <p><span data-pt>Ouça o EP completo ou vá direto às faixas em destaque.</span><span data-en>Play the whole EP or go straight to the featured tracks.</span></p>
   </div>
-  <div class="dream-side rv">
-    <div class="dream-cover"><img src="../assets/img/cover_from_lust_with_love_ep.jpg" alt="Capa do EP From Lust With Love" loading="lazy" width="1000" height="1000"></div>
-    <div class="dream-meta"><span class="t">Dream</span><span data-pt>do EP <i>From Lust With Love</i>, 2024</span><span data-en>from the EP <i>From Lust With Love</i>, 2024</span></div>
-    <div class="chips"><a class="chip" href="https://open.spotify.com/track/4NwdpTLdXLJ8r8nsU9ahYg" target="_blank" rel="noopener">Spotify</a><a class="chip" href="https://music.apple.com/br/album/dream/1772144762?i=1772144764" target="_blank" rel="noopener">Apple Music</a><a class="chip" href="https://www.youtube.com/watch?v=KPGVJBNcEVY" target="_blank" rel="noopener">YouTube</a><a class="chip" href="https://www.deezer.com/track/3030005171" target="_blank" rel="noopener">Deezer</a></div>
-  </div>
+
+  <article class="ep" id="tudo-que-nos-temos" aria-labelledby="t-tudo">
+    <div class="cov rv"><img src="../assets/img/cover_tudo_que_nos_temos_ep.jpg" alt="Capa do EP Tudo Que Nós Temos" loading="lazy" width="1400" height="1400"></div>
+    <div class="rv">
+      <div class="meta"><b>EP</b><span>2024</span><i>·</i><span data-pt>5 faixas</span><span data-en>5 tracks</span></div>
+      <h3 id="t-tudo">Tudo Que<br><em>Nós Temos</em></h3>
+      <p class="d"><span data-pt>Cinco canções. Em destaque, a faixa-título e “A Semente”.</span><span data-en>Five songs. Featured: the title track and “A Semente”.</span></p>
+      <div class="listen">
+        <div class="k-lbl"><span data-pt>Ouvir o EP completo</span><span data-en>Play the full EP</span></div>
+        <div class="plats"><a class="pl" href="https://open.spotify.com/album/7LOAQVApqzlboFVU36Ra8W" target="_blank" rel="noopener">Spotify</a><a class="pl" href="https://music.apple.com/br/album/tudo-que-n%C3%B3s-temos-ep/1771898588" target="_blank" rel="noopener">Apple Music</a><a class="pl" href="https://www.deezer.com/album/652637021" target="_blank" rel="noopener">Deezer</a><a class="pl" href="https://www.youtube.com/playlist?list=OLAK5uy_mtp81r8MNhSZHwOh28Ln7EjJc7AuKG0kk" target="_blank" rel="noopener">YouTube</a></div>
+      </div>
+      <ol class="tracks" aria-label="Faixas · Tracks">
+        <li><span class="n">1</span><span class="tt">Perto de Você</span></li>
+        <li class="hl"><span class="n">2</span><span class="tt">Tudo Que Nós Temos</span><span class="tl"><a href="https://open.spotify.com/track/1B5GqvhtFzysxjppebfu6v" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/br/album/tudo-que-n%C3%B3s-temos/1771898588?i=1771898591" target="_blank" rel="noopener">Apple Music</a><a href="https://www.deezer.com/track/3032466481" target="_blank" rel="noopener">Deezer</a><a href="https://www.youtube.com/watch?v=IsH1Nnfqr1c" target="_blank" rel="noopener">YouTube</a></span></li>
+        <li><span class="n">3</span><span class="tt">Nosso Encanto</span></li>
+        <li><span class="n">4</span><span class="tt">Cometa</span></li>
+        <li class="hl"><span class="n">5</span><span class="tt">A Semente</span><span class="tl"><a href="https://open.spotify.com/track/0qQlLVXVZCDNJsZkS8UTgJ" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/br/album/a-semente/1771898588?i=1771898751" target="_blank" rel="noopener">Apple Music</a><a href="https://www.deezer.com/track/3032466511" target="_blank" rel="noopener">Deezer</a><a href="https://www.youtube.com/watch?v=2hRjACjynCo" target="_blank" rel="noopener">YouTube</a></span></li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="ep dreamy" id="from-lust-with-love" aria-labelledby="t-flwl">
+    <div class="cov rv"><img src="../assets/img/cover_from_lust_with_love_ep.jpg" alt="Capa do EP From Lust With Love" loading="lazy" width="1000" height="1000"></div>
+    <div class="rv">
+      <div class="meta"><b>EP</b><span>2024</span><i>·</i><span data-pt>4 faixas</span><span data-en>4 tracks</span></div>
+      <h3 id="t-flwl">From Lust<br><em>With Love</em></h3>
+      <p class="d"><span data-pt>Quatro faixas. Em destaque, “Dream”, uma canção com uma história própria.</span><span data-en>Four tracks. Featured: “Dream”, a song with a story of its own.</span></p>
+      <div class="listen">
+        <div class="k-lbl"><span data-pt>Ouvir o EP completo</span><span data-en>Play the full EP</span></div>
+        <div class="plats"><a class="pl" href="https://open.spotify.com/album/1Vv5mvIBy2LtFutSgJGFxd" target="_blank" rel="noopener">Spotify</a><a class="pl" href="https://music.apple.com/br/album/from-lust-with-love-ep/1772144762" target="_blank" rel="noopener">Apple Music</a><a class="pl" href="https://www.deezer.com/album/651798111" target="_blank" rel="noopener">Deezer</a><a class="pl" href="https://www.youtube.com/playlist?list=OLAK5uy_kKsCI6eXU0kN4XbWfQ60179rJOwVQVlJs" target="_blank" rel="noopener">YouTube</a></div>
+      </div>
+      <ol class="tracks" aria-label="Faixas · Tracks">
+        <li><span class="n">1</span><span class="tt">Intro</span></li>
+        <li class="hl" id="dream"><span class="n">2</span><span class="tt">Dream</span><span class="tl"><a href="https://open.spotify.com/track/4NwdpTLdXLJ8r8nsU9ahYg" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/br/album/dream/1772144762?i=1772144764" target="_blank" rel="noopener">Apple Music</a><a href="https://www.deezer.com/track/3030005171" target="_blank" rel="noopener">Deezer</a><a href="https://www.youtube.com/watch?v=KPGVJBNcEVY" target="_blank" rel="noopener">YouTube</a></span></li>
+        <li><span class="n">3</span><span class="tt">Flower</span></li>
+        <li><span class="n">4</span><span class="tt">Everything Is Possible</span></li>
+      </ol>
+      <div class="story" aria-labelledby="dreamTitle">
+        <div class="label" id="dreamTitle"><span data-pt>A história de “Dream”</span><span data-en>The story of “Dream”</span></div>
+        <blockquote class="lyric" lang="en">
+          <p>Where was I last night?<br>Take me back to that dream tonight.</p>
+          <footer><span data-pt lang="pt-BR">Refrão de “Dream”. Em português: “Onde estava eu ontem à noite? Me leve de volta praquele sonho essa noite.”</span><span data-en>From the chorus of “Dream”</span></footer>
+        </blockquote>
+        <div class="txt">
+          <p><span data-pt>Rafael conheceu uma moça certa noite e, nessa mesma noite, sonhou com ela. Desde o início, sentiu uma conexão fora do comum.</span><span data-en>Rafael met a woman one night, and that same night he dreamed about her. From the very beginning, he felt an unusual connection.</span></p>
+          <p><span data-pt>“Dream” descreve essa experiência. Rafael acredita que pode ter sido uma projeção astral: essa é a interpretação dele sobre o que viveu.</span><span data-en>“Dream” describes that experience. Rafael believes it may have been an astral projection: that is his own interpretation of what he lived through.</span></p>
+        </div>
+      </div>
+    </div>
+  </article>
 </section>
 
-<section class="catalog" id="catalogo" data-t="night">
-  <div class="label rv"><b>04</b> <span data-pt>Catálogo</span><span data-en>Catalogue</span></div>
-  <h2 class="mid rv"><span data-pt>Lançamentos</span><span data-en>Releases</span></h2>
-  <p class="note rv"><span data-pt>Singles e EPs nas plataformas digitais.</span><span data-en>Singles and EPs on the streaming platforms.</span></p>
-  <div class="disco rv" role="list">
-    <div role="listitem"><span class="y">2025</span><span class="t">Beautiful Girl</span><span class="k">Single</span><span class="ln"><a href="https://music.apple.com/br/album/beautiful-girl-single/1831603525" target="_blank" rel="noopener">Apple Music</a><a href="https://www.deezer.com/album/800049931" target="_blank" rel="noopener">Deezer</a></span></div>
-    <div role="listitem"><span class="y">2025</span><span class="t">Pro Mundo Sorrir</span><span class="k">Single</span><span class="ln"><a href="https://music.apple.com/br/album/pro-mundo-sorrir-single/1834747617" target="_blank" rel="noopener">Apple Music</a><a href="https://www.deezer.com/album/808130001" target="_blank" rel="noopener">Deezer</a></span></div>
-    <div role="listitem"><span class="y">2024</span><span class="t">From Lust With Love</span><span class="k">EP</span><span class="ln"><a href="https://music.apple.com/br/album/from-lust-with-love-ep/1772144762" target="_blank" rel="noopener">Apple Music</a><a href="https://www.deezer.com/album/651798111" target="_blank" rel="noopener">Deezer</a></span></div>
-    <div role="listitem"><span class="y">2024</span><span class="t">For Real</span><span class="k">Single</span><span class="ln"><a href="https://music.apple.com/br/album/for-real-single/1763019112" target="_blank" rel="noopener">Apple Music</a><a href="https://www.deezer.com/album/630014181" target="_blank" rel="noopener">Deezer</a></span></div>
+<section class="cat" id="singles" data-t="night">
+  <div class="head rv">
+    <div>
+      <div class="label"><b>03</b> Singles</div>
+      <h2 class="mid"><span data-pt>Os <em>singles</em></span><span data-en>The <em>singles</em></span></h2>
+    </div>
+    <p><span data-pt>Do mais recente para o mais antigo.</span><span data-en>Newest first.</span></p>
   </div>
-  <div class="chips rv"><a class="chip" href="https://open.spotify.com/artist/7kd18976nztFGQEd83LE8Q" target="_blank" rel="noopener"><span data-pt>Tudo no Spotify</span><span data-en>All on Spotify</span></a><a class="chip" href="https://music.apple.com/br/artist/rafael-z/1533916916" target="_blank" rel="noopener"><span data-pt>Tudo no Apple Music</span><span data-en>All on Apple Music</span></a><a class="chip" href="https://www.deezer.com/artist/108967802" target="_blank" rel="noopener"><span data-pt>Tudo no Deezer</span><span data-en>All on Deezer</span></a></div>
+  <ol class="singles">
+    <li class="sg rv" id="beautiful-girl">
+      <div class="cov"><img src="../assets/img/cover_beautiful_girl.jpg" alt="Capa do single Beautiful Girl" loading="lazy" width="1400" height="1400"></div>
+      <div class="meta"><b>Single</b><span>2025</span></div>
+      <h3>Beautiful<br><em>Girl</em></h3>
+      <div class="plats"><a class="pl" href="https://open.spotify.com/track/5Yca02WK32t8KfUjqu66Wc" target="_blank" rel="noopener">Spotify</a><a class="pl" href="https://music.apple.com/br/album/beautiful-girl-single/1831603525" target="_blank" rel="noopener">Apple Music</a><a class="pl" href="https://www.deezer.com/track/3493907571" target="_blank" rel="noopener">Deezer</a><a class="pl" href="https://www.youtube.com/watch?v=-axWIYMCSUA" target="_blank" rel="noopener">YouTube</a></div>
+    </li>
+    <li class="sg rv" id="pro-mundo-sorrir">
+      <div class="cov"><img src="../assets/img/cover_pro_mundo_sorrir.jpg" alt="Capa do single Pro Mundo Sorrir" loading="lazy" width="1400" height="1400"></div>
+      <div class="meta"><b>Single</b><span>2025</span></div>
+      <h3>Pro Mundo<br><em>Sorrir</em></h3>
+      <div class="plats"><a class="pl" href="https://open.spotify.com/track/23G6zGh82giwaWX5vhcqEf" target="_blank" rel="noopener">Spotify</a><a class="pl" href="https://music.apple.com/br/album/pro-mundo-sorrir-single/1834747617" target="_blank" rel="noopener">Apple Music</a><a class="pl" href="https://www.deezer.com/track/3517816901" target="_blank" rel="noopener">Deezer</a><a class="pl" href="https://www.youtube.com/watch?v=g3z1dMj7t_4" target="_blank" rel="noopener">YouTube</a></div>
+    </li>
+    <li class="sg rv" id="agora">
+      <div class="cov"><img src="../assets/img/cover_agora_ao_vivo.jpg" alt="Capa do single Agora (Ao vivo)" loading="lazy" width="1400" height="1400"></div>
+      <div class="meta"><b>Single</b><span>2025</span></div>
+      <h3>Agora<br><em>(Ao vivo)</em></h3>
+      <p class="d"><span data-pt>Canção autoral, em versão acústica.</span><span data-en>An original song, in an acoustic version.</span></p>
+      <div class="plats"><a class="pl" href="https://open.spotify.com/track/2gIHN6O5NtgdvUx02JQXVL" target="_blank" rel="noopener">Spotify</a><a class="pl" href="https://music.apple.com/br/album/agora-ao-vivo-single/1817513928" target="_blank" rel="noopener">Apple Music</a><a class="pl" href="https://www.deezer.com/track/3389968071" target="_blank" rel="noopener">Deezer</a><a class="pl" href="https://www.youtube.com/watch?v=JEznkpz2pIE" target="_blank" rel="noopener">YouTube</a></div>
+    </li>
+    <li class="sg rv" id="for-real">
+      <div class="cov"><img src="../assets/img/cover_for_real.jpg" alt="Capa do single For Real" loading="lazy" width="1400" height="1400"></div>
+      <div class="meta"><b>Single</b><span>2024</span></div>
+      <h3>For<br><em>Real</em></h3>
+      <div class="plats"><a class="pl" href="https://open.spotify.com/track/6BoCj9HdlQrHKJJzqRabzm" target="_blank" rel="noopener">Spotify</a><a class="pl" href="https://music.apple.com/br/album/for-real-single/1763019112" target="_blank" rel="noopener">Apple Music</a><a class="pl" href="https://www.deezer.com/track/2949290871" target="_blank" rel="noopener">Deezer</a><a class="pl" href="https://www.youtube.com/watch?v=oALyMoOgnAQ" target="_blank" rel="noopener">YouTube</a></div>
+    </li>
+  </ol>
+  <div class="everything rv">
+    <p><span data-pt>Siga Rafael Z para ouvir os próximos lançamentos.</span><span data-en>Follow Rafael Z to hear the next releases.</span></p>
+    <div class="chips"><a class="chip" href="https://open.spotify.com/artist/7kd18976nztFGQEd83LE8Q" target="_blank" rel="noopener">Spotify</a><a class="chip" href="https://music.apple.com/br/artist/rafael-z/1533916916" target="_blank" rel="noopener">Apple Music</a><a class="chip" href="https://www.deezer.com/artist/108967802" target="_blank" rel="noopener">Deezer</a><a class="chip" href="https://www.youtube.com/@rafaelzeredo" target="_blank" rel="noopener">YouTube</a></div>
+  </div>
 </section>
 
 <nav class="next" aria-label="Mais · More" data-t="ink"><a class="rv" href="../ao-vivo/"><img src="../assets/img/poster_tudo.jpg" alt="" loading="lazy" style="object-position:50% 30%"><div class="cap"><div class="pre"><span data-pt>Ao vivo</span><span data-en>Live</span></div><h3><span data-pt>Portfólio</span><span data-en>Portfolio</span><em><span data-pt>cinco filmes</span><span data-en>five films</span></em></h3></div></a><a class="rv" href="../#formatos"><img src="../assets/img/cmw_dusk_violet.jpg" alt="" loading="lazy" style="object-position:50% 40%"><div class="cap"><div class="pre"><span data-pt>Contratar</span><span data-en>Booking</span></div><h3><span data-pt>Formatos</span><span data-en>Formats</span><em><span data-pt>solo, trio, trio com Bruno</span><span data-en>solo, trio, trio with Bruno</span></em></h3></div></a><a class="rv" href="../#historia"><img src="../assets/img/bh_dream_moon.jpg" alt="" loading="lazy" style="object-position:42% 45%"><div class="cap"><div class="pre">Rafael Z</div><h3><span data-pt>História</span><span data-en>Story</span><em><span data-pt>de Brasília à Inglaterra</span><span data-en>from Brasília to England</span></em></h3></div></a></nav>
