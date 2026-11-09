@@ -57,7 +57,7 @@
         st.style.cssText='position:absolute;inset:0;pointer-events:none;background:url("'+v.poster+'") '+cs.objectPosition+'/cover no-repeat;transition:opacity .6s;z-index:'+cs.zIndex;
         v.insertAdjacentElement('afterend',st)}
       if(st)st.style.opacity=on?'1':'0'}
-    function go(){if(!vis||!v.paused)return;var p=v.play();if(p&&p.catch)p.catch(function(e){if(e&&e.name==='NotAllowedError')still(true)})}
+    var refused=0;function go(){if(!vis||!v.paused||v.dataset.rzSwapped)return;var p=v.play();if(p&&p.catch)p.catch(function(e){if(e&&e.name==='NotAllowedError'){still(true);if(++refused>=2&&window.RZ_lpmSwap)window.RZ_lpmSwap(v)}})}
     function again(){go();if(vis&&v.paused&&tries++<24)setTimeout(again,400)}
     v.addEventListener('playing',function(){still(false)});
     new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;if(vis){tries=0;again()}else v.pause()})},{threshold:.25}).observe(v);

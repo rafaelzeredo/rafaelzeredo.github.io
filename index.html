@@ -114,7 +114,7 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .hero{position:relative;min-height:100svh;overflow:hidden;background:var(--ink);color:var(--text-light);isolation:isolate}
 .hero .glow{position:absolute;inset:-10%;z-index:-3;background:url(assets/img/poster_hero_night.jpg) 80% 50%/cover;filter:blur(70px) saturate(1.3);opacity:.5;transform:scale(1.2)}
 .film{position:absolute;top:0;bottom:0;right:clamp(24px,7vw,130px);width:calc(100svh*.5625);max-width:46vw;z-index:-2;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 26%);mask-image:linear-gradient(90deg,transparent 0,#000 26%)}
-.film video{width:100%;height:100%;object-fit:cover}
+.film video,.film img.rz-vid{width:100%;height:100%;object-fit:cover}
 .film:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,8,16,.55),transparent 22%,transparent 62%,rgba(11,8,16,.7))}
 .grain{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.14;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
 .hero-left{position:absolute;left:var(--pad);top:50%;transform:translateY(-46%);width:min(52vw,720px);display:flex;flex-direction:column;gap:0}
@@ -147,7 +147,7 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 
 /* ================= SEAM (sun) ================= */
 .seam{position:relative;height:clamp(380px,62svh,680px);overflow:hidden;background:var(--ink);color:var(--text-light);display:flex;flex-direction:column;justify-content:center;isolation:isolate}
-.seam video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 52%;z-index:-2}
+.seam video,.seam img.rz-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 52%;z-index:-2}
 .seam:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--seam-top,var(--ink)) 0,rgba(11,8,16,.1) 30%,rgba(11,8,16,.1) 60%,var(--seam-bot,var(--bone)) 100%)}
 .mq{overflow:hidden;white-space:nowrap}
 .mq>div{display:inline-flex;animation:mq 60s linear infinite;will-change:transform}
@@ -166,9 +166,9 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .fcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
 .fc{display:flex;flex-direction:column}
 .fc .ph{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:#1a1420;color:var(--text-light);isolation:isolate}
-.fc .ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
-@media (hover:hover){.fc .ph:hover video{transform:scale(1.03)}}
-.fc .ph video.bd{object-position:75% 50%}
+.fc .ph video,.fc .ph img.rz-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+@media (hover:hover){.fc .ph:hover video,.fc .ph:hover img.rz-vid{transform:scale(1.03)}}
+.fc .ph video.bd,.fc .ph img.bd{object-position:75% 50%}
 .fc .ph:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,8,16,0) 30%,rgba(11,8,16,.55) 62%,rgba(11,8,16,.88));z-index:-1}
 .fc .cap{position:absolute;inset:auto 0 0 0;padding:22px 24px;text-shadow:0 1px 14px rgba(0,0,0,.55)}
 .fc .pre{font-size:11px;letter-spacing:.3em;text-transform:uppercase;display:flex;gap:10px;align-items:center}
@@ -302,7 +302,7 @@ footer.f nav{display:flex;gap:26px;flex-wrap:wrap}
 /* ============ DIRECTION B: ENTARDECER (full-bleed, dark) ============ */
 html[data-dir=entardecer] .film{left:0;right:0;width:auto;max-width:none;-webkit-mask-image:none;mask-image:none;z-index:-2}
 html[data-dir=entardecer] .film:after{background:linear-gradient(90deg,rgba(11,8,16,.9),rgba(11,8,16,.25) 58%,rgba(11,8,16,.05)),linear-gradient(180deg,rgba(11,8,16,.5),transparent 24%,transparent 55%,rgba(11,8,16,.85))}
-html[data-dir=entardecer] .film video{object-position:50% 30%}
+html[data-dir=entardecer] .film video,html[data-dir=entardecer] .film img.rz-vid{object-position:50% 30%}
 html[data-dir=entardecer] .hero .glow{display:none}
 html[data-dir=entardecer] .hero-left{top:auto;bottom:clamp(70px,12vh,130px);transform:none}
 html[data-dir=entardecer] .rot{color:#F3E9DA}
@@ -313,7 +313,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   /* the big hero logo is sized by the window height too, so on laptop screens it can no longer climb under the menu */
   .logo-hero{width:min(100%,max(300px,calc((100svh - 540px)*2.04)))}
   /* decorative videos are scenery, not players: no native controls or start-playback button, and they ignore the pointer */
-  #heroVideo,.seam video,.fc .ph video{pointer-events:none}
+  #heroVideo,.seam video,.fc .ph video,.film img.rz-vid,.seam img.rz-vid,.fc .ph img.rz-vid{pointer-events:none}
   #heroVideo::-webkit-media-controls,.seam video::-webkit-media-controls,.fc .ph video::-webkit-media-controls,
   #heroVideo::-webkit-media-controls-start-playback-button,.seam video::-webkit-media-controls-start-playback-button,.fc .ph video::-webkit-media-controls-start-playback-button,
   #heroVideo::-webkit-media-controls-overlay-play-button,.seam video::-webkit-media-controls-overlay-play-button,.fc .ph video::-webkit-media-controls-overlay-play-button,
@@ -560,6 +560,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
 <div class="dock" id="dock"><a href="musica/"><span data-pt>Ouvir</span><span data-en>Listen</span></a><a class="gold" href="#contato"><span data-pt>Contratar</span><span data-en>Book</span></a></div>
 
 
+<script src="assets/js/lpm-img-fallback.js?v=1"></script>
 <script>
 (function(){
   var d=document, root=d.documentElement, body=d.body;
@@ -608,6 +609,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   // rejected and WebKit draws its grey start button on the paused video. In that case a still of the poster is laid over the
   // video (covering that button), and the first tap, click or key press anywhere starts every decorative video, because
   // WebKit only allows play() inside such a gesture. The still fades away as soon as the video is really playing.
+  // After two refusals assets/js/lpm-img-fallback.js swaps the video for <img src="same.mp4">, which Safari does animate (see that file).
   var ambient=[];
   function ambientVideo(v,th){
     v.muted=true;v.defaultMuted=true;v.controls=false;v.removeAttribute('controls');v.setAttribute('disablepictureinpicture','');v.setAttribute('disableremoteplayback','');v.setAttribute('tabindex','-1');
@@ -617,7 +619,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
         st.style.cssText='position:absolute;inset:0;pointer-events:none;background:url("'+v.poster+'") '+cs.objectPosition+'/cover no-repeat;transition:opacity .6s;z-index:'+cs.zIndex;
         v.insertAdjacentElement('afterend',st)}
       if(st)st.style.opacity=on?'1':'0'}
-    function go(){if(!vis||!v.paused)return;var p=v.play();if(p&&p.catch)p.catch(function(e){if(e&&e.name==='NotAllowedError')still(true)})}
+    var refused=0;function go(){if(!vis||!v.paused||v.dataset.rzSwapped)return;var p=v.play();if(p&&p.catch)p.catch(function(e){if(e&&e.name==='NotAllowedError'){still(true);if(++refused>=2&&window.RZ_lpmSwap)window.RZ_lpmSwap(v)}})}
     function again(){go();if(vis&&v.paused&&tries++<24)setTimeout(again,400)}   // keeps asking for ~10 s if the browser says no at first
     v.addEventListener('playing',function(){still(false)});
     new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;if(vis){tries=0;again()}else v.pause()})},th?{threshold:th}:{}).observe(v);
