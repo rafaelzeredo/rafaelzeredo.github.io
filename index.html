@@ -111,14 +111,17 @@ html[data-lang=pt] .lang [data-set=pt],html[data-lang=en] .lang [data-set=en]{ba
 .hero-watch{display:inline-flex;gap:8px;align-self:flex-start;margin-top:16px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:#F3E9DA;border-bottom:1px solid var(--sun);padding-bottom:4px}
 .hero-note{position:absolute;right:var(--pad);bottom:28px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#CFC4DE;writing-mode:vertical-rl;transform:rotate(180deg)}
 .scrollcue{position:absolute;left:var(--pad);bottom:0;width:1px;height:54px;background:linear-gradient(var(--sun),transparent)}
-.hero .logo-hero,.hero .tagline,.hero .rot,.hero .hero-actions,.hero .film{opacity:0}
-.loaded .hero .film{animation:fadein 1.8s .1s forwards}
+.hero .logo-hero,.hero .tagline,.hero .rot,.hero .hero-actions{opacity:0}
+/* the hero film fades in from .01, not 0: Safari/WebKit will not autoplay a video whose parent is fully transparent, which left it paused with a play button */
+.hero .film{opacity:.01}
+.loaded .hero .film{animation:filmin 1.8s .1s forwards}
 .loaded .hero .logo-hero{animation:rise 1.4s .35s cubic-bezier(.2,.8,.2,1) forwards}
 .hero .hero-watch{opacity:0}
 .loaded .hero .hero-watch{animation:rise 1.2s 1.15s cubic-bezier(.2,.8,.2,1) forwards}
 .loaded .hero .tagline,.loaded .hero .rot,.loaded .hero .hero-actions{animation:rise 1.2s 1s cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes filmin{from{opacity:.01}to{opacity:1}}
 
 /* ================= SEAM (sun) ================= */
 .seam{position:relative;height:clamp(380px,62svh,680px);overflow:hidden;background:var(--ink);color:var(--text-light);display:flex;flex-direction:column;justify-content:center;isolation:isolate}
@@ -584,7 +587,9 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     v.muted=true;v.defaultMuted=true;v.controls=false;v.removeAttribute('controls');v.setAttribute('disablepictureinpicture','');v.setAttribute('disableremoteplayback','');v.setAttribute('tabindex','-1');
     var vis=false;
     function go(){if(!vis||!v.paused)return;var p=v.play();if(p&&p.catch)p.catch(function(){})}
-    new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;if(vis)go();else v.pause()})},th?{threshold:th}:{}).observe(v);
+    var tries=0;function again(){go();if(vis&&v.paused&&tries++<24)setTimeout(again,400)}   // keeps asking for ~10 s if the browser says no at first
+    new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;if(vis){tries=0;again()}else v.pause()})},th?{threshold:th}:{}).observe(v);
+    var fm=v.closest('.film');if(fm)fm.addEventListener('animationend',function(){tries=0;again()});
     ['canplay','loadeddata','pause','stalled','suspend'].forEach(function(ev){v.addEventListener(ev,function(){setTimeout(go,ev==='pause'?250:0)})});
     ambient.push(go);
   }
