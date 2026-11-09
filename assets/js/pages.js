@@ -45,10 +45,27 @@
     var te=parseFloat(pl.dataset.titleEnd);
     if(te){var cap=function(){pl.classList.toggle('titling',!pv.ended&&pv.currentTime<te)};['play','timeupdate','seeked','ended'].forEach(function(ev){pv.addEventListener(ev,cap)})}
   });
-  // silent loops: play only while on screen
+  // silent loops: decorative, play only while on screen. If Safari refuses autoplay (Low Power Mode, "Never Auto-Play"),
+  // the poster is laid over the paused video as a still (hiding WebKit's grey start button) and the first tap, click or key
+  // press starts them; the still fades away once the video is really playing. Same behaviour as on the homepage.
+  var ambient=[];
   d.querySelectorAll('video[data-loop]').forEach(function(v){
-    new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?v.play().catch(function(){}):v.pause()})},{threshold:.25}).observe(v);
+    v.muted=true;v.defaultMuted=true;v.controls=false;v.removeAttribute('controls');v.setAttribute('disablepictureinpicture','');v.setAttribute('disableremoteplayback','');v.setAttribute('tabindex','-1');
+    var vis=false,tries=0,st=null;
+    function still(on){
+      if(on&&!st&&v.poster){var cs=getComputedStyle(v);st=d.createElement('span');st.setAttribute('aria-hidden','true');
+        st.style.cssText='position:absolute;inset:0;pointer-events:none;background:url("'+v.poster+'") '+cs.objectPosition+'/cover no-repeat;transition:opacity .6s;z-index:'+cs.zIndex;
+        v.insertAdjacentElement('afterend',st)}
+      if(st)st.style.opacity=on?'1':'0'}
+    function go(){if(!vis||!v.paused)return;var p=v.play();if(p&&p.catch)p.catch(function(e){if(e&&e.name==='NotAllowedError')still(true)})}
+    function again(){go();if(vis&&v.paused&&tries++<24)setTimeout(again,400)}
+    v.addEventListener('playing',function(){still(false)});
+    new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;if(vis){tries=0;again()}else v.pause()})},{threshold:.25}).observe(v);
+    ['canplay','loadeddata'].forEach(function(ev){v.addEventListener(ev,go)});
+    ambient.push(function(gesture){if(vis)return go();if(gesture&&v.paused&&!v.dataset.unlocked){var p=v.play();if(p&&p.then)p.then(function(){v.dataset.unlocked=1;if(!vis)v.pause()},function(){})}});
   });
+  ['pointerdown','touchend','keydown','click'].forEach(function(ev){addEventListener(ev,function(){ambient.forEach(function(g){g(true)})},{passive:true,capture:true})});
+  d.addEventListener('visibilitychange',function(){if(!d.hidden)ambient.forEach(function(g){g(false)})});
   // mobile booking dock: after the first screen, hidden over the booking section
   var dock=d.getElementById('dock'),bk=d.getElementById('contato');
   if(dock&&bk){

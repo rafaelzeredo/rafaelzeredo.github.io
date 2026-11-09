@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /README.md
+Disallow: /ROLLBACK_GUIDE.md
+
+Sitemap: https://rafaelzeredo.github.io/sitemap.xml

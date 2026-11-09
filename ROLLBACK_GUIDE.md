@@ -75,6 +75,20 @@ git push origin main
 
 The new cover files (`assets/img/cover_beautiful_girl.jpg`, `assets/img/cover_for_real.jpg`, `assets/img/thumbs/`) are harmless if left in place. The full restore above (to `eba6470`) still works and removes them too.
 
+## Undo the public launch (9 Nov 2026)
+
+Saved state before the Safari fix, SEO and launch: commit `46e5130`, branch `backup/pre-launch-seo-2026-11-09` (on GitHub and locally), tag `backup/pre-launch-seo-2026-11-09-tag`.
+To hide the site from search again without losing anything else, put `<meta name="robots" content="noindex, nofollow">` back in each page's head (replacing the `index, follow` line), or restore every file from the backup branch:
+
+```bash
+cd ~/Desktop/ClaudeWorkspace/Website/rafael-z-site
+git checkout main && git pull
+git fetch origin backup/pre-launch-seo-2026-11-09
+git restore --source=origin/backup/pre-launch-seo-2026-11-09 --staged --worktree -- . ':!ROLLBACK_GUIDE.md'
+git commit -m "Restore the site as it was before the public launch (46e5130)"
+git push origin main
+```
+
 ## What not to do
 
 - Do not use `git push --force` or `git reset --hard` on `main`.
