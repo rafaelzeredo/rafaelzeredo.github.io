@@ -282,6 +282,18 @@ html[data-dir=entardecer] .hero-left{top:auto;bottom:clamp(70px,12vh,130px);tran
 html[data-dir=entardecer] .rot{color:#F3E9DA}
 
 
+/* ================= desktop refinements (900px and up; the phone layout is untouched) ================= */
+@media (min-width:900px){
+  /* the big hero logo is sized by the window height too, so on laptop screens it can no longer climb under the menu */
+  .logo-hero{width:min(100%,max(300px,calc((100svh - 540px)*2.04)))}
+  /* decorative videos are scenery, not players: no native controls or start-playback button, and they ignore the pointer */
+  #heroVideo,.seam video,.fc .ph video{pointer-events:none}
+  #heroVideo::-webkit-media-controls,.seam video::-webkit-media-controls,.fc .ph video::-webkit-media-controls,
+  #heroVideo::-webkit-media-controls-start-playback-button,.seam video::-webkit-media-controls-start-playback-button,.fc .ph video::-webkit-media-controls-start-playback-button,
+  #heroVideo::-webkit-media-controls-overlay-play-button,.seam video::-webkit-media-controls-overlay-play-button,.fc .ph video::-webkit-media-controls-overlay-play-button,
+  #heroVideo::-webkit-media-controls-panel,.seam video::-webkit-media-controls-panel,.fc .ph video::-webkit-media-controls-panel{display:none!important;opacity:0!important;-webkit-appearance:none}
+}
+
 /* ================= responsive ================= */
 @media (max-width:1100px){.nav{display:none}.menu-btn{display:flex}.tools .btn{display:none}}
 @media (max-width:899px){
@@ -565,7 +577,20 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
   function rvNet(){d.querySelectorAll('.rv:not(.in)').forEach(function(e){var r=e.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)e.classList.add('in')})}
   setTimeout(rvNet,1600);var rvT=0;addEventListener('scroll',function(){clearTimeout(rvT);rvT=setTimeout(rvNet,400)},{passive:true});
   // format cards: silent loops play only while on screen
-  d.querySelectorAll('video[data-loop]').forEach(function(v){new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?v.play().catch(function(){}):v.pause()})},{threshold:.25}).observe(v)});
+  // Decorative silent videos (format cards, hero, sunset): play while on screen. If the browser refuses autoplay (desktop Safari or
+  // Low Power Mode, for example) they try again on the next tap/click/key, once data arrives and when the tab comes back.
+  var ambient=[];
+  function ambientVideo(v,th){
+    v.muted=true;v.defaultMuted=true;v.controls=false;v.removeAttribute('controls');v.setAttribute('disablepictureinpicture','');v.setAttribute('disableremoteplayback','');v.setAttribute('tabindex','-1');
+    var vis=false;
+    function go(){if(!vis||!v.paused)return;var p=v.play();if(p&&p.catch)p.catch(function(){})}
+    new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;if(vis)go();else v.pause()})},th?{threshold:th}:{}).observe(v);
+    ['canplay','loadeddata','pause','stalled','suspend'].forEach(function(ev){v.addEventListener(ev,function(){setTimeout(go,ev==='pause'?250:0)})});
+    ambient.push(go);
+  }
+  ['pointerdown','touchend','keydown','click'].forEach(function(ev){addEventListener(ev,function(){ambient.forEach(function(g){g()})},{passive:true,capture:true})});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)ambient.forEach(function(g){g()})});
+  d.querySelectorAll('video[data-loop]').forEach(function(v){ambientVideo(v,.25)});
   // story topics: one panel at a time; tapping the open topic closes it
   var facts=[].slice.call(d.querySelectorAll('.facts button')),tales=d.getElementById('tales');
   function tell(b){var open=b.getAttribute('aria-expanded')!=='true';facts.forEach(function(x){var on=open&&x===b,t=d.getElementById(x.getAttribute('aria-controls'));x.setAttribute('aria-expanded',on);if(on){t.hidden=false;t.classList.remove('show');void t.offsetWidth;t.classList.add('show')}else if(open)t.hidden=true});tales.classList.toggle('open',open)}
@@ -606,7 +631,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     if(te){var cap=function(){pl.classList.toggle('titling',!pv.ended&&pv.currentTime<te)};['play','timeupdate','seeked','ended'].forEach(function(ev){pv.addEventListener(ev,cap)})}
   });
   // ambient videos: pause when off-screen
-  [].slice.call(d.querySelectorAll('#heroVideo,.seam video')).forEach(function(v){new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?v.play().catch(function(){}):v.pause()})}).observe(v)});
+  [].slice.call(d.querySelectorAll('#heroVideo,.seam video')).forEach(function(v){ambientVideo(v)});
   // contact picker
   d.querySelectorAll('.pick button').forEach(function(b){b.addEventListener('click',function(){d.querySelectorAll('.pick button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});d.getElementById('askF').textContent=b.dataset.f;askF=b.dataset.f;updAsk()})});
   // dock (mobile)
