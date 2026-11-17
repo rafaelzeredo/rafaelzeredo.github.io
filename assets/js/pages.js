@@ -33,6 +33,10 @@
   // reveal
   var rio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}})},{threshold:.12});
   d.querySelectorAll('.rv').forEach(function(e){rio.observe(e)});
+  // safety net (as on the homepage): anything already on screen is shown even if the observer never fires for it,
+  // e.g. an element whose 34px reveal offset pushes it outside a clipped parent (the "Voltar" link on Ao vivo)
+  function rvNet(){d.querySelectorAll('.rv:not(.in)').forEach(function(e){var r=e.getBoundingClientRect();if(r.top-40<innerHeight&&r.bottom>0)e.classList.add('in')})}
+  setTimeout(rvNet,1200);var rvT=0;addEventListener('scroll',function(){clearTimeout(rvT);rvT=setTimeout(rvNet,400)},{passive:true});
   // films with sound: one at a time
   var players=[].slice.call(d.querySelectorAll('.vis[role=button]'));
   players.forEach(function(pl){

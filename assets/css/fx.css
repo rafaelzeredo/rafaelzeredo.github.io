@@ -1,0 +1,149 @@
+/* Rafael Z: the "elevate" layer (16 Nov 2026). Atmosphere, depth and motion on top of the existing pages.
+   Loaded by every page after its own styles. Everything motion-related is keyed to html.fx, which assets/js/fx.js sets;
+   without that script (or with ?fx=off) the pages look exactly as before. The archive/lightbox styles work without it. */
+
+/* ---------- page-to-page transition (browsers with cross-document view transitions; others just navigate) ---------- */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:fxvt-out .32s ease both}
+::view-transition-new(root){animation:fxvt-in .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fxvt-out{to{opacity:0;transform:translateY(-10px)}}
+@keyframes fxvt-in{from{opacity:0;transform:translateY(16px)}}
+
+/* ---------- reading progress: a thin line of sun ---------- */
+.fx-progress{position:fixed;left:0;top:0;right:0;height:2px;z-index:70;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,#E5703A,#F0B429 60%,#F6D58A);pointer-events:none}
+
+/* ---------- film grain over everything (alpha-only tile: no blend mode, cheap to composite) ---------- */
+.fx-grain{position:fixed;inset:-140px;z-index:60;pointer-events:none;background:url(../img/fx/grain.png);opacity:.2}
+@media (hover:hover){.fx-grain{animation:fxgrain 1.1s steps(1) infinite}}
+@keyframes fxgrain{0%{transform:translate(0,0)}17%{transform:translate(-64px,38px)}34%{transform:translate(42px,-71px)}51%{transform:translate(-23px,90px)}68%{transform:translate(77px,24px)}85%{transform:translate(-90px,-48px)}}
+
+/* ---------- headlines rise line by line out of a mask ---------- */
+.fx .fx-ln{display:block;overflow:hidden;padding:.08em .12em .2em 0;margin:-.08em 0 -.2em}
+.fx .fx-ln>span{display:block;transform:translateY(112%) rotate(2.5deg);transform-origin:0 100%;transition:transform 1.25s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i,0)*110ms + 60ms);will-change:transform}
+.fx .fx-in .fx-ln>span{transform:none}
+.fx .fx-split.rv{opacity:1;transform:none}
+
+/* ---------- giant outlined section numerals, drifting behind the content ---------- */
+.fx section.fx-has-num{position:relative;isolation:isolate}
+.fx-num{position:absolute;right:var(--pad);top:clamp(10px,4vw,70px);z-index:-1;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(150px,27vw,430px);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(246,239,230,.09);pointer-events:none;-webkit-user-select:none;user-select:none}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .fx-num{animation:fxnum linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+    @keyframes fxnum{from{transform:translateY(90px)}to{transform:translateY(-90px)}}
+    /* soft parallax inside framed pictures */
+    .fx .story figure img,.fx .photos figure img,.fx .next a img{animation:fxpar linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+    @keyframes fxpar{from{transform:scale(1.14) translateY(-4.5%)}to{transform:scale(1.14) translateY(4.5%)}}
+    /* the hero lets go as you scroll away */
+    .fx .hero .hero-left{animation:fxheroout linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+    @keyframes fxheroout{to{transform:translateY(-70px);opacity:.0}}
+    .fx .hero .film video,.fx .hero .film img.rz-vid{animation:fxfilm linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+    @keyframes fxfilm{to{transform:scale(1.1)}}
+  }
+}
+/* the hero's own entrance uses "animation ... forwards" on its children, which would outrank the scroll animation above;
+   .hero-left itself has none, so only the wrapper is driven by scroll */
+
+/* ---------- hero: a slow warm light leak over the film ---------- */
+.fx .hero::after{content:"";position:absolute;inset:-20%;z-index:-1;pointer-events:none;mix-blend-mode:screen;
+  background:radial-gradient(38% 46% at 80% 28%,rgba(240,180,41,.2),transparent 70%),radial-gradient(30% 40% at 58% 84%,rgba(229,112,58,.13),transparent 70%);
+  animation:fxleak 17s ease-in-out infinite alternate}
+@keyframes fxleak{from{transform:translate3d(-4%,2%,0) scale(1)}to{transform:translate3d(5%,-3%,0) scale(1.12)}}
+
+/* ---------- footer: the last light on the horizon, under where the sun went down ---------- */
+.fx footer.f{overflow:hidden;isolation:isolate}
+.fx footer.f::before{content:"";position:absolute;left:0;right:0;top:0;height:min(60%,420px);z-index:-1;pointer-events:none;
+  background:radial-gradient(58% 100% at 79% 0,rgba(240,180,41,.2),rgba(229,112,58,.08) 45%,transparent 72%)}
+.fx footer.f::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(240,180,41,.55) 79%,transparent)}
+@media (max-width:899px){.fx footer.f::before{background:radial-gradient(90% 100% at 88% 0,rgba(240,180,41,.2),rgba(229,112,58,.08) 45%,transparent 72%)}}
+
+/* ---------- depth: cards and covers tilt toward the pointer ---------- */
+.fx .fx-tilt{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) rotate(var(--rz,0deg));transition:transform .9s cubic-bezier(.16,1,.3,1),box-shadow .9s;transform-style:flat;will-change:transform}
+.fx .fx-tilt.fx-live{transition-duration:.18s}
+.fx-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .5s;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,238,205,.22),rgba(255,238,205,0) 58%)}
+.fx .fx-tilt:hover .fx-glare{opacity:1}
+
+/* ---------- format cards: an index in the corner ---------- */
+.fcards{counter-reset:fc}
+.fc .ph:before{counter-increment:fc;content:"0" counter(fc);position:absolute;bottom:24px;right:24px;font-family:var(--serif);font-style:italic;font-size:22px;line-height:1;color:#F6EFE6;text-shadow:0 1px 12px rgba(0,0,0,.6);opacity:.9}
+
+/* ---------- highlights: the open entry breathes in ---------- */
+.fx .hl details.fx-closing .pl{transform:none}
+.fx .hl details[open]:not(.fx-closing) .body{animation:fxbody .9s cubic-bezier(.16,1,.3,1) both}
+@keyframes fxbody{from{opacity:0;transform:translateY(14px)}}
+.hl details.arch .t small{color:var(--sun)}
+
+/* ---------- the pointer label over things you can drag, open or enlarge (fine pointers only) ---------- */
+.fx-cur{position:fixed;left:0;top:0;z-index:80;pointer-events:none;width:92px;height:92px;margin:-46px 0 0 -46px;border-radius:50%;display:grid;place-items:center;background:rgba(240,180,41,.94);color:#0B0810;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-indent:.2em;opacity:0;transition:opacity .25s}
+.fx-cur>span{transform:scale(.3);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.fx-cur{clip-path:circle(0 at 50% 50%);transition:opacity .25s,clip-path .45s cubic-bezier(.16,1,.3,1)}
+.fx-cur.on{opacity:1;clip-path:circle(50% at 50% 50%)}.fx-cur.on>span{transform:none}
+
+/* ---------- O Sol: the WebGL sun behind the booking headline (canvas is added by fx.js; CSS sun if WebGL is missing) ---------- */
+.fx .contact,.fx .book{position:relative;isolation:isolate;overflow:clip}
+.fx-sol{position:absolute;z-index:-1;pointer-events:none;width:clamp(420px,52vw,860px);aspect-ratio:1/1;right:-7vw;top:clamp(-120px,-5vw,-30px);opacity:0;transition:opacity 1.6s ease}
+.fx-sol.ready{opacity:1}
+.fx-sol canvas{width:100%;height:100%;display:block}
+.fx-sol.nogl{background:radial-gradient(circle at 50% 50%,#FFF0C2 0,#F7C34A 12%,#F0B429 20.5%,rgba(240,180,41,.55) 22.5%,rgba(229,112,58,.22) 36%,rgba(228,164,140,.08) 52%,transparent 68%)}
+@media (max-width:899px){
+  .fx-sol{width:320px;right:-118px;top:-92px}
+}
+
+/* ---------- the archive: an original document, laid on the table ---------- */
+.flyer-facts{margin-top:26px;border-top:1px solid var(--line);padding-top:18px;max-width:46ch}
+.flyer-facts .k{font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;color:var(--mute);margin-bottom:10px}
+.flyer-facts dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 18px;align-items:baseline}
+.flyer-facts dt{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--sun);white-space:nowrap}
+.flyer-facts dd{font-size:16px;color:var(--fg)}
+.flyer-facts dd b{font-weight:600}
+.relic{margin:6px 0 0;justify-self:start}
+.relic-btn{--rz:-1.6deg;display:block;position:relative;width:min(100%,340px);padding:13px 13px 0;background:#EFE7D8;color:#17120F;border-radius:2px;text-align:left;cursor:zoom-in;
+  transform:rotate(var(--rz));transition:transform .9s cubic-bezier(.16,1,.3,1),box-shadow .9s;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 34px 70px -30px rgba(0,0,0,.8),0 10px 22px -12px rgba(0,0,0,.55)}
+.relic-btn img{display:block;width:100%;height:auto;background:#1b1b1b}
+.relic-btn:hover,.relic-btn:focus-visible{--rz:0deg;box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 50px 90px -34px rgba(0,0,0,.85),0 14px 26px -12px rgba(0,0,0,.55)}
+.relic-cap{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 1px 12px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.relic-cap .z{color:#8a5a00}
+.relic figcaption{margin-top:20px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);max-width:340px}
+.relic figcaption small{display:block;margin-top:8px;font-size:13px;letter-spacing:.01em;text-transform:none;line-height:1.5}
+.fx .hl details[open]:not(.fx-closing) .relic-btn{animation:fxrelic 1.2s .12s cubic-bezier(.16,1,.3,1) both}
+@keyframes fxrelic{from{opacity:0;transform:translateY(46px) rotate(5deg) scale(.96)}}
+@media (max-width:899px){.relic{margin:14px 0 0 -54px}.relic-btn{width:min(100%,380px)}.relic figcaption{max-width:none}.flyer-facts dd{font-size:15.5px}}
+
+/* ---------- lightbox ---------- */
+.lightbox{border:0;padding:0;background:transparent;color:#F6EFE6;max-width:none;max-height:none;width:100vw;height:100dvh;overflow:auto;margin:0}
+.lightbox::backdrop{background:rgba(11,8,16,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.lightbox[open]{display:grid;place-items:center;animation:fxlb .45s ease both}
+.lightbox figure{margin:0;padding:72px 20px 40px;display:grid;justify-items:center;gap:20px}
+.lightbox img{display:block;width:min(88vw,calc(100dvh - 230px),720px);height:auto;background:#EFE7D8;padding:clamp(10px,1.6vw,18px);border-radius:2px;box-shadow:0 60px 120px -40px rgba(0,0,0,.9);animation:fxlbimg .8s cubic-bezier(.16,1,.3,1) both}
+.lightbox figcaption{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#B8AEC4;text-align:center;max-width:min(88vw,560px)}
+.lightbox figcaption small{display:block;margin-top:8px;font-size:13px;letter-spacing:.01em;text-transform:none;line-height:1.5}
+.lb-x{position:fixed;right:max(18px,env(safe-area-inset-right));top:max(16px,env(safe-area-inset-top));width:48px;height:48px;border-radius:50%;border:1px solid rgba(246,239,230,.5);color:#F6EFE6;font-size:26px;line-height:1;display:grid;place-items:center;transition:background-color .3s,color .3s}
+.lb-x:hover{background:#F6EFE6;color:#0B0810}
+@keyframes fxlb{from{opacity:0}}
+@keyframes fxlbimg{from{opacity:0;transform:translateY(30px) scale(.94) rotate(-2deg)}}
+
+/* ---------- music page: the record slides out of its sleeve (desktop pointers) ---------- */
+.fx-vinyl{display:none}
+@media (hover:hover) and (min-width:900px){
+  .fx .cov.fx-sleeve{overflow:visible}
+  .fx .cov.fx-sleeve img{border-radius:3px;position:relative}
+  .fx-vinyl{display:block;position:absolute;z-index:-1;top:2.5%;left:2.5%;width:95%;aspect-ratio:1/1;border-radius:50%;pointer-events:none;
+    background:
+      radial-gradient(circle,#0B0810 0 2.2%,transparent 2.4%),
+      radial-gradient(circle,transparent 0 17.5%,rgba(11,8,16,.9) 17.7% 18.4%,transparent 18.6%),
+      var(--label) center/36% 36% no-repeat,
+      repeating-radial-gradient(circle,#15121a 0 1.1px,#07060a 1.2px 2.6px);
+    box-shadow:0 0 0 1px rgba(246,239,230,.08),0 18px 40px -18px rgba(0,0,0,.8);
+    transform:translateX(var(--out,0%)) rotate(var(--spin,0deg));transition:transform 1.3s cubic-bezier(.16,1,.3,1)}
+  .fx-vinyl:after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 20deg,transparent 0 8%,rgba(255,255,255,.13) 12%,transparent 17% 50%,rgba(255,255,255,.1) 56%,transparent 61%)}
+  .fx .ep .cov.fx-sleeve.in .fx-vinyl{--out:13%}
+  .fx .ep:hover .cov.fx-sleeve .fx-vinyl{--out:17%;--spin:140deg}
+  .fx .sg:hover .cov.fx-sleeve .fx-vinyl{--out:13%;--spin:120deg}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fx-grain{animation:none}
+  .fx .hero::after{animation:none}
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+  .fx .fx-ln>span{transform:none}
+}

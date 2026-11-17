@@ -89,6 +89,12 @@ git commit -m "Restore the site as it was before the public launch (46e5130)"
 git push origin main
 ```
 
+## Undo the "elevate" visual layer (16 Nov 2026)
+
+Saved state before it: commit `9f3bd8e`, branch `backup/pre-elevate-2026-11-16` and tag `backup/pre-elevate-2026-11-16-tag` (local). The work lives on branch `elevate/2026-11-16`; `main` is untouched until it is merged and pushed.
+- Not merged yet: just `git switch main`.
+- After merging: `git revert <merge or commit hash>`, or to keep the Djavan panel and only silence the effects, remove the `fx.js` script tags (or set `window.RZ_FX=false`).
+
 ## What not to do
 
 - Do not use `git push --force` or `git reset --hard` on `main`.
