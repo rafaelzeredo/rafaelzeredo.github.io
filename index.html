@@ -468,8 +468,8 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     </div>
   </div>
   <div class="strip" role="region" tabindex="0" aria-label="Fotos ao vivo · Live photos"><div>
-    <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt=""><img src="assets/img/porks_pirenopolis_trio_crowd.jpg" alt="">
-    <img src="assets/img/cmw_dusk_violet.jpg" alt=""><img src="assets/img/cmw_daylight_kombi.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/cmw_looking_down.jpg" alt=""><img src="assets/img/cmw_sunset_backlit.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt=""><img src="assets/img/porks_pirenopolis_trio_crowd.jpg" alt="">
+    <img src="assets/img/strip_solo_little_piece_of_nothing_1m36.jpg" alt=""><img src="assets/img/strip_donamaria_highlights_0m23.jpg" alt=""><img src="assets/img/strip_brunogig_showreel_1m00.jpg" alt=""><img src="assets/img/strip_mirante_sao_jorge_0m12.jpg" alt=""><img src="assets/img/strip_zoio_de_lula_1m03.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/strip_donamaria_livemix_0m12.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/strip_o_show_0m55.jpg" alt=""><img src="assets/img/porks_pirenopolis_trio_crowd.jpg" alt=""><img src="assets/img/strip_donamaria_highlights_0m17.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt="">
+    <img src="assets/img/strip_solo_little_piece_of_nothing_1m36.jpg" alt=""><img src="assets/img/strip_donamaria_highlights_0m23.jpg" alt=""><img src="assets/img/strip_brunogig_showreel_1m00.jpg" alt=""><img src="assets/img/strip_mirante_sao_jorge_0m12.jpg" alt=""><img src="assets/img/strip_zoio_de_lula_1m03.jpg" alt=""><img src="assets/img/bh_moon.jpg" alt=""><img src="assets/img/strip_donamaria_livemix_0m12.jpg" alt=""><img src="assets/img/cmw_rose_sky.jpg" alt=""><img src="assets/img/strip_o_show_0m55.jpg" alt=""><img src="assets/img/porks_pirenopolis_trio_crowd.jpg" alt=""><img src="assets/img/strip_donamaria_highlights_0m17.jpg" alt=""><img src="assets/img/brunogig_lakeside_singing.jpg" alt="">
   </div></div>
 </section>
 
@@ -653,7 +653,7 @@ html[data-dir=entardecer] .rot{color:#F3E9DA}
     function put(){st.scrollLeft=x;set=st.scrollLeft}
     function busy(){until=performance.now()+2500}
     function tick(t){raf=0;if(!on)return;var dt=last?Math.min(64,t-last):16;last=t;
-      if(P&&!still&&!hov&&t>until){if(Math.abs(st.scrollLeft-set)>1)x=st.scrollLeft;x=wrap(x+P/90000*dt);put()}
+      if(P&&!still&&!hov&&t>until){if(Math.abs(st.scrollLeft-set)>1)x=st.scrollLeft;x=wrap(x+P/(90000*half/8)*dt);put()}
       raf=requestAnimationFrame(tick)}
     ['pointerdown','touchstart','wheel','keydown'].forEach(function(e){st.addEventListener(e,busy,{passive:true})});
     st.addEventListener('scroll',function(){if(Math.abs(st.scrollLeft-set)>1)busy()},{passive:true});
